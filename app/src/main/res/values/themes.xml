@@ -1,0 +1,58 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.SkillStat" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/splash_green</item>
+        <item name="colorPrimaryVariant">@color/splash_green_dark</item>
+        <item name="colorOnPrimary">@color/splash_text_primary</item>
+        <item name="android:windowBackground">@color/splash_bg_dark</item>
+    </style>
+
+    <style name="Theme.SkillStat.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@color/splash_bg_dark</item>
+        <item name="android:statusBarColor">@color/splash_bg_dark</item>
+        <item name="android:navigationBarColor">@color/splash_bg_dark</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="CustomBottomSheetDialogTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/CustomBottomSheetStyle</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/splash_bg_dark</item>
+    </style>
+
+    <style name="CustomBottomSheetStyle" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="backgroundTint">@color/splash_bg_dark</item>
+        <item name="shapeAppearance">@style/CustomShapeAppearanceBottomSheet</item>
+    </style>
+
+    <style name="CustomShapeAppearanceBottomSheet" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">32dp</item>
+        <item name="cornerSizeTopRight">32dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
+    <style name="NavActiveIndicator" parent="">
+        <item name="android:color">#1A58CC02</item>
+        <item name="android:height">32dp</item>
+        <item name="marginHorizontal">8dp</item>
+    </style>
+
+    <style name="NavTextActive" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">10sp</item>
+        <item name="android:fontFamily">@font/nunito_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="NavTextInactive" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">10sp</item>
+        <item name="android:fontFamily">@font/nunito_bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+</resources>

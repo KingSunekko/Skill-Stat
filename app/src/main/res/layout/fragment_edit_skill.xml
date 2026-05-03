@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/splash_bg_dark">
+
+    <!-- Title - Matched with fragment_skills.xml (50dp marginTop) -->
+    <TextView
+        android:id="@+id/tv_edit_skill_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/nunito_bold"
+        android:text="Edit Skill ✏️"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Back Button - Centered vertically with title -->
+    <FrameLayout
+        android:id="@+id/btn_back_skill"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/shape_edit_btn_selector"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@id/tv_edit_skill_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_edit_skill_title">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:contentDescription="Back"
+            android:src="@android:drawable/ic_menu_revert"
+            app:tint="@color/white" />
+    </FrameLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@id/ll_skill_actions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_edit_skill_title">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingBottom="24dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:letterSpacing="0.05"
+                android:text="SKILL NAME"
+                android:textColor="@color/splash_text_secondary"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_skill_name_edit"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shape_input_selector"
+                android:fontFamily="@font/nunito_semibold"
+                android:hint="Skill Name"
+                android:inputType="text"
+                android:paddingHorizontal="16dp"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textColorHint="#4E4E61"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_mastery_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/nunito_bold"
+                android:letterSpacing="0.05"
+                android:text="MASTERY — 82%"
+                android:textColor="@color/splash_text_secondary"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <!-- Interactive SeekBar -->
+            <SeekBar
+                android:id="@+id/sb_mastery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:max="100"
+                android:progress="82"
+                android:progressDrawable="@drawable/shape_seekbar_progress_green"
+                android:thumb="@drawable/shape_seekbar_thumb" />
+
+            <!-- Visual 3D Progress Bar that follows SeekBar -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="14dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="12dp">
+
+                <View
+                    android:id="@+id/mastery_view_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shape_progress_bg" />
+
+                <View
+                    android:id="@+id/mastery_view_fill"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shape_progress_fill"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.82" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tv_decay_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/nunito_bold"
+                android:letterSpacing="0.05"
+                android:text="DECAY TIMER — 1 DAYS"
+                android:textColor="@color/splash_text_secondary"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/shape_input_field"
+                android:padding="16dp"
+                android:orientation="vertical">
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/slider_decay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:valueFrom="1.0"
+                    android:valueTo="14.0"
+                    android:stepSize="1.0"
+                    android:value="1.0"
+                    app:labelBehavior="gone"
+                    app:trackHeight="10dp"
+                    app:thumbRadius="12dp"
+                    app:tickVisible="true"
+                    app:haloRadius="0dp"
+                    app:thumbColor="@color/splash_green"
+                    app:trackColorActive="@color/splash_green"
+                    app:trackColorInactive="#33FFFFFF"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_decay_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/shape_input_field"
+                    android:padding="12dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_decay_status_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🛑"
+                        android:textSize="18sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_decay_status_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="At Risk"
+                        android:textColor="#FF4B4B"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/nunito_bold"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/nunito_bold"
+                android:letterSpacing="0.05"
+                android:text="LEVEL"
+                android:textColor="@color/splash_text_secondary"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/opt_beginner"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/shape_profile_card"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="20dp"
+                android:clickable="true"
+                android:focusable="true">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="🌱 Beginner"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/check_beginner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="✓"
+                    android:tag="check_mark"
+                    android:visibility="gone"
+                    android:textColor="@color/splash_green"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/opt_intermediate"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/shape_profile_card"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="20dp"
+                android:clickable="true"
+                android:focusable="true">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="🔥 Intermediate"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/check_intermediate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="✓"
+                    android:tag="check_mark"
+                    android:visibility="gone"
+                    android:textColor="@color/splash_green"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/opt_advanced"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/shape_achievement_badge"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="20dp"
+                android:clickable="true"
+                android:focusable="true">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="⚡ Advanced"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/check_advanced"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="✓"
+                    android:tag="check_mark"
+                    android:visibility="visible"
+                    android:textColor="@color/splash_green"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/nunito_bold"
+                android:letterSpacing="0.05"
+                android:text="DANGER ZONE"
+                android:textColor="@color/splash_text_secondary"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_remove_skill"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/shape_btn_danger"
+                android:fontFamily="@font/nunito_bold"
+                android:text="🗑️ REMOVE THIS SKILL"
+                android:textColor="#FF4B4B"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/ll_skill_actions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_skill_save"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/shape_btn_login_selector"
+            android:backgroundTint="@null"
+            android:fontFamily="@font/nunito_bold"
+            android:text="💾 SAVE CHANGES"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:stateListAnimator="@animator/button_hover" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_skill_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/shape_btn_social_selector"
+            android:backgroundTint="@null"
+            android:fontFamily="@font/nunito_bold"
+            android:text="CANCEL"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:stateListAnimator="@animator/button_hover" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

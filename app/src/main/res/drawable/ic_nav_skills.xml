@@ -1,0 +1,18 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Red card -->
+    <path
+        android:fillColor="#FF5E7D"
+        android:pathData="M8,6h10v12h-10z" />
+    <!-- Blue card -->
+    <path
+        android:fillColor="#4D8BFF"
+        android:pathData="M6,8h10v12h-10z" />
+    <!-- Green card -->
+    <path
+        android:fillColor="#58CC02"
+        android:pathData="M4,10h10v12h-10z" />
+</vector>

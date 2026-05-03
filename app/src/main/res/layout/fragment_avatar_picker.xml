@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#12121F"
+    android:padding="24dp">
+
+    <!-- STEP label -->
+    <TextView
+        android:id="@+id/tv_step_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunito_bold"
+        android:letterSpacing="0.1"
+        android:text="STEP 1 OF 3"
+        android:textColor="#58CC02"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/nunito_bold"
+        android:text="Pick Your Avatar 🎭"
+        android:textColor="#FFFFFF"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_step_label" />
+
+    <!-- Progress Dots - NOW CENTERED -->
+    <LinearLayout
+        android:id="@+id/ll_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title">
+
+        <View
+            android:layout_width="24dp"
+            android:layout_height="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/shape_dot_active" />
+
+        <View
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/shape_dot_inactive" />
+
+        <View
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:background="@drawable/shape_dot_inactive" />
+    </LinearLayout>
+
+    <!-- Avatar grid (5 columns for a 3x5 grid) -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_avatars"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/ll_progress"
+        app:spanCount="5"
+        tools:itemCount="15"
+        tools:listitem="@layout/item_avatar" />
+
+    <!-- DISPLAY NAME Section -->
+    <TextView
+        android:id="@+id/tv_display_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/nunito_bold"
+        android:letterSpacing="0.1"
+        android:text="DISPLAY NAME"
+        android:textColor="#AAAACC"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_avatars" />
+
+    <EditText
+        android:id="@+id/et_display_name"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/shape_input_selector"
+        android:fontFamily="@font/nunito_semibold"
+        android:hint="SkillStatUser"
+        android:inputType="textPersonName"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:singleLine="true"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#4E4E61"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/tv_display_name_label" />
+
+    <TextView
+        android:id="@+id/tv_helper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/nunito_semibold"
+        android:text="This will be your public username 🌎"
+        android:textColor="#66667A"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_display_name" />
+
+    <!-- CONTINUE button -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_continue"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/shape_btn_login_selector"
+        android:backgroundTint="@null"
+        android:fontFamily="@font/nunito_bold"
+        android:stateListAnimator="@animator/button_hover"
+        android:text="CONTINUE →"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

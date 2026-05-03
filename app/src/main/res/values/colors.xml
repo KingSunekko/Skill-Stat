@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ── SkillStat Splash Colors ──────────────────────────── -->
+    <color name="white">#FFFFFF</color>
+    <!-- Background deep navy/dark purple -->
+    <color name="splash_bg_dark">#1A1A2E</color>
+    <color name="splash_bg_mid">#16213E</color>
+    <color name="splash_bg_surface">#0F0823</color>
+
+    <!-- Brand green (Duolingo-style) -->
+    <color name="splash_green">#58CC02</color>
+    <color name="splash_green_dark">#46A302</color>
+    <color name="splash_green_dim">#2958CC02</color>  <!-- 16% alpha -->
+
+    <!-- Text -->
+    <color name="splash_text_primary">#FFFFFF</color>
+    <color name="splash_text_secondary">#BFBFBF</color>
+
+    <!-- Pill button border/bg -->
+    <color name="splash_pill_border">#58CC02</color>
+    <color name="splash_pill_bg">#1A58CC02</color>   <!-- 10% green -->
+
+    <!-- Star / particle dots -->
+    <color name="splash_star">#66FFFFFF</color>       <!-- 40% white -->
+
+    <!-- Dot indicators -->
+    <color name="splash_dot_active">#58CC02</color>
+    <color name="splash_dot_inactive">#4DFFFFFF</color>  <!-- 30% white -->
+
+    <!-- Gradient accent colors (used in splash_background gradient) -->
+    <color name="splash_accent_purple">#E040FB</color>
+    <color name="splash_accent_cyan">#00BCD4</color>
+    <color name="splash_accent_orange">#FF6B35</color>
+
+    <color name="login_label">#CCFFFFFF</color>      <!-- 80% white -->
+
+    <!-- Input hint text -->
+    <color name="login_hint">#66FFFFFF</color>        <!-- 40% white -->
+
+    <!-- OR divider line -->
+    <color name="login_divider">#33FFFFFF</color>     <!-- 20% white -->
+
+</resources>

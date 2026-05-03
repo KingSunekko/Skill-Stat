@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Bottom Shadow/Edge -->
+    <item>
+        <shape>
+            <solid android:color="#008694" />
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+    <!-- Main Fill with light top highlight -->
+    <item android:bottom="3dp">
+        <shape>
+            <gradient
+                android:angle="270"
+                android:endColor="#00BCD4"
+                android:startColor="#62E2F1" />
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+</layer-list>

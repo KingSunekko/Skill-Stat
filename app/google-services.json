@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "383577502531",
+    "firebase_url": "https://mark-project-43e07-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "mark-project-43e07",
+    "storage_bucket": "mark-project-43e07.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:383577502531:android:c73792a82f2299792d75f6",
+        "android_client_info": {
+          "package_name": "com.example.skillstat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALO5i94rsgiWkZL0gxKQ8_Vqc47IZxbQ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

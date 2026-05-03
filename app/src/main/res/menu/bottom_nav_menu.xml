@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_nav_home"
+        android:title="HOME"/>
+
+    <item
+        android:id="@+id/nav_skills"
+        android:icon="@drawable/ic_nav_skills"
+        android:title="SKILLS"/>
+
+    <item
+        android:id="@+id/nav_stats"
+        android:icon="@drawable/ic_nav_stats"
+        android:title="STATS"/>
+
+    <item
+        android:id="@+id/nav_ranks"
+        android:icon="@drawable/ic_nav_ranks"
+        android:title="RANKS"/>
+
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="PROFILE"/>
+
+</menu>

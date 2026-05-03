@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/splash_bg_dark">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="40dp"
+            android:paddingBottom="40dp">
+
+            <!-- Celebration Icon -->
+            <TextView
+                android:id="@+id/tv_celebration_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🎉"
+                android:textSize="80sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="Amazing work!"
+                android:textColor="@color/white"
+                android:textSize="32sp" />
+
+            <!-- Skill Tag (Pill) -->
+            <TextView
+                android:id="@+id/tv_skill_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/shape_progress_fill"
+                android:fontFamily="@font/nunito_bold"
+                android:paddingHorizontal="28dp"
+                android:paddingVertical="10dp"
+                android:text="Java 💻"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <!-- Stats Grid -->
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:columnCount="2"
+                android:rowCount="2">
+
+                <!-- Time Practiced -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/shape_skill_card"
+                    android:backgroundTint="#1A58CC02"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="⏰"
+                        android:textSize="24sp" />
+                    <TextView
+                        android:id="@+id/tv_reward_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/nunito_bold"
+                        android:text="1 min"
+                        android:textColor="@color/splash_green"
+                        android:textSize="22sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_semibold"
+                        android:text="Time Practiced"
+                        android:textColor="@color/splash_text_secondary"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- XP Earned -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/shape_skill_card"
+                    android:backgroundTint="#1AFFD700"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="⭐"
+                        android:textSize="24sp" />
+                    <TextView
+                        android:id="@+id/tv_reward_xp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/nunito_bold"
+                        android:text="+15"
+                        android:textColor="#FFD700"
+                        android:textSize="22sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_semibold"
+                        android:text="XP Earned"
+                        android:textColor="@color/splash_text_secondary"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- Skill Growth -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/shape_skill_card"
+                    android:backgroundTint="#1A21B1FF"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📈"
+                        android:textSize="24sp" />
+                    <TextView
+                        android:id="@+id/tv_reward_growth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/nunito_bold"
+                        android:text="+2%"
+                        android:textColor="#21B1FF"
+                        android:textSize="22sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_semibold"
+                        android:text="Skill Growth"
+                        android:textColor="@color/splash_text_secondary"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- Day Streak -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/shape_skill_card"
+                    android:backgroundTint="#1AFF9800"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🔥"
+                        android:textSize="24sp" />
+                    <TextView
+                        android:id="@+id/tv_reward_streak"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/nunito_bold"
+                        android:text="7"
+                        android:textColor="#FF9800"
+                        android:textSize="22sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_semibold"
+                        android:text="Day Streak"
+                        android:textColor="@color/splash_text_secondary"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </GridLayout>
+
+            <!-- Reset Banner (Redesigned) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/shape_reward_banner_green"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="18dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="✅"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/nunito_bold"
+                        android:text="Decay Timer Reset!"
+                        android:textColor="#58CC02"
+                        android:textSize="19sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_reset_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:text="Java 💻 — next check in 7 days 📅"
+                    android:textColor="#8E8E93"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- Total XP Container (Redesigned) -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <!-- Total XP Pill -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_total_xp_pill"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="44dp"
+                    android:paddingVertical="12dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="⭐"
+                        android:textSize="22sp" />
+                    <TextView
+                        android:id="@+id/tv_total_xp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/nunito_extrabold"
+                        android:text="3,150 XP"
+                        android:textColor="#5C4D00"
+                        android:textSize="24sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="Total Points"
+                    android:textColor="#BFBFBF"
+                    android:textSize="12sp"
+                    android:letterSpacing="0.05" />
+            </LinearLayout>
+
+            <!-- Back Button -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_back_dashboard"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/shape_btn_green"
+                android:fontFamily="@font/nunito_bold"
+                android:text="🏠 BACK TO DASHBOARD"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Confetti Container -->
+    <FrameLayout
+        android:id="@+id/confetti_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="10dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

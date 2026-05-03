@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Pressed state -->
+    <item android:state_pressed="true" android:drawable="@drawable/shape_skill_chip_pressed" />
+
+    <!-- Checked state (for Choice Chips) -->
+    <item android:state_checked="true" android:drawable="@drawable/shape_skill_chip_selected" />
+
+    <!-- Selected state -->
+    <item android:state_selected="true" android:drawable="@drawable/shape_skill_chip_selected" />
+
+    <!-- Normal state -->
+    <item android:drawable="@drawable/shape_skill_chip_normal" />
+</selector>

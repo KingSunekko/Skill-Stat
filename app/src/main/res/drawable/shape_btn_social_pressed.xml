@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Bottom Shadow/Edge (smaller for pressed state) -->
+    <item>
+        <shape>
+            <solid android:color="#000000" />
+            <corners android:radius="16dp" />
+        </shape>
+    </item>
+    <!-- Main Body (pushed down) -->
+    <item android:bottom="1dp" android:top="3dp">
+        <shape>
+            <solid android:color="#252545" />
+            <stroke android:width="2dp" android:color="#58CC02" />
+            <corners android:radius="16dp" />
+        </shape>
+    </item>
+</layer-list>

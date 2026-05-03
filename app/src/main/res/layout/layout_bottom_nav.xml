@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:orientation="horizontal"
+    android:background="@drawable/shape_bottom_nav_bg"
+    android:gravity="center_vertical"
+    android:paddingHorizontal="8dp"
+    android:elevation="8dp">
+
+    <!-- Home -->
+    <LinearLayout
+        android:id="@+id/navHome"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true">
+
+        <FrameLayout
+            android:id="@+id/pillHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="2dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🏠"
+                android:textSize="20sp" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/labelHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HOME"
+            android:textColor="#8E8E93"
+            android:textSize="10sp"
+            android:layout_marginTop="0dp"
+            android:fontFamily="@font/nunito_bold" />
+    </LinearLayout>
+
+    <!-- Skills -->
+    <LinearLayout
+        android:id="@+id/navSkills"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true">
+
+        <FrameLayout
+            android:id="@+id/pillSkills"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="2dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📚"
+                android:textSize="20sp" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/labelSkills"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SKILLS"
+            android:textColor="#8E8E93"
+            android:textSize="10sp"
+            android:layout_marginTop="0dp"
+            android:fontFamily="@font/nunito_bold" />
+    </LinearLayout>
+
+    <!-- Stats -->
+    <LinearLayout
+        android:id="@+id/navStats"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true">
+
+        <FrameLayout
+            android:id="@+id/pillStats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="2dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📊"
+                android:textSize="20sp" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/labelStats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="STATS"
+            android:textColor="#8E8E93"
+            android:textSize="10sp"
+            android:layout_marginTop="0dp"
+            android:fontFamily="@font/nunito_bold" />
+    </LinearLayout>
+
+    <!-- Ranks -->
+    <LinearLayout
+        android:id="@+id/navRanks"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true">
+
+        <FrameLayout
+            android:id="@+id/pillRanks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="2dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🏆"
+                android:textSize="20sp" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/labelRanks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RANKS"
+            android:textColor="#8E8E93"
+            android:textSize="10sp"
+            android:layout_marginTop="0dp"
+            android:fontFamily="@font/nunito_bold" />
+    </LinearLayout>
+
+    <!-- Profile -->
+    <LinearLayout
+        android:id="@+id/navProfile"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true">
+
+        <FrameLayout
+            android:id="@+id/pillProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="2dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="👤"
+                android:textSize="20sp" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/labelProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PROFILE"
+            android:textColor="#8E8E93"
+            android:textSize="10sp"
+            android:layout_marginTop="0dp"
+            android:fontFamily="@font/nunito_bold" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_skill_card"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tv_decay_skill_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunito_bold"
+        android:text="Java 💻"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Status Badge -->
+    <LinearLayout
+        android:id="@+id/ll_decay_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_status_badge"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="4dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_decay_skill_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_decay_skill_name">
+
+        <TextView
+            android:id="@+id/tv_decay_status_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:text="●"
+            android:textColor="@color/splash_green"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tv_decay_status_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_bold"
+            android:text="Sharp"
+            android:textColor="@color/splash_green"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <!-- Progress Bar (3D Style) -->
+    <View
+        android:id="@+id/v_decay_bg"
+        android:layout_width="match_parent"
+        android:layout_height="12dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/shape_progress_bg"
+        app:layout_constraintTop_toBottomOf="@id/tv_decay_skill_name" />
+
+    <View
+        android:id="@+id/v_decay_progress_fill"
+        android:layout_width="0dp"
+        android:layout_height="12dp"
+        android:background="@drawable/shape_progress_fill"
+        app:layout_constraintBottom_toBottomOf="@id/v_decay_bg"
+        app:layout_constraintStart_toStartOf="@id/v_decay_bg"
+        app:layout_constraintTop_toTopOf="@id/v_decay_bg"
+        app:layout_constraintWidth_percent="0.7" />
+
+    <TextView
+        android:id="@+id/tv_next_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/nunito_semibold"
+        android:text="Next check in 7 days"
+        android:textColor="@color/splash_text_secondary"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/v_decay_bg" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

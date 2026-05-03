@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/splash_bg_dark">
+
+    <!-- Header Section -->
+    <TextView
+        android:id="@+id/tv_my_skills_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/nunito_bold"
+        android:text="My Skills 📚"
+        android:textColor="@color/splash_text_primary"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/nunito_semibold"
+        android:text="Your learning portfolio"
+        android:textColor="@color/splash_text_secondary"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_my_skills_title" />
+
+    <ImageButton
+        android:id="@+id/btn_add_small"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/shape_dot_active"
+        android:contentDescription="Add Skill"
+        android:padding="8dp"
+        android:src="@android:drawable/ic_input_add"
+        app:layout_constraintBottom_toBottomOf="@id/tv_subtitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_my_skills_title"
+        app:tint="@color/splash_text_primary" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:paddingBottom="100dp"
+        android:clipToPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_subtitle">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp">
+
+            <!-- Java Card -->
+            <include
+                android:id="@+id/card_java"
+                layout="@layout/item_skill_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Guitar Card -->
+            <include
+                android:id="@+id/card_guitar"
+                layout="@layout/item_skill_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Public Speaking Card -->
+            <include
+                android:id="@+id/card_public_speaking"
+                layout="@layout/item_skill_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Add New Skill Button -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_add_new_skill"
+                android:layout_width="match_parent"
+                android:layout_height="68dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/shape_btn_green_3d"
+                android:fontFamily="@font/nunito_bold"
+                android:text="+ ADD NEW SKILL"
+                android:textColor="@color/splash_text_primary"
+                android:textSize="16sp"
+                android:textAllCaps="true" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

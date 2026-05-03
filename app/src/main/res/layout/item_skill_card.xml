@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:background="@drawable/shape_skill_card"
+    android:padding="16dp"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <!-- Title and Emoji -->
+    <TextView
+        android:id="@+id/tv_skill_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunito_bold"
+        android:text="Java 💻"
+        android:textColor="@color/splash_text_primary"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Status Badge (3D) -->
+    <LinearLayout
+        android:id="@+id/ll_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/shape_status_badge"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="4dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_skill_name"
+        app:layout_constraintStart_toEndOf="@id/tv_skill_name"
+        app:layout_constraintTop_toTopOf="@id/tv_skill_name">
+
+        <View
+            android:id="@+id/status_dot"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/shape_dot_active" />
+
+        <TextView
+            android:id="@+id/tv_status_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_bold"
+            android:text="Sharp"
+            android:textColor="@color/splash_green"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <!-- Edit Button (3D) -->
+    <TextView
+        android:id="@+id/btn_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_input_field"
+        android:fontFamily="@font/nunito_bold"
+        android:paddingHorizontal="14dp"
+        android:paddingVertical="6dp"
+        android:text="EDIT"
+        android:textColor="@color/splash_text_primary"
+        android:textSize="12sp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@id/tv_skill_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_skill_name"
+        tools:ignore="ContentDescription" />
+
+    <!-- Progress Bar Section (3D) -->
+    <View
+        android:id="@+id/progress_bg"
+        android:layout_width="match_parent"
+        android:layout_height="12dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/shape_progress_bg"
+        app:layout_constraintTop_toBottomOf="@id/tv_skill_name" />
+
+    <View
+        android:id="@+id/progress_fill"
+        android:layout_width="0dp"
+        android:layout_height="12dp"
+        android:background="@drawable/shape_progress_fill"
+        app:layout_constraintBottom_toBottomOf="@id/progress_bg"
+        app:layout_constraintStart_toStartOf="@id/progress_bg"
+        app:layout_constraintTop_toTopOf="@id/progress_bg"
+        app:layout_constraintWidth_percent="0.82" />
+
+    <!-- Progress Info Text -->
+    <TextView
+        android:id="@+id/tv_progress_percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/nunito_bold"
+        android:text="82% • Advanced"
+        android:textColor="@color/splash_text_secondary"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progress_bg" />
+
+    <TextView
+        android:id="@+id/tv_decay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunito_bold"
+        android:text="Decays in 7d ⏳"
+        android:textColor="@color/splash_text_secondary"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_progress_percent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_progress_percent" />
+
+    <!-- Practice Button (3D) -->
+    <LinearLayout
+        android:id="@+id/btn_practice"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/shape_btn_practice_selector"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintTop_toBottomOf="@id/tv_progress_percent">
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginEnd="8dp"
+            android:src="@android:drawable/ic_media_play"
+            app:tint="@color/white"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_extrabold"
+            android:text="PRACTICE NOW"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

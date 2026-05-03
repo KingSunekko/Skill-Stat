@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_background"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <!-- ── Decorative background stars ── -->
+    <View android:id="@+id/star1" android:layout_width="6dp" android:layout_height="6dp" android:background="@drawable/shape_star_dot" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" android:layout_marginStart="40dp" android:layout_marginTop="120dp"/>
+    <View android:id="@+id/star2" android:layout_width="4dp" android:layout_height="4dp" android:background="@drawable/shape_star_dot" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent" android:layout_marginEnd="60dp" android:layout_marginTop="200dp"/>
+    <View android:id="@+id/star3" android:layout_width="5dp" android:layout_height="5dp" android:background="@drawable/shape_star_dot" app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent" android:layout_marginStart="80dp" android:layout_marginBottom="280dp"/>
+    <View android:id="@+id/star4" android:layout_width="4dp" android:layout_height="4dp" android:background="@drawable/shape_star_dot" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="50dp" android:layout_marginBottom="400dp"/>
+
+    <!-- ── Center content ── -->
+
+    <FrameLayout
+        android:id="@+id/logo_container"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:visibility="invisible"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_app_name"
+        android:layout_marginBottom="20dp">
+        <View android:layout_width="match_parent" android:layout_height="match_parent" android:background="@drawable/shape_logo_glow"/>
+        <View android:layout_width="100dp" android:layout_height="100dp" android:layout_gravity="center" android:background="@drawable/shape_logo_circle"/>
+        <ImageView android:id="@+id/iv_logo" android:layout_width="64dp" android:layout_height="64dp" android:layout_gravity="center" android:src="@drawable/ic_skillstat_logo" android:contentDescription="SkillStat logo" android:scaleType="fitCenter"/>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SkillStat"
+        android:textColor="@color/splash_text_primary"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/nunito_bold"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="4dp"/>
+
+    <TextView
+        android:id="@+id/tv_tagline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Track. Practice. Master. 🚀"
+        android:textColor="@color/splash_text_secondary"
+        android:textSize="14sp"
+        android:fontFamily="@font/nunito_semibold"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_app_name"
+        android:layout_marginTop="6dp"/>
+
+    <LinearLayout
+        android:id="@+id/btn_powered_by_science"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_pill_button"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_tagline"
+        android:layout_marginTop="24dp">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⚡ " android:textSize="12sp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Powered by Science" android:textColor="@color/splash_green" android:textSize="12sp" android:fontFamily="@font/nunito_semibold" android:textStyle="bold"/>
+    </LinearLayout>
+
+    <!-- ── Bouncing dots ── -->
+    <LinearLayout
+        android:id="@+id/dots_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingTop="20dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="48dp">
+
+        <View android:id="@+id/dot1" android:layout_width="8dp" android:layout_height="8dp" android:layout_marginEnd="8dp" android:background="@drawable/shape_dot_active"/>
+        <View android:id="@+id/dot2" android:layout_width="8dp" android:layout_height="8dp" android:layout_marginEnd="8dp" android:background="@drawable/shape_dot_active"/>
+        <View android:id="@+id/dot3" android:layout_width="8dp" android:layout_height="8dp" android:background="@drawable/shape_dot_active"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

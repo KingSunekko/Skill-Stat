@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_background"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="40dp"
+            android:paddingBottom="40dp"
+            android:clipChildren="false"
+            android:clipToPadding="false">
+
+            <!-- Logo circle -->
+            <FrameLayout
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="20dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shape_logo_glow"/>
+
+                <View
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/shape_logo_circle"/>
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_skillstat_logo"
+                    android:contentDescription="SkillStat logo"
+                    android:scaleType="fitCenter"/>
+            </FrameLayout>
+
+            <!-- Signup heading -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Join SkillStat! 🚀"
+                android:textColor="#FFFFFF"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/nunito_bold"
+                android:layout_marginBottom="6dp"/>
+
+            <!-- Subheading -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start your journey today ✨"
+                android:textColor="#AAAACC"
+                android:textSize="14sp"
+                android:fontFamily="@font/nunito_semibold"
+                android:layout_marginBottom="36dp"/>
+
+            <!-- EMAIL label -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="EMAIL"
+                android:textColor="#AAAACC"
+                android:textSize="11sp"
+                android:letterSpacing="0.12"
+                android:textStyle="bold"
+                android:fontFamily="@font/nunito_bold"
+                android:layout_marginBottom="8dp"/>
+
+            <!-- Email field -->
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@drawable/shape_input_selector"
+                android:hint="you@email.com"
+                android:textColorHint="#66667A"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:fontFamily="@font/nunito_semibold"
+                android:inputType="textEmailAddress"
+                android:imeOptions="actionNext"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:singleLine="true"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- PASSWORD label -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PASSWORD"
+                android:textColor="#AAAACC"
+                android:textSize="11sp"
+                android:letterSpacing="0.12"
+                android:textStyle="bold"
+                android:fontFamily="@font/nunito_bold"
+                android:layout_marginBottom="8dp"/>
+
+            <!-- Password field with toggle -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginBottom="28dp">
+
+                <EditText
+                    android:id="@+id/et_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shape_input_selector"
+                    android:hint="••••••••"
+                    android:textColorHint="#66667A"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:inputType="textPassword"
+                    android:imeOptions="actionDone"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="52dp"
+                    android:singleLine="true"/>
+
+                <ImageView
+                    android:id="@+id/iv_password_toggle"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    tools:ignore="TouchTargetSizeCheck"
+                    android:layout_gravity="center_vertical|end"
+                    android:layout_marginEnd="14dp"
+                    android:src="@drawable/ic_eye_off"
+                    android:contentDescription="Toggle password visibility"
+                    android:clickable="true"
+                    android:focusable="true"/>
+            </FrameLayout>
+
+            <!-- ✅ GREEN SIGN UP button -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_create_account"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:text="🎯  CREATE ACCOUNT"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/nunito_bold"
+                android:letterSpacing="0.08"
+                android:background="@drawable/shape_btn_login_selector"
+                android:backgroundTint="@null"
+                android:stateListAnimator="@animator/button_hover"
+                android:layout_marginBottom="20dp"/>
+
+            <!-- OR divider -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp"
+                android:clipChildren="false">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="#2A2A4A"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="or"
+                    android:textColor="#66667A"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="#2A2A4A"/>
+            </LinearLayout>
+
+            <!-- Social buttons - Fixed clipping by adding top padding and disabling clipping -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginBottom="32dp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:paddingTop="12dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_facebook"
+                    android:layout_width="0dp"
+                    android:layout_height="54dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:text="🔵  FACEBOOK"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/nunito_bold"
+                    android:letterSpacing="0.05"
+                    android:background="@drawable/shape_btn_social_selector"
+                    android:backgroundTint="@null"
+                    android:stateListAnimator="@animator/button_hover"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_google"
+                    android:layout_width="0dp"
+                    android:layout_height="54dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="🔴  GOOGLE"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/nunito_bold"
+                    android:letterSpacing="0.05"
+                    android:background="@drawable/shape_btn_social_selector"
+                    android:backgroundTint="@null"
+                    android:stateListAnimator="@animator/button_hover"/>
+            </LinearLayout>
+
+            <!-- Already have an account? Log In → -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:clipChildren="false">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Already have an account?  "
+                    android:textColor="#AAAACC"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/nunito_semibold"/>
+
+                <TextView
+                    android:id="@+id/tv_log_in"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Log In →"
+                    android:textColor="#58CC02"
+                    tools:ignore="TouchTargetSizeCheck"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/nunito_bold"
+                    android:clickable="true"
+                    android:focusable="true"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

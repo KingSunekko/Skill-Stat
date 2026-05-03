@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#12121F">
+
+    <!-- Header Container with background to mask scrolling content -->
+    <LinearLayout
+        android:id="@+id/ll_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="8dp"
+        android:elevation="4dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- STEP label -->
+        <TextView
+            android:id="@+id/tv_step_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="STEP 2 OF 3"
+            android:textColor="#58CC02"
+            android:textSize="11sp"
+            android:letterSpacing="0.12"
+            android:textStyle="bold"
+            android:fontFamily="@font/nunito_bold"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"/>
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choose Your Skills 🧠"
+            android:textColor="#FFFFFF"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/nunito_bold"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="6dp"/>
+
+        <!-- Subtitle -->
+        <TextView
+            android:id="@+id/tv_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What do you want to master?"
+            android:textColor="#AAAACC"
+            android:textSize="14sp"
+            android:fontFamily="@font/nunito_semibold"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="4dp"/>
+
+        <!-- Step dots indicator - Centered -->
+        <LinearLayout
+            android:id="@+id/ll_dots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp">
+
+            <!-- Inactive dot -->
+            <View
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@drawable/shape_dot_inactive"
+                android:layout_marginEnd="8dp"/>
+
+            <!-- Active dot -->
+            <View
+                android:layout_width="24dp"
+                android:layout_height="8dp"
+                android:background="@drawable/shape_dot_active"
+                android:layout_marginEnd="8dp"/>
+
+            <!-- Inactive dot -->
+            <View
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@drawable/shape_dot_inactive"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Scrollable area for skills -->
+    <ScrollView
+        android:id="@+id/sv_skills"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toBottomOf="@id/ll_header"
+        app:layout_constraintBottom_toTopOf="@id/btn_continue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="24dp">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cg_skills"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                app:chipSpacingHorizontal="10dp"
+                app:chipSpacingVertical="10dp" />
+
+            <!-- Summary Box -->
+            <LinearLayout
+                android:id="@+id/ll_summary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="32dp"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:background="@drawable/shape_summary_box"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <TextView
+                    android:id="@+id/tv_selected_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="☑ Selected — 3 skills"
+                    android:textColor="#58CC02"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:layout_marginBottom="14dp"/>
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/cg_selected_summary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:chipSpacingHorizontal="8dp"
+                    app:chipSpacingVertical="8dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- CONTINUE button -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_continue"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:text="CONTINUE →"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/nunito_bold"
+        android:letterSpacing="0.08"
+        android:background="@drawable/shape_btn_login_selector"
+        android:backgroundTint="@null"
+        android:stateListAnimator="@animator/button_hover"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
