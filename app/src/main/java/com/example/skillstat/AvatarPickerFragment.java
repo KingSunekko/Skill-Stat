@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,8 +17,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AvatarPickerFragment extends Fragment {
 
@@ -25,11 +32,15 @@ public class AvatarPickerFragment extends Fragment {
     private AvatarAdapter adapter;
     private EditText etDisplayName;
     private Button btnContinue;
+    private String selectedEmoji = "🧙‍♂️"; // Default
+    private DatabaseReference mDatabase;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_avatar_picker, container, false);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         rvAvatars = view.findViewById(R.id.rv_avatars);
         etDisplayName = view.findViewById(R.id.et_display_name);
@@ -38,45 +49,55 @@ public class AvatarPickerFragment extends Fragment {
         setupRecyclerView();
         setupValidation();
 
-        btnContinue.setOnClickListener(v -> {
-            String name = etDisplayName.getText().toString().trim();
-            if (TextUtils.isEmpty(name)) {
-                etDisplayName.setError("Please enter a display name");
-                etDisplayName.requestFocus();
-                return;
-            }
-
-            // Navigate to Step 2: Skills Picker with professional step-forward animation
-            if (getActivity() != null) {
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(
-                                R.anim.step_forward_enter,
-                                R.anim.step_forward_exit,
-                                R.anim.step_backward_enter,
-                                R.anim.step_backward_exit
-                        )
-                        .replace(R.id.onboarding_container, new SkillsPickerFragment())
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
+        btnContinue.setOnClickListener(v -> saveAndContinue());
 
         return view;
     }
 
-    private void setupValidation() {
-        // Disable button initially if name is empty
-        updateButtonState();
+    private void saveAndContinue() {
+        String name = etDisplayName.getText().toString().trim();
+        if (TextUtils.isEmpty(name)) {
+            etDisplayName.setError("Please enter a display name");
+            etDisplayName.requestFocus();
+            return;
+        }
 
+        String uid = FirebaseAuth.getInstance().getUid();
+        if (uid == null) return;
+
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("username", name);
+        updates.put("avatarUrl", selectedEmoji);
+
+        mDatabase.child("users").child(uid).updateChildren(updates)
+                .addOnSuccessListener(aVoid -> {
+                    if (getActivity() != null) {
+                        getActivity().getSupportFragmentManager().beginTransaction()
+                                .setCustomAnimations(
+                                        R.anim.step_forward_enter,
+                                        R.anim.step_forward_exit,
+                                        R.anim.step_backward_enter,
+                                        R.anim.step_backward_exit
+                                )
+                                .replace(R.id.onboarding_container, new SkillsPickerFragment())
+                                .addToBackStack(null)
+                                .commit();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Failed to save profile", Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private void setupValidation() {
+        updateButtonState();
         etDisplayName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 updateButtonState();
             }
-
             @Override
             public void afterTextChanged(Editable s) {}
         });
@@ -96,7 +117,7 @@ public class AvatarPickerFragment extends Fragment {
         );
 
         adapter = new AvatarAdapter(emojiAvatars, position -> {
-            // Handle selection
+            selectedEmoji = emojiAvatars.get(position);
         });
 
         rvAvatars.setLayoutManager(new GridLayoutManager(getContext(), 5));

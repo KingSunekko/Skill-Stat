@@ -1,8 +1,11 @@
 package com.example.skillstat;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -11,106 +14,141 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class MainActivity extends AppCompatActivity {
 
-    private View navHome, navSkills, navStats, navRanks, navProfile;
-    private View pillHome, pillSkills, pillStats, pillRanks, pillProfile;
-    private TextView labelHome, labelSkills, labelStats, labelRanks, labelProfile;
+    private static final String TAG = "MainActivity";
+    private View navHome, navSkills, navFriends, navRanks, navProfile;
+    private View pillHome, pillSkills, pillFriends, pillRanks, pillProfile;
+    private TextView labelHome, labelSkills, labelFriends, labelRanks, labelProfile;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Safely initialize FirebaseAuth
+        try {
+            mAuth = FirebaseAuth.getInstance();
+            FirebaseUser currentUser = mAuth.getCurrentUser();
+
+            if (currentUser == null) {
+                goToLogin();
+                return;
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Firebase not initialized. Redirecting to Login.", e);
+            // If Firebase fails, we can't check user, so go to login where we handle the error
+            goToLogin();
+            return;
+        }
+
         setContentView(R.layout.activity_main);
 
-        // Apply window insets to bottom navigation to avoid system bar overlap
         View bottomNav = findViewById(R.id.bottom_nav_container);
-        ViewCompat.setOnApplyWindowInsetsListener(bottomNav, (v, insets) -> {
-            Insets navigationBars = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
-            v.setPadding(0, 0, 0, navigationBars.bottom);
-            return insets;
-        });
+        if (bottomNav != null) {
+            ViewCompat.setOnApplyWindowInsetsListener(bottomNav, (v, insets) -> {
+                Insets navigationBars = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
+                v.setPadding(0, 0, 0, navigationBars.bottom);
+                return insets;
+            });
+        }
 
-        // Initialize containers
+        // Initialize views
         navHome = findViewById(R.id.navHome);
         navSkills = findViewById(R.id.navSkills);
-        navStats = findViewById(R.id.navStats);
+        navFriends = findViewById(R.id.navFriends);
         navRanks = findViewById(R.id.navRanks);
         navProfile = findViewById(R.id.navProfile);
 
-        // Initialize pills
         pillHome = findViewById(R.id.pillHome);
         pillSkills = findViewById(R.id.pillSkills);
-        pillStats = findViewById(R.id.pillStats);
+        pillFriends = findViewById(R.id.pillFriends);
         pillRanks = findViewById(R.id.pillRanks);
         pillProfile = findViewById(R.id.pillProfile);
 
-        // Initialize labels
         labelHome = findViewById(R.id.labelHome);
         labelSkills = findViewById(R.id.labelSkills);
-        labelStats = findViewById(R.id.labelStats);
+        labelFriends = findViewById(R.id.labelFriends);
         labelRanks = findViewById(R.id.labelRanks);
         labelProfile = findViewById(R.id.labelProfile);
 
         setupNavigation();
 
-        // Load default fragment
-        if (savedInstanceState == null) {
+        // Check for specific navigation requests (e.g. from Duel screen)
+        String navigateTo = getIntent().getStringExtra("navigate_to");
+        if ("practice".equals(navigateTo)) {
+            String skillName = getIntent().getStringExtra("skill_name");
+            PracticeFragment fragment = new PracticeFragment();
+            Bundle args = new Bundle();
+            args.putString("skill_name", skillName);
+            fragment.setArguments(args);
+            
+            updateNavSelection(navHome);
+            loadFragment(fragment);
+        } else if (savedInstanceState == null) {
             updateNavSelection(navHome);
             loadFragment(new HomeFragment());
         }
     }
 
+    private void goToLogin() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     private void setupNavigation() {
-        navHome.setOnClickListener(v -> {
+        if (navHome != null) navHome.setOnClickListener(v -> {
             updateNavSelection(navHome);
             loadFragment(new HomeFragment());
         });
 
-        navSkills.setOnClickListener(v -> {
+        if (navSkills != null) navSkills.setOnClickListener(v -> {
             updateNavSelection(navSkills);
             loadFragment(new SkillsFragment());
         });
 
-        navStats.setOnClickListener(v -> {
-            updateNavSelection(navStats);
-            loadFragment(new StatsFragment());
+        if (navFriends != null) navFriends.setOnClickListener(v -> {
+            updateNavSelection(navFriends);
+            loadFragment(new FriendsFragment());
         });
 
-        navRanks.setOnClickListener(v -> {
+        if (navRanks != null) navRanks.setOnClickListener(v -> {
             updateNavSelection(navRanks);
             loadFragment(new RanksFragment());
         });
 
-        navProfile.setOnClickListener(v -> {
+        if (navProfile != null) navProfile.setOnClickListener(v -> {
             updateNavSelection(navProfile);
             loadFragment(new ProfileFragment());
         });
     }
 
     private void updateNavSelection(View selectedNav) {
-        // Reset all
         resetNavItem(pillHome, labelHome);
         resetNavItem(pillSkills, labelSkills);
-        resetNavItem(pillStats, labelStats);
+        resetNavItem(pillFriends, labelFriends);
         resetNavItem(pillRanks, labelRanks);
         resetNavItem(pillProfile, labelProfile);
 
-        // Highlight selected
         if (selectedNav == navHome) setSelectedItem(pillHome, labelHome);
         else if (selectedNav == navSkills) setSelectedItem(pillSkills, labelSkills);
-        else if (selectedNav == navStats) setSelectedItem(pillStats, labelStats);
+        else if (selectedNav == navFriends) setSelectedItem(pillFriends, labelFriends);
         else if (selectedNav == navRanks) setSelectedItem(pillRanks, labelRanks);
         else if (selectedNav == navProfile) setSelectedItem(pillProfile, labelProfile);
     }
 
     private void resetNavItem(View pill, TextView label) {
-        pill.setBackground(null);
-        label.setTextColor(0xFF8E8E93);
+        if (pill != null) pill.setBackground(null);
+        if (label != null) label.setTextColor(0xFF8E8E93);
     }
 
     private void setSelectedItem(View pill, TextView label) {
-        pill.setBackgroundResource(R.drawable.shape_nav_pill_active);
-        label.setTextColor(ContextCompat.getColor(this, R.color.splash_green));
+        if (pill != null) pill.setBackgroundResource(R.drawable.shape_nav_pill_active);
+        if (label != null) label.setTextColor(ContextCompat.getColor(this, R.color.splash_green));
     }
 
     private void loadFragment(Fragment fragment) {

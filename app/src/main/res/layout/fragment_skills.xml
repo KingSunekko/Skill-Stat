@@ -63,36 +63,20 @@
             android:orientation="vertical"
             android:paddingHorizontal="20dp">
 
-            <!-- Java Card -->
-            <include
-                android:id="@+id/card_java"
-                layout="@layout/item_skill_card"
+            <LinearLayout
+                android:id="@+id/ll_skills_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp" />
-
-            <!-- Guitar Card -->
-            <include
-                android:id="@+id/card_guitar"
-                layout="@layout/item_skill_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp" />
-
-            <!-- Public Speaking Card -->
-            <include
-                android:id="@+id/card_public_speaking"
-                layout="@layout/item_skill_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp" />
+                android:orientation="vertical">
+                <!-- Dynamically populated -->
+            </LinearLayout>
 
             <!-- Add New Skill Button -->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_add_new_skill"
                 android:layout_width="match_parent"
                 android:layout_height="68dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/shape_btn_green_3d"
                 android:fontFamily="@font/nunito_bold"
                 android:text="+ ADD NEW SKILL"

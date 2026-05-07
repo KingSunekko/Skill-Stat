@@ -1,19 +1,23 @@
 package com.example.skillstat;
 
-import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.chip.ChipGroup;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,6 +30,7 @@ public class SkillsPickerFragment extends Fragment {
     private TextView tvSelectedCount;
     private Button btnContinue;
     private final List<String> selectedSkills = new ArrayList<>();
+    private DatabaseReference mDatabase;
 
     private final List<String> availableSkills = Arrays.asList(
             "Java 💻", "Python 🐍", "Guitar 🎸",
@@ -40,6 +45,8 @@ public class SkillsPickerFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_skills_picker, container, false);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
         cgSkills = view.findViewById(R.id.cg_skills);
         cgSelectedSummary = view.findViewById(R.id.cg_selected_summary);
         llSummary = view.findViewById(R.id.ll_summary);
@@ -49,22 +56,33 @@ public class SkillsPickerFragment extends Fragment {
         setupSkillsGrid();
         updateButtonState();
 
-        btnContinue.setOnClickListener(v -> {
-            if (getActivity() != null) {
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(
-                                R.anim.step_forward_enter,
-                                R.anim.step_forward_exit,
-                                R.anim.step_backward_enter,
-                                R.anim.step_backward_exit
-                        )
-                        .replace(R.id.onboarding_container, new GoalPickerFragment())
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
+        btnContinue.setOnClickListener(v -> saveSkillsAndContinue());
 
         return view;
+    }
+
+    private void saveSkillsAndContinue() {
+        String uid = FirebaseAuth.getInstance().getUid();
+        if (uid == null) return;
+
+        mDatabase.child("users").child(uid).child("skills").setValue(selectedSkills)
+                .addOnSuccessListener(aVoid -> {
+                    if (getActivity() != null) {
+                        getActivity().getSupportFragmentManager().beginTransaction()
+                                .setCustomAnimations(
+                                        R.anim.step_forward_enter,
+                                        R.anim.step_forward_exit,
+                                        R.anim.step_backward_enter,
+                                        R.anim.step_backward_exit
+                                )
+                                .replace(R.id.onboarding_container, new GoalPickerFragment())
+                                .addToBackStack(null)
+                                .commit();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Failed to save skills", Toast.LENGTH_SHORT).show();
+                });
     }
 
     private void setupSkillsGrid() {
@@ -113,7 +131,6 @@ public class SkillsPickerFragment extends Fragment {
         } else {
             llSummary.setVisibility(View.VISIBLE);
             String countText = selectedSkills.size() == 1 ? "1 skill" : selectedSkills.size() + " skills";
-            // Keeping the checkmark icon in the header
             tvSelectedCount.setText("☑ Selected — " + countText);
             cgSelectedSummary.removeAllViews();
             for (String skill : selectedSkills) {

@@ -40,4 +40,12 @@
     <!-- OR divider line -->
     <color name="login_divider">#33FFFFFF</color>     <!-- 20% white -->
 
+    <!-- Redesign Accents -->
+    <color name="glass_white_10">#1AFFFFFF</color>
+    <color name="glass_white_5">#0DFFFFFF</color>
+    <color name="critical_red">#FF4B4B</color>
+    <color name="critical_red_dim">#26FF4B4B</color>
+    <color name="xp_yellow">#FFD600</color>
+    <color name="xp_yellow_dim">#1AFFD600</color>
+
 </resources>

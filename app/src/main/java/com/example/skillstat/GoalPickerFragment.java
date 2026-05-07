@@ -9,10 +9,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class GoalPickerFragment extends Fragment {
 
@@ -20,11 +25,14 @@ public class GoalPickerFragment extends Fragment {
     private LinearLayout llOption10, llOption20, llOption30, llOption45;
     private Button btnContinue;
     private int selectedGoal = 10;
+    private DatabaseReference mDatabase;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_goal_picker, container, false);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         tvGoalValue = view.findViewById(R.id.tv_goal_value);
         llOption10 = view.findViewById(R.id.ll_option_10);
@@ -35,17 +43,27 @@ public class GoalPickerFragment extends Fragment {
 
         setupGoalOptions();
 
-        btnContinue.setOnClickListener(v -> {
-            // Finish onboarding and go to MainActivity
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            if (getActivity() != null) {
-                getActivity().finish();
-            }
-        });
+        btnContinue.setOnClickListener(v -> saveGoalAndFinish());
 
         return view;
+    }
+
+    private void saveGoalAndFinish() {
+        String uid = FirebaseAuth.getInstance().getUid();
+        if (uid == null) return;
+
+        mDatabase.child("users").child(uid).child("dailyGoalMinutes").setValue(selectedGoal)
+                .addOnSuccessListener(aVoid -> {
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    if (getActivity() != null) {
+                        getActivity().finish();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Failed to save goal", Toast.LENGTH_SHORT).show();
+                });
     }
 
     private void setupGoalOptions() {
@@ -59,13 +77,11 @@ public class GoalPickerFragment extends Fragment {
         selectedGoal = minutes;
         tvGoalValue.setText(String.valueOf(minutes));
 
-        // Reset all options
         resetOption(llOption10);
         resetOption(llOption20);
         resetOption(llOption30);
         resetOption(llOption45);
 
-        // Highlight selected
         selectedView.setBackgroundResource(R.drawable.shape_goal_option_selected);
         updateChildColors(selectedView, true);
     }
@@ -82,9 +98,9 @@ public class GoalPickerFragment extends Fragment {
                 if (isSelected) {
                     ((TextView) child).setTextColor(Color.parseColor("#58CC02"));
                 } else {
-                    if (i == 0) { // First text view (the number)
+                    if (i == 0) {
                         ((TextView) child).setTextColor(Color.WHITE);
-                    } else { // Second text view (the 'min' label)
+                    } else {
                         ((TextView) child).setTextColor(Color.parseColor("#AAAACC"));
                     }
                 }

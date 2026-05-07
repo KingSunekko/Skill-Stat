@@ -1,9 +1,9 @@
 package com.example.skillstat;
 
 import android.annotation.SuppressLint;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,13 +12,28 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.example.skillstat.models.Duel;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Map;
 
 public class NotificationsBottomSheet extends BottomSheetDialogFragment {
 
+    private static final String TAG = "NotificationsBottomSheet";
     private LinearLayout llNotificationsContainer;
+    private DatabaseReference mDatabase;
+    private String currentUid;
 
     @Nullable
     @Override
@@ -30,106 +45,159 @@ public class NotificationsBottomSheet extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        currentUid = FirebaseAuth.getInstance().getUid();
+
         llNotificationsContainer = view.findViewById(R.id.ll_notifications_container);
         View btnMarkAllRead = view.findViewById(R.id.btn_mark_all_read);
         
-        btnMarkAllRead.setOnClickListener(v -> {
-            // Hide all unread dots with a simple fade animation
-            for (int i = 0; i < llNotificationsContainer.getChildCount(); i++) {
-                View item = llNotificationsContainer.getChildAt(i);
-                View dot = item.findViewById(R.id.v_notif_dot);
-                if (dot != null && dot.getVisibility() == View.VISIBLE) {
-                    dot.animate().alpha(0f).setDuration(200).withEndAction(() -> dot.setVisibility(View.GONE)).start();
-                }
-            }
-            
-            // Clear the notification badge on the Home screen
-            if (getActivity() != null) {
-                View badge = getActivity().findViewById(R.id.tv_notif_badge);
-                if (badge != null) {
-                    badge.animate().scaleX(0f).scaleY(0f).setDuration(200).withEndAction(() -> badge.setVisibility(View.GONE)).start();
-                }
-            }
-        });
+        btnMarkAllRead.setOnClickListener(v -> markAllAsRead());
         applyHoverEffect(btnMarkAllRead);
 
-        populateNotifications();
+        loadNotifications();
     }
 
-    private void populateNotifications() {
-        llNotificationsContainer.removeAllViews();
+    private void loadNotifications() {
+        if (currentUid == null) return;
 
-        addNotificationItem("🚨", "Welcome back! Your skills miss you 👋", 
-                "Java 💻 is at risk of decaying. Tap to practice now!", "now", "critical", true);
+        mDatabase.child("users").child(currentUid).child("notifications")
+                .addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!isAdded() || llNotificationsContainer == null) return;
+                llNotificationsContainer.removeAllViews();
 
-        addNotificationItem("🚨", "Skills Decaying Now!", 
-                "Java 💻 is at critical risk. Practice now before you lose progress!", "now", "critical", true);
+                if (!snapshot.exists()) {
+                    showEmptyState();
+                    return;
+                }
 
-        addNotificationItem("💪", "Daily Practice Reminder", 
-                "You haven't practiced today. Even 5 minutes keeps your skills sharp!", "5 min ago", "reminder", false);
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    Object data = ds.getValue();
+                    if (data instanceof Map) {
+                        Map<String, Object> notif = (Map<String, Object>) data;
+                        addNotificationItemFromMap(ds.getKey(), notif);
+                    } else if (data instanceof String) {
+                        addSimpleNotification(ds.getKey(), (String) data);
+                    }
+                }
+            }
 
-        addNotificationItem("🧠", "Consistency Beats Intensity", 
-                "Short daily sessions are 3x more effective than long weekly ones. Open SkillStat and practice now!", "1 hr ago", "info", false);
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e(TAG, "Load failed", error.toException());
+            }
+        });
     }
 
-    private void addNotificationItem(String icon, String title, String desc, String time, String type, boolean showAction) {
+    private void addNotificationItemFromMap(String key, Map<String, Object> notif) {
+        String type = (String) notif.get("type");
+        String message = (String) notif.get("message");
+        
         View item = getLayoutInflater().inflate(R.layout.item_notification, llNotificationsContainer, false);
-
         TextView tvIcon = item.findViewById(R.id.tv_notif_icon);
         TextView tvTitle = item.findViewById(R.id.tv_notif_title);
         TextView tvDesc = item.findViewById(R.id.tv_notif_desc);
         TextView tvTime = item.findViewById(R.id.tv_notif_time);
-        View vDot = item.findViewById(R.id.v_notif_dot);
-        View btnAction = item.findViewById(R.id.btn_notif_action);
-        View btnDismiss = item.findViewById(R.id.btn_notif_dismiss);
+        TextView btnAction = item.findViewById(R.id.btn_notif_action);
+        TextView btnDismiss = item.findViewById(R.id.btn_notif_dismiss);
 
-        tvIcon.setText(icon);
-        tvTitle.setText(title);
-        tvDesc.setText(desc);
-        tvTime.setText(time);
-
-        if ("critical".equals(type)) {
-            item.setBackgroundResource(R.drawable.shape_notification_red);
-            vDot.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF4B4B")));
-        } else if ("reminder".equals(type)) {
-            item.setBackgroundResource(R.drawable.shape_notification_green);
-            vDot.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#58CC02")));
-        } else if ("info".equals(type)) {
-            item.setBackgroundResource(R.drawable.shape_notification_blue);
-            vDot.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#21B1FF")));
-        }
-
-        if (showAction) {
-            btnAction.setVisibility(View.VISIBLE);
+        if ("duel_invite".equals(type)) {
+            tvIcon.setText("⚔️");
+            tvTitle.setText("Duel Invitation");
+            tvDesc.setText(message);
+            btnAction.setText("Accept");
+            btnDismiss.setText("Decline");
+            
+            String duelId = (String) notif.get("duelId");
+            btnAction.setOnClickListener(v -> acceptDuel(key, duelId));
+            btnDismiss.setOnClickListener(v -> declineDuel(key, duelId));
+        } else if ("nudge".equals(type)) {
+            tvIcon.setText("👋");
+            tvTitle.setText("Friend Nudge");
+            tvDesc.setText(message);
+            btnAction.setText("Practice Now");
+            btnAction.setOnClickListener(v -> {
+                dismissNotification(key);
+                dismiss();
+                // Navigate to home practice
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+            });
+            btnDismiss.setOnClickListener(v -> dismissNotification(key));
         } else {
+            tvIcon.setText("🔔");
+            tvTitle.setText("Notification");
+            tvDesc.setText(message);
             btnAction.setVisibility(View.GONE);
+            btnDismiss.setOnClickListener(v -> dismissNotification(key));
         }
 
-        btnDismiss.setOnClickListener(v -> {
-            item.animate().alpha(0f).translationX(100f).setDuration(200).withEndAction(() -> llNotificationsContainer.removeView(item)).start();
-        });
-        
-        applyHoverEffect(item);
-        applyHoverEffect(btnAction);
-        applyHoverEffect(btnDismiss);
+        tvTime.setText("just now");
+        llNotificationsContainer.addView(item, 0);
+    }
 
-        llNotificationsContainer.addView(item);
+    private void addSimpleNotification(String key, String message) {
+        View item = getLayoutInflater().inflate(R.layout.item_notification, llNotificationsContainer, false);
+        ((TextView) item.findViewById(R.id.tv_notif_icon)).setText("🔔");
+        ((TextView) item.findViewById(R.id.tv_notif_title)).setText("Alert");
+        ((TextView) item.findViewById(R.id.tv_notif_desc)).setText(message);
+        item.findViewById(R.id.btn_notif_action).setVisibility(View.GONE);
+        item.findViewById(R.id.btn_notif_dismiss).setOnClickListener(v -> dismissNotification(key));
+        llNotificationsContainer.addView(item, 0);
+    }
+
+    private void acceptDuel(String notifKey, String duelId) {
+        mDatabase.child("duels").child(duelId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Duel duel = snapshot.getValue(Duel.class);
+                if (duel != null) {
+                    mDatabase.child("duels").child(duelId).child("status").setValue("active");
+                    mDatabase.child("users").child(duel.getInitiatorUid()).child("activeDuels").child(duelId).setValue(true);
+                    mDatabase.child("users").child(duel.getOpponentUid()).child("activeDuels").child(duelId).setValue(true);
+                    
+                    dismissNotification(notifKey);
+                    Toast.makeText(getContext(), "Duel Started! ⚔️", Toast.LENGTH_SHORT).show();
+                    
+                    Intent intent = new Intent(getActivity(), ActiveDuelActivity.class);
+                    intent.putExtra("duel_id", duelId);
+                    startActivity(intent);
+                    dismiss();
+                }
+            }
+            @Override public void onCancelled(@NonNull DatabaseError error) {}
+        });
+    }
+
+    private void declineDuel(String notifKey, String duelId) {
+        mDatabase.child("duels").child(duelId).removeValue();
+        dismissNotification(notifKey);
+    }
+
+    private void dismissNotification(String key) {
+        mDatabase.child("users").child(currentUid).child("notifications").child(key).removeValue();
+    }
+
+    private void markAllAsRead() {
+        mDatabase.child("users").child(currentUid).child("notifications").removeValue();
+    }
+
+    private void showEmptyState() {
+        TextView tv = new TextView(getContext());
+        tv.setText("No new notifications");
+        tv.setTextColor(0x88FFFFFF);
+        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        tv.setPadding(0, 50, 0, 50);
+        llNotificationsContainer.addView(tv);
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void applyHoverEffect(View view) {
         view.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    v.animate().scaleX(0.97f).scaleY(0.97f).setDuration(100)
-                            .setInterpolator(new DecelerateInterpolator()).start();
-                    break;
-                case MotionEvent.ACTION_UP:
-                case MotionEvent.ACTION_CANCEL:
-                    v.animate().scaleX(1.0f).scaleY(1.0f).setDuration(150)
-                            .setInterpolator(new AccelerateInterpolator()).start();
-                    break;
-            }
+            if (event.getAction() == MotionEvent.ACTION_DOWN) v.animate().scaleX(0.97f).scaleY(0.97f).setDuration(100).start();
+            else if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) 
+                v.animate().scaleX(1.0f).scaleY(1.0f).setDuration(150).start();
             return false;
         });
     }

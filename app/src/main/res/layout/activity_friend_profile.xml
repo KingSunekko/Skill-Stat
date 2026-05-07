@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/splash_bg_dark">
+
+    <!-- Top Bar -->
+    <RelativeLayout
+        android:id="@+id/rl_profile_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="50dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:id="@+id/btn_back"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/shape_skill_card"
+            android:backgroundTint="#2D2D44"
+            android:clickable="true"
+            android:focusable="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="←"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:fontFamily="@font/nunito_bold" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/btn_back"
+            android:fontFamily="@font/nunito_extrabold"
+            android:text="Friend Profile"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rl_profile_header">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="50dp">
+
+            <!-- Profile Info Card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_skill_card"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <FrameLayout
+                    android:layout_width="90dp"
+                    android:layout_height="90dp">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/shape_avatar_bg"
+                        android:backgroundTint="#2D2D44" />
+                    <TextView
+                        android:id="@+id/tv_friend_avatar_emoji"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="🦊"
+                        android:textSize="45sp" />
+                    <View
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="bottom|end"
+                        android:background="@drawable/shape_star_dot"
+                        android:backgroundTint="@color/splash_green" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/tv_friend_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/nunito_extrabold"
+                    android:text="Alex"
+                    android:textColor="@color/white"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/tv_friend_handle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:text="@alex_codes"
+                    android:textColor="@color/splash_text_secondary"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_vertical">
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:background="@drawable/shape_star_dot"
+                        android:backgroundTint="@color/splash_green" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/nunito_bold"
+                        android:text="Online now"
+                        android:textColor="@color/splash_green"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <!-- Mini Stats Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⭐" android:textSize="18sp"/>
+                        <TextView android:id="@+id/tv_friend_xp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="4,210" android:textColor="@color/white" android:fontFamily="@font/nunito_extrabold" android:textSize="16sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Total XP" android:textColor="@color/splash_text_secondary" android:textSize="10sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🔥" android:textSize="18sp"/>
+                        <TextView android:id="@+id/tv_friend_streak" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="14d" android:textColor="@color/white" android:fontFamily="@font/nunito_extrabold" android:textSize="16sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Streak" android:textColor="@color/splash_text_secondary" android:textSize="10sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🎖️" android:textSize="18sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="Lv.12" android:textColor="@color/white" android:fontFamily="@font/nunito_extrabold" android:textSize="16sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Level" android:textColor="@color/splash_text_secondary" android:textSize="10sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⚔️" android:textSize="18sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="5-2" android:textColor="@color/white" android:fontFamily="@font/nunito_extrabold" android:textSize="16sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Duels" android:textColor="@color/splash_text_secondary" android:textSize="10sp"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Action Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/btn_challenge_friend"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.2"
+                    android:background="@drawable/shape_btn_green_3d"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⚔️" android:textSize="24sp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="CHALLENGE\nTO DUEL" android:textColor="@color/white" android:gravity="center" android:fontFamily="@font/nunito_extrabold" android:textSize="16sp"/>
+                </LinearLayout>
+
+                <View android:layout_width="16dp" android:layout_height="1dp"/>
+
+                <LinearLayout
+                    android:id="@+id/btn_profile_nudge"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_skill_card"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="👋" android:textSize="20sp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="10dp" android:text="NUDGE" android:textColor="@color/white" android:fontFamily="@font/nunito_extrabold" android:textSize="16sp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Their Skills Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/nunito_extrabold"
+                android:text="THEIR SKILLS"
+                android:textColor="@color/splash_text_secondary"
+                android:textSize="14sp"
+                android:letterSpacing="0.05"/>
+
+            <LinearLayout
+                android:id="@+id/ll_friend_skills_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+                <!-- Sample Skill -->
+                <include layout="@layout/item_home_skill" />
+                <include layout="@layout/item_home_skill" />
+            </LinearLayout>
+
+            <!-- Comparison Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/nunito_extrabold"
+                android:text="⚔️ YOU VS ALEX"
+                android:textColor="@color/splash_text_secondary"
+                android:textSize="14sp"
+                android:letterSpacing="0.05"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <!-- Comparison Card 1 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/shape_skill_card"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Guitar 🎸" android:textColor="@color/white" android:fontFamily="@font/nunito_bold" android:textSize="16sp"/>
+                    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="You" android:textColor="@color/splash_text_secondary" android:fontFamily="@font/nunito_bold" android:textSize="12sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:text="Alex 👑" android:textColor="@color/splash_green" android:fontFamily="@font/nunito_bold" android:textSize="12sp"/>
+                    </RelativeLayout>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:gravity="center_vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="65%" android:textColor="@color/white" android:fontFamily="@font/nunito_extrabold" android:textSize="16sp"/>
+                        <View android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="vs" android:textColor="@color/splash_text_secondary" android:textSize="10sp"/>
+                        <View android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="95%" android:textColor="@color/white" android:fontFamily="@font/nunito_extrabold" android:textSize="16sp"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="10dp" android:layout_marginTop="8dp" android:orientation="horizontal">
+                        <View android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="0.65" android:background="@drawable/shape_progress_fill" android:backgroundTint="@color/splash_accent_orange"/>
+                        <View android:layout_width="16dp" android:layout_height="match_parent"/>
+                        <View android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="0.95" android:background="@drawable/shape_progress_fill" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Comparison Card 2 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_skill_card"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Java 💻" android:textColor="@color/white" android:fontFamily="@font/nunito_bold" android:textSize="16sp"/>
+                    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="You 👑" android:textColor="@color/splash_green" android:fontFamily="@font/nunito_bold" android:textSize="12sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:text="Alex" android:textColor="@color/splash_text_secondary" android:fontFamily="@font/nunito_bold" android:textSize="12sp"/>
+                    </RelativeLayout>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:gravity="center_vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="82%" android:textColor="@color/white" android:fontFamily="@font/nunito_extrabold" android:textSize="16sp"/>
+                        <View android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="vs" android:textColor="@color/splash_text_secondary" android:textSize="10sp"/>
+                        <View android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="78%" android:textColor="@color/white" android:fontFamily="@font/nunito_extrabold" android:textSize="16sp"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="10dp" android:layout_marginTop="8dp" android:orientation="horizontal">
+                        <View android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="0.82" android:background="@drawable/shape_progress_fill"/>
+                        <View android:layout_width="16dp" android:layout_height="match_parent"/>
+                        <View android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="0.78" android:background="@drawable/shape_progress_fill" android:backgroundTint="#FF4B4B"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

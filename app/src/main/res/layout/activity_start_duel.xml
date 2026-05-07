@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/splash_bg_dark">
+
+    <!-- Top Bar -->
+    <RelativeLayout
+        android:id="@+id/rl_duel_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="50dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:id="@+id/btn_back_duel"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/shape_skill_card"
+            android:backgroundTint="#2D2D44"
+            android:clickable="true"
+            android:focusable="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="←"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:fontFamily="@font/nunito_bold" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/btn_back_duel"
+            android:fontFamily="@font/nunito_extrabold"
+            android:text="⚔️ Start a Duel"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@id/btn_challenge_final"
+        app:layout_constraintTop_toBottomOf="@id/rl_duel_header">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="24dp">
+
+            <!-- Friend Profile Summary -->
+            <LinearLayout
+                android:id="@+id/ll_opponent_summary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_status_at_risk"
+                android:backgroundTint="#1F1A2D"
+                android:gravity="center_vertical"
+                android:padding="16dp">
+
+                <FrameLayout
+                    android:layout_width="60dp"
+                    android:layout_height="60dp">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/shape_avatar_bg"
+                        android:backgroundTint="#2D2D44" />
+                    <TextView
+                        android:id="@+id/tv_opponent_avatar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="🦊"
+                        android:textSize="32sp" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/tv_opponent_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_bold"
+                        android:text="Alex"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/tv_opponent_handle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_semibold"
+                        android:text="@alex_codes - Lv.12"
+                        android:textColor="@color/splash_text_secondary"
+                        android:textSize="13sp" />
+                    <TextView
+                        android:id="@+id/tv_opponent_streak"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/nunito_bold"
+                        android:text="🔥 14d streak"
+                        android:textColor="#FF9F0A"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⚔️"
+                    android:textSize="28sp"
+                    android:alpha="0.4" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/nunito_extrabold"
+                android:text="CHOOSE A SKILL TO DUEL ON"
+                android:textColor="@color/splash_text_secondary"
+                android:textSize="14sp"
+                android:letterSpacing="0.05" />
+
+            <!-- Skill Options -->
+            <LinearLayout
+                android:id="@+id/ll_duel_skills_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+                <!-- Dynamically populated -->
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/nunito_extrabold"
+                android:text="DUEL DURATION"
+                android:textColor="@color/splash_text_secondary"
+                android:textSize="14sp"
+                android:letterSpacing="0.05" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+                <TextView android:id="@+id/btn_duration_3" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:background="@drawable/shape_skill_card" android:text="3d" android:textColor="@color/white" android:gravity="center" android:fontFamily="@font/nunito_extrabold" android:textSize="18sp" android:clickable="true" android:focusable="true"/>
+                <View android:layout_width="12dp" android:layout_height="1dp"/>
+                <TextView android:id="@+id/btn_duration_7" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:background="@drawable/shape_leaderboard_you" android:text="7d" android:textColor="@color/splash_green" android:gravity="center" android:fontFamily="@font/nunito_extrabold" android:textSize="18sp" android:clickable="true" android:focusable="true"/>
+                <View android:layout_width="12dp" android:layout_height="1dp"/>
+                <TextView android:id="@+id/btn_duration_14" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:background="@drawable/shape_skill_card" android:text="14d" android:textColor="@color/white" android:gravity="center" android:fontFamily="@font/nunito_extrabold" android:textSize="18sp" android:clickable="true" android:focusable="true"/>
+            </LinearLayout>
+
+            <!-- Rules Box -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/shape_status_badge"
+                android:backgroundTint="#16213E"
+                android:orientation="vertical"
+                android:padding="16dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📜 Duel Rules" android:textColor="@color/splash_accent_cyan" android:fontFamily="@font/nunito_bold" android:textSize="13sp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="• Whoever gains the most % mastery wins\n• Both players must practice at least once\n• Winner earns 2x XP for that skill during the duel\n• Loser's skill decays 1.5x faster for 3 days" android:textColor="@color/splash_text_secondary" android:fontFamily="@font/nunito_semibold" android:lineSpacingExtra="4dp" android:textSize="12sp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/btn_challenge_final"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/shape_btn_green_3d"
+        android:fontFamily="@font/nunito_extrabold"
+        android:gravity="center"
+        android:text="⚔️ CHALLENGE!"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

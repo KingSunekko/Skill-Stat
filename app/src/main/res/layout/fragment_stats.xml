@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/splash_bg_dark">
@@ -48,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/nunito_semibold"
-                android:text="7-day skill growth tracking"
+                android:text="Skill growth tracking"
                 android:textColor="@color/splash_text_secondary"
                 android:textSize="14sp" />
 
@@ -67,50 +66,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingHorizontal="2dp">
-
-                    <TextView
-                        android:id="@+id/tab_java"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/shape_skill_chip_selector"
-                        android:text="Java 💻"
-                        android:textColor="@color/skill_chip_text_selector"
-                        android:fontFamily="@font/nunito_bold"
-                        android:paddingHorizontal="20dp"
-                        android:paddingVertical="12dp"
-                        android:clickable="true"
-                        android:focusable="true" />
-
-                    <View android:layout_width="12dp" android:layout_height="1dp" />
-
-                    <TextView
-                        android:id="@+id/tab_guitar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/shape_skill_chip_selector"
-                        android:text="Guitar 🎸"
-                        android:textColor="@color/skill_chip_text_selector"
-                        android:fontFamily="@font/nunito_bold"
-                        android:paddingHorizontal="20dp"
-                        android:paddingVertical="12dp"
-                        android:clickable="true"
-                        android:focusable="true" />
-
-                    <View android:layout_width="12dp" android:layout_height="1dp" />
-
-                    <TextView
-                        android:id="@+id/tab_public_speaking"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/shape_skill_chip_selector"
-                        android:text="Public Speaking 🎤"
-                        android:textColor="@color/skill_chip_text_selector"
-                        android:fontFamily="@font/nunito_bold"
-                        android:paddingHorizontal="20dp"
-                        android:paddingVertical="12dp"
-                        android:clickable="true"
-                        android:focusable="true" />
-
+                    <!-- Dynamically populated -->
                 </LinearLayout>
             </HorizontalScrollView>
 
@@ -137,7 +93,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nunito_bold"
-                            android:text="Java 💻"
+                            android:text="No skill selected"
                             android:textColor="@color/white"
                             android:textSize="20sp" />
 
@@ -156,7 +112,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:fontFamily="@font/nunito_bold"
-                        android:text="82%"
+                        android:text="0%"
                         android:textColor="@color/splash_green"
                         android:textSize="32sp" />
                 </RelativeLayout>
@@ -167,7 +123,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp">
 
-                    <!-- Growth Badge Floating Top Right -->
                     <TextView
                         android:id="@+id/tv_stats_growth_badge"
                         android:layout_width="wrap_content"
@@ -178,7 +133,7 @@
                         android:fontFamily="@font/nunito_bold"
                         android:paddingHorizontal="10dp"
                         android:paddingVertical="4dp"
-                        android:text="+27% this week 📈"
+                        android:text="0% this week"
                         android:textColor="@color/white"
                         android:textSize="9sp" />
 
@@ -189,15 +144,7 @@
                         android:layout_marginTop="20dp"
                         android:gravity="bottom"
                         android:orientation="horizontal">
-
-                        <include layout="@layout/layout_stat_bar" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" />
-                        <include layout="@layout/layout_stat_bar" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" />
-                        <include layout="@layout/layout_stat_bar" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" />
-                        <include layout="@layout/layout_stat_bar" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" />
-                        <include layout="@layout/layout_stat_bar" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" />
-                        <include layout="@layout/layout_stat_bar" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" />
-                        <include layout="@layout/layout_stat_bar" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" />
-
+                        <!-- Dynamically populated -->
                     </LinearLayout>
                 </RelativeLayout>
 
@@ -225,13 +172,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nunito_bold"
-                            android:text="82%"
+                            android:text="0%"
                             android:textColor="@color/splash_green"
                             android:textSize="18sp" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="☑ Peak"
+                            android:text="Peak"
                             android:textColor="@color/splash_text_secondary"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -247,13 +194,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nunito_bold"
-                            android:text="55%"
+                            android:text="0%"
                             android:textColor="#FF9800"
                             android:textSize="18sp" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="📉 Low"
+                            android:text="Low"
                             android:textColor="@color/splash_text_secondary"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -269,13 +216,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nunito_bold"
-                            android:text="70%"
+                            android:text="0%"
                             android:textColor="#21B1FF"
                             android:textSize="18sp" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="📊 Avg"
+                            android:text="Avg"
                             android:textColor="@color/splash_text_secondary"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -293,19 +240,14 @@
                 android:textColor="@color/splash_text_secondary"
                 android:textSize="13sp" />
 
-            <!-- Decay List -->
+            <!-- Decay List Container -->
             <LinearLayout
                 android:id="@+id/ll_decay_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:orientation="vertical">
-
-                <include layout="@layout/item_decay_status" />
-                <View android:layout_width="match_parent" android:layout_height="12dp" />
-                <include layout="@layout/item_decay_status" />
-                <View android:layout_width="match_parent" android:layout_height="12dp" />
-                <include layout="@layout/item_decay_status" />
+                <!-- Dynamically populated -->
             </LinearLayout>
 
             <!-- Ebbinghaus Box -->
@@ -321,7 +263,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nunito_bold"
-                    android:text="📖 Ebbinghaus Forgetting Curve"
+                    android:text="📖 Science of Forgetting"
                     android:textColor="#FFD700"
                     android:textSize="15sp" />
 
@@ -331,7 +273,7 @@
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/nunito_semibold"
                     android:lineSpacingExtra="4dp"
-                    android:text="Skills decay over time without practice. SkillStat uses the Ebbinghaus model to predict when each skill is at risk before forgetting sets in! 🧠"
+                    android:text="Skills decay over time without practice. SkillStat tracks this so you can practice right before you start to forget! 🧠"
                     android:textColor="#BFBFBF"
                     android:textSize="13sp" />
             </LinearLayout>

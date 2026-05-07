@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -11,22 +12,86 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.OnBackPressedCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.skillstat.models.User;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class LoginActivity extends AppCompatActivity {
 
+    private static final String TAG = "LoginActivity";
     private EditText etEmail, etPassword;
     private ImageView ivPasswordToggle;
     private boolean isPasswordVisible = false;
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
+    private GoogleSignInClient mGoogleSignInClient;
+    private boolean isFirebaseConfigured = true;
+
+    private final ActivityResultLauncher<Intent> googleSignInLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK) {
+                    Intent data = result.getData();
+                    Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+                    try {
+                        GoogleSignInAccount account = task.getResult(ApiException.class);
+                        firebaseAuthWithGoogle(account.getIdToken());
+                    } catch (ApiException e) {
+                        Log.w(TAG, "Google sign in failed", e);
+                        Toast.makeText(this, "Google sign in failed", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
+
+        // Initialize Firebase safely
+        try {
+            mAuth = FirebaseAuth.getInstance();
+            mDatabase = FirebaseDatabase.getInstance().getReference();
+        } catch (Exception e) {
+            Log.e(TAG, "Firebase initialization failed. Make sure google-services.json is present.", e);
+            isFirebaseConfigured = false;
+            Toast.makeText(this, "Firebase not configured! Login will be disabled.", Toast.LENGTH_LONG).show();
+        }
+
+        // Configure Google Sign-In
+        try {
+            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestIdToken(getString(R.string.default_web_client_id))
+                    .requestEmail()
+                    .build();
+            mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        } catch (Exception e) {
+            Log.e(TAG, "Google Sign-In configuration failed", e);
+        }
 
         // Edge-to-edge insets
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -66,6 +131,13 @@ public class LoginActivity extends AppCompatActivity {
 
         // ── LOG IN button ────────────────────────────────────────────────────
         btnLogin.setOnClickListener(v -> {
+            if (!isFirebaseConfigured) {
+                Toast.makeText(this, "Firebase is not set up. Please add google-services.json", Toast.LENGTH_SHORT).show();
+                // For development: skip to main if firebase is missing
+                navigateToMain();
+                return;
+            }
+
             String email    = etEmail.getText().toString().trim();
             String password = etPassword.getText().toString().trim();
 
@@ -90,19 +162,29 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_up_enter, R.anim.gentle_fade_out);
-            finish();
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, task -> {
+                        if (task.isSuccessful()) {
+                            checkUserInDatabase(mAuth.getCurrentUser());
+                        } else {
+                            String errorMessage = task.getException() != null ? task.getException().getMessage() : "Login failed.";
+                            Toast.makeText(LoginActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+                        }
+                    });
         });
 
         // ── Social buttons ───────────────────────────────────────────────────
         btnFacebook.setOnClickListener(v ->
                 Toast.makeText(this, "Facebook login coming soon!", Toast.LENGTH_SHORT).show());
 
-        btnGoogle.setOnClickListener(v ->
-                Toast.makeText(this, "Google login coming soon!", Toast.LENGTH_SHORT).show());
+        btnGoogle.setOnClickListener(v -> {
+            if (mGoogleSignInClient != null) {
+                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+                googleSignInLauncher.launch(signInIntent);
+            } else {
+                Toast.makeText(this, "Google Sign-In not configured", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         // ── "No account? Sign Up →" link ──────────────────────────────────────
         tvSignUp.setOnClickListener(v -> {
@@ -111,11 +193,76 @@ public class LoginActivity extends AppCompatActivity {
             overridePendingTransition(R.anim.slide_up_enter, R.anim.gentle_fade_out);
             finish();
         });
+
+        // Handle back navigation
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                finish();
+                overridePendingTransition(R.anim.gentle_fade_in, R.anim.slide_down_exit);
+            }
+        });
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.gentle_fade_in, R.anim.slide_down_exit);
+    private void firebaseAuthWithGoogle(String idToken) {
+        if (mAuth == null) return;
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        checkUserInDatabase(user);
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Authentication Failed.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void checkUserInDatabase(FirebaseUser firebaseUser) {
+        if (firebaseUser == null || mDatabase == null) return;
+
+        mDatabase.child("users").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    navigateToMain();
+                } else {
+                    createUserProfile(firebaseUser);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e(TAG, "Database error", error.toException());
+                navigateToMain();
+            }
+        });
+    }
+
+    private void createUserProfile(FirebaseUser firebaseUser) {
+        if (mDatabase == null) return;
+        User user = new User(firebaseUser.getUid(), firebaseUser.getDisplayName(), firebaseUser.getEmail());
+        if (firebaseUser.getPhotoUrl() != null) {
+            user.setAvatarUrl(firebaseUser.getPhotoUrl().toString());
+        }
+
+        mDatabase.child("users").child(firebaseUser.getUid()).setValue(user)
+                .addOnSuccessListener(aVoid -> {
+                    Intent intent = new Intent(LoginActivity.this, OnboardingActivity.class);
+                    startActivity(intent);
+                    finish();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Failed to create profile", Toast.LENGTH_SHORT).show();
+                    navigateToMain();
+                });
+    }
+
+    private void navigateToMain() {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_up_enter, R.anim.gentle_fade_out);
+        finish();
     }
 }

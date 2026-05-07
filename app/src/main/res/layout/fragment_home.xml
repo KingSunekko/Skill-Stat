@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/splash_bg_dark">
@@ -17,7 +16,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="20dp"
-            android:paddingTop="50dp"
+            android:paddingTop="60dp"
             android:paddingBottom="100dp">
 
             <!-- Header Section -->
@@ -35,6 +34,7 @@
                         android:background="@drawable/shape_avatar_bg"
                         android:backgroundTint="@color/splash_green" />
                     <TextView
+                        android:id="@+id/tv_home_avatar_emoji"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -49,36 +49,21 @@
                     android:layout_marginStart="16dp"
                     android:layout_toEndOf="@id/fl_home_avatar"
                     android:orientation="vertical">
-
                     <TextView
+                        android:id="@+id/tv_home_greeting"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nunito_bold"
                         android:text="Hey, SkillStatUser!"
                         android:textColor="@color/white"
-                        android:textSize="20sp" />
-
-                    <LinearLayout
+                        android:textSize="18sp" />
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="👋"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="6dp"
-                            android:fontFamily="@font/nunito_semibold"
-                            android:text="Ready to level up?"
-                            android:textColor="@color/splash_text_secondary"
-                            android:textSize="13sp" />
-                    </LinearLayout>
+                        android:fontFamily="@font/nunito_semibold"
+                        android:text="Ready to level up? 👋"
+                        android:textColor="@color/splash_text_secondary"
+                        android:textSize="13sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -88,31 +73,30 @@
                     android:layout_centerVertical="true"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
-
                     <FrameLayout
                         android:id="@+id/btn_notifications"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
                         android:background="@drawable/shape_skill_card"
-                        android:backgroundTint="#2D2D44"
-                        android:clickable="true"
-                        android:focusable="true">
+                        android:backgroundTint="#2D2D44">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="🔔"
-                            android:textSize="18sp" />
+                            android:textSize="20sp" />
                         <TextView
                             android:id="@+id/tv_notif_badge"
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
+                            android:layout_width="22dp"
+                            android:layout_height="18dp"
                             android:layout_gravity="top|end"
+                            android:layout_marginTop="-4dp"
+                            android:layout_marginEnd="-4dp"
                             android:background="@drawable/shape_status_at_risk"
                             android:gravity="center"
-                            android:text="3"
+                            android:text="0"
                             android:textColor="@color/white"
-                            android:textSize="9sp"
+                            android:textSize="10sp"
                             android:fontFamily="@font/nunito_bold" />
                     </FrameLayout>
 
@@ -127,20 +111,21 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="🔥"
-                            android:textSize="12sp" />
+                            android:textSize="14sp" />
                         <TextView
+                            android:id="@+id/tv_home_streak"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
                             android:fontFamily="@font/nunito_bold"
-                            android:text="6"
+                            android:text="0"
                             android:textColor="@color/white"
                             android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
             </RelativeLayout>
 
-            <!-- XP Level Card -->
+            <!-- XP Card -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -153,45 +138,49 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
+                        android:id="@+id/tv_home_xp_total"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nunito_bold"
-                        android:text="⭐ 3,135 XP"
+                        android:text="⭐ 0 XP"
                         android:textColor="@color/white"
                         android:textSize="16sp" />
                     <TextView
+                        android:id="@+id/tv_home_level"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:fontFamily="@font/nunito_bold"
-                        android:text="Level 8 → 9"
+                        android:text="Level 1 → 2"
                         android:textColor="@color/splash_text_secondary"
                         android:textSize="13sp" />
                 </RelativeLayout>
 
                 <View
+                    android:id="@+id/v_xp_progress_bg"
                     android:layout_width="match_parent"
-                    android:layout_height="12dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="12dp"
                     android:background="@drawable/shape_progress_bg" />
-
                 <View
-                    android:layout_width="250dp"
-                    android:layout_height="12dp"
-                    android:layout_marginTop="-12dp"
+                    android:id="@+id/v_xp_progress_fill"
+                    android:layout_width="0dp"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="-10dp"
                     android:background="@drawable/shape_progress_fill" />
 
                 <TextView
+                    android:id="@+id/tv_home_xp_needed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/nunito_semibold"
-                    android:text="865 XP to next level"
+                    android:text="1000 XP to next level"
                     android:textColor="@color/splash_text_secondary"
                     android:textSize="12sp" />
             </LinearLayout>
 
-            <!-- Skill at Risk Alert -->
+            <!-- Skill at Risk Alert (Hidden for new users) -->
             <LinearLayout
                 android:id="@+id/card_risk_alert"
                 android:layout_width="match_parent"
@@ -201,7 +190,8 @@
                 android:backgroundTint="#2D1A1A"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:padding="16dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -223,11 +213,12 @@
                         android:textColor="#FF4B4B"
                         android:textSize="16sp" />
                     <TextView
+                        android:id="@+id/tv_risk_skill_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:fontFamily="@font/nunito_semibold"
-                        android:text="Java 💻 fading fast!"
+                        android:text="Skill fading fast!"
                         android:textColor="#BF8080"
                         android:textSize="13sp" />
                 </LinearLayout>
@@ -266,11 +257,12 @@
                         android:text="🔥"
                         android:textSize="20sp" />
                     <TextView
+                        android:id="@+id/tv_stat_streak"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/nunito_bold"
-                        android:text="6"
+                        android:text="0"
                         android:textColor="@color/white"
                         android:textSize="18sp" />
                     <TextView
@@ -298,11 +290,12 @@
                         android:text="⭐"
                         android:textSize="20sp" />
                     <TextView
+                        android:id="@+id/tv_stat_xp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/nunito_bold"
-                        android:text="3,135"
+                        android:text="0"
                         android:textColor="@color/white"
                         android:textSize="18sp" />
                     <TextView
@@ -330,11 +323,12 @@
                         android:text="🏆"
                         android:textSize="20sp" />
                     <TextView
+                        android:id="@+id/tv_stat_days"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/nunito_bold"
-                        android:text="4"
+                        android:text="0"
                         android:textColor="@color/white"
                         android:textSize="18sp" />
                     <TextView
@@ -348,12 +342,13 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_home_goal_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:fontFamily="@font/nunito_bold"
                 android:letterSpacing="0.05"
-                android:text="TODAY'S GOAL — 20 MIN"
+                android:text="TODAY'S GOAL — 10 MIN"
                 android:textColor="@color/splash_text_secondary"
                 android:textSize="13sp" />
 
@@ -377,33 +372,37 @@
                         android:textColor="@color/white"
                         android:textSize="16sp" />
                     <TextView
+                        android:id="@+id/tv_home_goal_progress"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:fontFamily="@font/nunito_bold"
-                        android:text="12 / 20 min"
+                        android:text="0 / 10 min"
                         android:textColor="@color/splash_green"
                         android:textSize="16sp" />
                 </RelativeLayout>
 
                 <View
+                    android:id="@+id/v_goal_progress_bg"
                     android:layout_width="match_parent"
                     android:layout_height="12dp"
                     android:layout_marginTop="16dp"
                     android:background="@drawable/shape_progress_bg" />
 
                 <View
-                    android:layout_width="200dp"
+                    android:id="@+id/v_goal_progress_fill"
+                    android:layout_width="0dp"
                     android:layout_height="12dp"
                     android:layout_marginTop="-12dp"
                     android:background="@drawable/shape_progress_fill" />
 
                 <TextView
+                    android:id="@+id/tv_home_goal_footer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/nunito_semibold"
-                    android:text="8 more min to unlock your reward 🎁"
+                    android:text="10 more min to unlock your reward 🎁"
                     android:textColor="@color/splash_text_secondary"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -425,7 +424,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:orientation="vertical">
-                <!-- Dynamically populated in HomeFragment.java -->
+                <!-- Dynamically populated -->
             </LinearLayout>
 
             <!-- Action Buttons -->
@@ -443,17 +442,19 @@
                 android:clickable="true"
                 android:focusable="true" />
 
-            <LinearLayout
+            <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:orientation="horizontal">
+                android:columnCount="2"
+                android:alignmentMode="alignMargins"
+                android:useDefaultMargins="true">
 
                 <LinearLayout
                     android:id="@+id/btn_home_charts"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
-                    android:layout_weight="1"
+                    android:layout_columnWeight="1"
                     android:background="@drawable/shape_skill_card"
                     android:gravity="center"
                     android:clickable="true"
@@ -471,16 +472,14 @@
                         android:fontFamily="@font/nunito_bold"
                         android:text="CHARTS"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
-
-                <View android:layout_width="16dp" android:layout_height="1dp" />
 
                 <LinearLayout
                     android:id="@+id/btn_home_ranks"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
-                    android:layout_weight="1"
+                    android:layout_columnWeight="1"
                     android:background="@drawable/shape_skill_card"
                     android:gravity="center"
                     android:clickable="true"
@@ -498,9 +497,59 @@
                         android:fontFamily="@font/nunito_bold"
                         android:text="RANKS"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
-            </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_home_challenge"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_columnWeight="1"
+                    android:background="@drawable/shape_skill_card"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="⚡"
+                        android:textSize="18sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/nunito_bold"
+                        android:text="CHALLENGE"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_home_friends"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_columnWeight="1"
+                    android:background="@drawable/shape_skill_card"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="👥"
+                        android:textSize="18sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/nunito_bold"
+                        android:text="FRIENDS"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </GridLayout>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

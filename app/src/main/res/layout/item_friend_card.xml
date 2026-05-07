@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:background="@drawable/shape_skill_card"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:id="@+id/fl_avatar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/shape_avatar_bg"
+            android:backgroundTint="#2D2D44">
+            <TextView
+                android:id="@+id/tv_avatar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="🦊"
+                android:textSize="24sp" />
+            <View
+                android:id="@+id/v_status_dot"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="2dp"
+                android:background="@drawable/shape_star_dot"
+                android:backgroundTint="@color/splash_green" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@id/fl_avatar"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:text="Alex"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_handle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_semibold"
+                android:text="@alex_codes • Lv.12"
+                android:textColor="@color/splash_text_secondary"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_decay_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/shape_status_at_risk"
+                android:backgroundTint="#33FF4B4B"
+                android:fontFamily="@font/nunito_extrabold"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="2dp"
+                android:text="DECAYING"
+                android:textColor="#FF4B4B"
+                android:textSize="9sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/btn_unfriend"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/shape_skill_card"
+                android:backgroundTint="#3D2D2D"
+                android:gravity="center"
+                android:text="✕"
+                android:textColor="#FF4B4B"
+                android:textSize="14sp"
+                android:clickable="true"
+                android:focusable="true" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_streak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_bold"
+            android:text="🔥 14d"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_xp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="⭐ 4,210"
+            android:textColor="@color/xp_yellow"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_primary_skill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="⬢ Guitar"
+            android:textColor="@color/splash_green"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/btn_nudge"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_skill_card"
+            android:backgroundTint="#3D2D1A"
+            android:fontFamily="@font/nunito_bold"
+            android:gravity="center"
+            android:text="👋 Nudge"
+            android:textColor="#FF9F0A" />
+
+        <View
+            android:layout_width="12dp"
+            android:layout_height="1dp" />
+
+        <TextView
+            android:id="@+id/btn_duel"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_skill_card"
+            android:backgroundTint="#1D2A1D"
+            android:fontFamily="@font/nunito_bold"
+            android:gravity="center"
+            android:text="⚔️ Duel"
+            android:textColor="@color/splash_green" />
+    </LinearLayout>
+</LinearLayout>

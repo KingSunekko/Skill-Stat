@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/splash_bg_dark">
+
+    <!-- Top Bar -->
+    <RelativeLayout
+        android:id="@+id/rl_active_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="50dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:id="@+id/btn_back_active"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/shape_skill_card"
+            android:backgroundTint="#2D2D44"
+            android:clickable="true"
+            android:focusable="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="←"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:fontFamily="@font/nunito_bold" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/btn_back_active"
+            android:fontFamily="@font/nunito_extrabold"
+            android:text="⚔️ Active Duel"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@id/ll_bottom_actions"
+        app:layout_constraintTop_toBottomOf="@id/rl_active_header">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="24dp">
+
+            <!-- VS Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center" android:orientation="vertical">
+                    <TextView android:id="@+id/tv_my_avatar" android:layout_width="60dp" android:layout_height="60dp" android:text="👦" android:textSize="40sp" android:gravity="center"/>
+                    <TextView android:id="@+id/tv_my_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="You" android:textColor="@color/white" android:fontFamily="@font/nunito_bold" android:textSize="14sp"/>
+                </LinearLayout>
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginHorizontal="32dp" android:text="VS" android:textColor="#FF4B4B" android:fontFamily="@font/nunito_extrabold" android:textSize="28sp"/>
+
+                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center" android:orientation="vertical">
+                    <TextView android:id="@+id/tv_opponent_avatar" android:layout_width="60dp" android:layout_height="60dp" android:text="🦊" android:textSize="40sp" android:gravity="center"/>
+                    <TextView android:id="@+id/tv_opponent_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alex" android:textColor="@color/white" android:fontFamily="@font/nunito_bold" android:textSize="14sp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_duel_info_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/shape_reward_skill_pill"
+                android:backgroundTint="#2D2D44"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="4dp"
+                android:text="Skill - time remaining"
+                android:textColor="@color/white"
+                android:fontFamily="@font/nunito_bold"
+                android:textSize="13sp" />
+
+            <!-- Progress Gained Card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/shape_skill_card"
+                android:backgroundTint="#1D2A1D"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:gravity="center">
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Progress Gained" android:textColor="@color/white" android:fontFamily="@font/nunito_bold" android:textSize="15sp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+                        <TextView android:id="@+id/tv_my_gain" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="+0%" android:textColor="@color/splash_green" android:fontFamily="@font/nunito_extrabold" android:textSize="32sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="You" android:textColor="@color/splash_text_secondary" android:textSize="11sp"/>
+                    </LinearLayout>
+
+                    <TextView android:id="@+id/tv_duel_status_icon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⚔️" android:textSize="32sp" android:layout_marginHorizontal="16dp"/>
+
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
+                        <TextView android:id="@+id/tv_opponent_gain" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="+0%" android:textColor="#FF4B4B" android:fontFamily="@font/nunito_extrabold" android:textSize="32sp"/>
+                        <TextView android:id="@+id/tv_opponent_label_small" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alex" android:textColor="@color/splash_text_secondary" android:textSize="11sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_duel_status_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="The duel has just begun!"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- Mastery Comparison -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/shape_skill_card"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Mastery Comparison" android:textColor="@color/white" android:fontFamily="@font/nunito_bold" android:textSize="15sp"/>
+
+                <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="20dp">
+                    <TextView android:id="@+id/tv_mastery_my_label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="You 👦" android:textColor="@color/white" android:fontFamily="@font/nunito_bold" android:textSize="13sp"/>
+                    <TextView android:id="@+id/tv_my_mastery_percent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:text="0%" android:textColor="@color/splash_green" android:fontFamily="@font/nunito_extrabold" android:textSize="14sp"/>
+                </RelativeLayout>
+                <View android:id="@+id/v_my_mastery_bg" android:layout_width="match_parent" android:layout_height="10dp" android:layout_marginTop="8dp" android:background="@drawable/shape_progress_bg"/>
+                <View android:id="@+id/v_my_mastery_fill" android:layout_width="0dp" android:layout_height="10dp" android:layout_marginTop="-10dp" android:background="@drawable/shape_progress_fill"/>
+
+                <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp">
+                    <TextView android:id="@+id/tv_mastery_opponent_label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alex 🦊" android:textColor="@color/white" android:fontFamily="@font/nunito_bold" android:textSize="13sp"/>
+                    <TextView android:id="@+id/tv_opponent_mastery_percent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:text="0%" android:textColor="#FF4B4B" android:fontFamily="@font/nunito_extrabold" android:textSize="14sp"/>
+                </RelativeLayout>
+                <View android:id="@+id/v_opponent_mastery_bg" android:layout_width="match_parent" android:layout_height="10dp" android:layout_marginTop="8dp" android:background="@drawable/shape_progress_bg"/>
+                <View android:id="@+id/v_opponent_mastery_fill" android:layout_width="0dp" android:layout_height="10dp" android:layout_marginTop="-10dp" android:background="@drawable/shape_progress_fill" android:backgroundTint="#FF4B4B"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom_actions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/btn_practice_now_duel"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@drawable/shape_btn_green_3d"
+            android:fontFamily="@font/nunito_extrabold"
+            android:gravity="center"
+            android:text="💪 PRACTICE NOW"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/btn_back_to_friends"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/shape_skill_card"
+            android:fontFamily="@font/nunito_extrabold"
+            android:gravity="center"
+            android:text="BACK TO FRIENDS"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:clickable="true"
+            android:focusable="true" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

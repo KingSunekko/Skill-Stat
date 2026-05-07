@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ll_leaderboard_item_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -10,38 +9,57 @@
     android:orientation="horizontal"
     android:padding="12dp">
 
-    <!-- Rank Number/Medal -->
-    <TextView
-        android:id="@+id/tv_rank_number"
-        android:layout_width="30dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/nunito_bold"
-        android:gravity="center"
-        android:text="4"
-        android:textColor="@color/splash_text_secondary"
-        android:textSize="16sp" />
+    <!-- Rank / Medal -->
+    <FrameLayout
+        android:layout_width="35dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_rank_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/nunito_extrabold"
+            android:text="2"
+            android:textColor="@color/splash_green"
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/tv_rank_medal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="18sp"
+            android:visibility="gone" />
+    </FrameLayout>
 
     <!-- Avatar -->
     <FrameLayout
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp">
         <View
-            android:id="@+id/v_avatar_border"
+            android:id="@+id/v_avatar_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/shape_avatar_bg"
-            android:backgroundTint="#33FFFFFF" />
+            android:backgroundTint="#2D2D44" />
         <TextView
             android:id="@+id/tv_avatar_emoji"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="🧙‍♂️"
+            android:text="👦"
             android:textSize="24sp" />
+        <View
+            android:id="@+id/v_status_dot"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_gravity="bottom|end"
+            android:background="@drawable/shape_star_dot"
+            android:backgroundTint="@color/splash_green"
+            android:visibility="gone" />
     </FrameLayout>
 
-    <!-- Name and Info -->
+    <!-- Info -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -52,31 +70,28 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
+            android:gravity="center_vertical">
             <TextView
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_bold"
-                android:text="Alex"
+                android:text="You"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
-
             <TextView
-                android:id="@+id/tv_you_tag"
+                android:id="@+id/tv_you_badge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:background="@drawable/shape_reward_skill_pill"
-                android:fontFamily="@font/nunito_bold"
+                android:backgroundTint="@color/splash_green"
+                android:fontFamily="@font/nunito_extrabold"
                 android:paddingHorizontal="6dp"
                 android:paddingVertical="1dp"
                 android:text="YOU"
                 android:textColor="@color/white"
-                android:textSize="9sp"
-                android:visibility="gone" />
+                android:textSize="9sp" />
         </LinearLayout>
 
         <TextView
@@ -85,52 +100,19 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:fontFamily="@font/nunito_semibold"
-            android:text="🔥 14d • Java 💻, Guitar 🎸"
+            android:text="🔥 6d • ⭐ 340 XP this week"
             android:textColor="@color/splash_text_secondary"
             android:textSize="11sp" />
     </LinearLayout>
 
-    <!-- Score / Skill Info -->
-    <LinearLayout
+    <!-- Score -->
+    <TextView
+        android:id="@+id/tv_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="end"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/ll_score_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_score_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="⭐"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_score_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:fontFamily="@font/nunito_bold"
-                android:text="4,210"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tv_skill_level"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito_semibold"
-            android:text="Advanced"
-            android:textColor="@color/splash_text_secondary"
-            android:textSize="10sp"
-            android:visibility="gone" />
-    </LinearLayout>
+        android:fontFamily="@font/nunito_extrabold"
+        android:text="340"
+        android:textColor="@color/splash_green"
+        android:textSize="18sp" />
 
 </LinearLayout>

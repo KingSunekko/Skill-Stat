@@ -4,12 +4,15 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,9 +20,20 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.example.skillstat.models.User;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.slider.Slider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class AddSkillFragment extends Fragment {
 
@@ -34,16 +48,20 @@ public class AddSkillFragment extends Fragment {
     private View llDecayStatus;
 
     private String selectedLevel = "Beginner";
+    private DatabaseReference mDatabase;
+    private String currentUid;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_skill, container, false);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        currentUid = FirebaseAuth.getInstance().getUid();
+
         initViews(view);
         setupListeners();
         
-        // Default selections
         selectLevel("Beginner");
         updateDecayStatus(1);
 
@@ -93,14 +111,12 @@ public class AddSkillFragment extends Fragment {
         etSkillName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 boolean hasText = s.toString().trim().length() > 0;
                 btnAddSkill.setEnabled(hasText);
                 btnAddSkill.setAlpha(hasText ? 1.0f : 0.5f);
             }
-
             @Override
             public void afterTextChanged(Editable s) {}
         });
@@ -114,6 +130,53 @@ public class AddSkillFragment extends Fragment {
         llBeginner.setOnClickListener(v -> selectLevel("Beginner"));
         llIntermediate.setOnClickListener(v -> selectLevel("Intermediate"));
         llAdvanced.setOnClickListener(v -> selectLevel("Advanced"));
+
+        btnAddSkill.setOnClickListener(v -> saveSkillToDatabase());
+    }
+
+    private void saveSkillToDatabase() {
+        String skillName = etSkillName.getText().toString().trim();
+        if (TextUtils.isEmpty(skillName)) return;
+
+        if (currentUid == null) return;
+
+        mDatabase.child("users").child(currentUid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+                if (user != null) {
+                    List<String> skills = user.getSkills();
+                    if (skills == null) skills = new ArrayList<>();
+                    
+                    if (skills.contains(skillName)) {
+                        Toast.makeText(getContext(), "You already have this skill!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    skills.add(skillName);
+                    user.setSkills(skills);
+
+                    // Set initial mastery based on selected level
+                    Map<String, Integer> mastery = user.getSkillMastery();
+                    int initialMastery = 0;
+                    if (selectedLevel.equals("Intermediate")) initialMastery = 30;
+                    else if (selectedLevel.equals("Advanced")) initialMastery = 60;
+                    mastery.put(skillName, initialMastery);
+
+                    mDatabase.child("users").child(currentUid).setValue(user)
+                            .addOnSuccessListener(aVoid -> {
+                                Toast.makeText(getContext(), "Skill added successfully!", Toast.LENGTH_SHORT).show();
+                                if (getActivity() != null) {
+                                    getActivity().getSupportFragmentManager().popBackStack();
+                                }
+                            })
+                            .addOnFailureListener(e -> Toast.makeText(getContext(), "Failed to add skill", Toast.LENGTH_SHORT).show());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
     }
 
     private void updateDecayStatus(int days) {
@@ -155,8 +218,6 @@ public class AddSkillFragment extends Fragment {
 
     private void selectLevel(String level) {
         selectedLevel = level;
-
-        // Reset all
         llBeginner.setBackgroundTintList(null);
         llIntermediate.setBackgroundTintList(null);
         llAdvanced.setBackgroundTintList(null);
@@ -164,8 +225,7 @@ public class AddSkillFragment extends Fragment {
         ivIntermediateCheck.setVisibility(View.GONE);
         ivAdvancedCheck.setVisibility(View.GONE);
 
-        int selectedColor = Color.parseColor("#1A58CC02"); // 10% Alpha green
-
+        int selectedColor = Color.parseColor("#1A58CC02");
         switch (level) {
             case "Beginner":
                 llBeginner.setBackgroundTintList(ColorStateList.valueOf(selectedColor));

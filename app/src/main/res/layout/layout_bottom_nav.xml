@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="70dp"
     android:orientation="horizontal"
     android:background="@drawable/shape_bottom_nav_bg"
     android:gravity="center_vertical"
@@ -24,12 +24,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="16dp"
-            android:paddingVertical="2dp">
+            android:paddingVertical="4dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="🏠"
-                android:textSize="20sp" />
+                android:textSize="22sp" />
         </FrameLayout>
 
         <TextView
@@ -39,8 +39,8 @@
             android:text="HOME"
             android:textColor="#8E8E93"
             android:textSize="10sp"
-            android:layout_marginTop="0dp"
-            android:fontFamily="@font/nunito_bold" />
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/nunito_extrabold" />
     </LinearLayout>
 
     <!-- Skills -->
@@ -59,12 +59,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="16dp"
-            android:paddingVertical="2dp">
+            android:paddingVertical="4dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="📚"
-                android:textSize="20sp" />
+                android:textSize="22sp" />
         </FrameLayout>
 
         <TextView
@@ -74,13 +74,13 @@
             android:text="SKILLS"
             android:textColor="#8E8E93"
             android:textSize="10sp"
-            android:layout_marginTop="0dp"
-            android:fontFamily="@font/nunito_bold" />
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/nunito_extrabold" />
     </LinearLayout>
 
-    <!-- Stats -->
+    <!-- Friends -->
     <LinearLayout
-        android:id="@+id/navStats"
+        android:id="@+id/navFriends"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -90,27 +90,42 @@
         android:focusable="true">
 
         <FrameLayout
-            android:id="@+id/pillStats"
+            android:id="@+id/pillFriends"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="16dp"
-            android:paddingVertical="2dp">
+            android:paddingVertical="4dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="📊"
-                android:textSize="20sp" />
+                android:text="👥"
+                android:textSize="22sp" />
+
+            <!-- Badge -->
+            <TextView
+                android:id="@+id/tv_friends_badge"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="top|end"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/shape_status_at_risk"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/white"
+                android:textSize="9sp"
+                android:fontFamily="@font/nunito_bold" />
         </FrameLayout>
 
         <TextView
-            android:id="@+id/labelStats"
+            android:id="@+id/labelFriends"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="STATS"
+            android:text="FRIENDS"
             android:textColor="#8E8E93"
             android:textSize="10sp"
-            android:layout_marginTop="0dp"
-            android:fontFamily="@font/nunito_bold" />
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/nunito_extrabold" />
     </LinearLayout>
 
     <!-- Ranks -->
@@ -129,12 +144,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="16dp"
-            android:paddingVertical="2dp">
+            android:paddingVertical="4dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="🏆"
-                android:textSize="20sp" />
+                android:textSize="22sp" />
         </FrameLayout>
 
         <TextView
@@ -144,11 +159,11 @@
             android:text="RANKS"
             android:textColor="#8E8E93"
             android:textSize="10sp"
-            android:layout_marginTop="0dp"
-            android:fontFamily="@font/nunito_bold" />
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/nunito_extrabold" />
     </LinearLayout>
 
-    <!-- Profile -->
+    <!-- Me -->
     <LinearLayout
         android:id="@+id/navProfile"
         android:layout_width="0dp"
@@ -164,23 +179,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="16dp"
-            android:paddingVertical="2dp">
+            android:paddingVertical="4dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="👤"
-                android:textSize="20sp" />
+                android:textSize="22sp" />
         </FrameLayout>
 
         <TextView
             android:id="@+id/labelProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PROFILE"
+            android:text="ME"
             android:textColor="#8E8E93"
             android:textSize="10sp"
-            android:layout_marginTop="0dp"
-            android:fontFamily="@font/nunito_bold" />
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/nunito_extrabold" />
     </LinearLayout>
 
 </LinearLayout>

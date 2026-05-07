@@ -1,27 +1,37 @@
 {
   "project_info": {
-    "project_number": "383577502531",
-    "firebase_url": "https://mark-project-43e07-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "mark-project-43e07",
-    "storage_bucket": "mark-project-43e07.firebasestorage.app"
+    "project_number": "947420194712",
+    "firebase_url": "https://skill-stat-ded17-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "skill-stat-ded17",
+    "storage_bucket": "skill-stat-ded17.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:383577502531:android:c73792a82f2299792d75f6",
+        "mobilesdk_app_id": "1:947420194712:android:f8c0be550a500ad83beded",
         "android_client_info": {
           "package_name": "com.example.skillstat"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "947420194712-mvmc612fu239ttvr2ad7a9dlmm6a7ru6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyALO5i94rsgiWkZL0gxKQ8_Vqc47IZxbQ8"
+          "current_key": "AIzaSyBwYjrGac0nb1OF-2nhujzkUtvOVxml54s"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "947420194712-mvmc612fu239ttvr2ad7a9dlmm6a7ru6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
