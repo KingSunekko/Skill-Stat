@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="44dp"
+    android:background="@drawable/shape_pill_dark_3d"
+    android:fontFamily="@font/nunito_bold"
+    android:gravity="center"
+    android:paddingHorizontal="16dp"
+    android:text="Sub-skill"
+    android:textColor="@color/white"
+    android:textSize="13sp" />

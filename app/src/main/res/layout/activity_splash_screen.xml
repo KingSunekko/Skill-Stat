@@ -28,9 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tv_app_name"
         android:layout_marginBottom="20dp">
-        <View android:layout_width="match_parent" android:layout_height="match_parent" android:background="@drawable/shape_logo_glow"/>
-        <View android:layout_width="100dp" android:layout_height="100dp" android:layout_gravity="center" android:background="@drawable/shape_logo_circle"/>
-        <ImageView android:id="@+id/iv_logo" android:layout_width="64dp" android:layout_height="64dp" android:layout_gravity="center" android:src="@drawable/ic_skillstat_logo" android:contentDescription="SkillStat logo" android:scaleType="fitCenter"/>
+        <View android:layout_width="match_parent" android:layout_height="match_parent" android:background="@drawable/logo"/>
     </FrameLayout>
 
     <TextView

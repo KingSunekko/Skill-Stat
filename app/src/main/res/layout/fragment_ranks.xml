@@ -22,6 +22,7 @@
 
             <!-- Header Section -->
             <RelativeLayout
+                android:id="@+id/rl_header_section"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -80,6 +81,7 @@
 
             <!-- User Status Card -->
             <LinearLayout
+                android:id="@+id/card_user_rank"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -96,13 +98,13 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/shape_avatar_bg"
                         android:backgroundTint="@color/splash_green" />
-                    <TextView
-                        android:id="@+id/tv_header_user_emoji"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <ImageView
+                        android:id="@+id/iv_header_user_avatar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        android:text="🧙‍♂️"
-                        android:textSize="30sp" />
+                        android:padding="8dp"
+                        android:src="@drawable/prof1" />
                 </FrameLayout>
 
                 <LinearLayout
@@ -212,6 +214,17 @@
                     android:textColor="@color/white" />
 
                 <TextView
+                    android:id="@+id/tab_duels"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/nunito_bold"
+                    android:gravity="center"
+                    android:paddingVertical="10dp"
+                    android:text="Duels"
+                    android:textColor="@color/splash_text_secondary" />
+
+                <TextView
                     android:id="@+id/tab_weekly"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -251,12 +264,11 @@
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tv_podium_2_emoji"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="🧙‍♂️"
-                        android:textSize="32sp" />
+                    <ImageView
+                        android:id="@+id/iv_podium_2_avatar"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/prof2" />
 
                     <TextView
                         android:id="@+id/tv_podium_2_name"
@@ -303,12 +315,11 @@
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tv_podium_1_emoji"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="🦊"
-                        android:textSize="40sp" />
+                    <ImageView
+                        android:id="@+id/iv_podium_1_avatar"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/prof1" />
 
                     <TextView
                         android:id="@+id/tv_podium_1_name"
@@ -373,12 +384,11 @@
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tv_podium_3_emoji"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="🐺"
-                        android:textSize="32sp" />
+                    <ImageView
+                        android:id="@+id/iv_podium_3_avatar"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/prof3" />
 
                     <TextView
                         android:id="@+id/tv_podium_3_name"

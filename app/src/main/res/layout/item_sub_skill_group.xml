@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:background="@drawable/shape_skill_card"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_main_skill_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_extrabold"
+            android:text="Main Skill"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_sub_skill_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/shape_pill_dark_3d"
+            android:fontFamily="@font/nunito_bold"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="2dp"
+            android:text="0 Sub-skills"
+            android:textColor="@color/splash_text_secondary"
+            android:textSize="11sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginVertical="12dp"
+        android:background="#35355A" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/cg_sub_skills"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:chipSpacingHorizontal="8dp"
+        app:chipSpacingVertical="8dp">
+        <!-- Sub-skill pills will be added here -->
+    </com.google.android.material.chip.ChipGroup>
+
+    <TextView
+        android:id="@+id/btn_add_sub_skill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/nunito_bold"
+        android:text="+ ADD SUB-SKILL"
+        android:textColor="@color/splash_green"
+        android:textSize="12sp"
+        android:clickable="true"
+        android:focusable="true" />
+
+</LinearLayout>

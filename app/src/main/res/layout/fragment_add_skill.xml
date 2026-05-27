@@ -1,55 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/add_skill_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/splash_bg_dark">
 
     <!-- Header -->
     <LinearLayout
-        android:id="@+id/ll_header"
+        android:id="@+id/ll_add_skill_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="20dp"
-        android:layout_marginTop="50dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <FrameLayout
             android:id="@+id/btn_back"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="@drawable/shape_input_field"
             android:clickable="true"
             android:focusable="true">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="←"
                 android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:layout_gravity="center"/>
+                android:textSize="18sp" />
         </FrameLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/nunito_bold"
             android:text="Add New Skill ✨"
             android:textColor="#FFFFFF"
-            android:textSize="22sp"
-            android:fontFamily="@font/nunito_bold"
-            android:layout_marginStart="16dp"/>
+            android:textSize="22sp" />
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/nsv_add_skill"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:clipToPadding="false"
         android:scrollbars="none"
-        app:layout_constraintTop_toBottomOf="@id/ll_header"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_add_skill_header">
 
         <LinearLayout
+            android:id="@+id/ll_form_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -60,12 +64,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/nunito_bold"
+                android:letterSpacing="0.1"
                 android:text="SKILL NAME"
                 android:textColor="#8E8E93"
-                android:textSize="12sp"
-                android:fontFamily="@font/nunito_bold"
-                android:layout_marginTop="8dp"
-                android:letterSpacing="0.1"/>
+                android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/et_skill_name"
@@ -73,24 +77,25 @@
                 android:layout_height="56dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/shape_input_field"
-                android:hint="e.g. Violin, Photoshop..."
-                android:textColorHint="#55FFFFFF"
-                android:textColor="#FFFFFF"
-                android:paddingHorizontal="16dp"
-                android:textSize="14sp"
                 android:fontFamily="@font/nunito_semibold"
-                android:inputType="textCapWords"/>
+                android:hint="e.g. Violin, Photoshop..."
+                android:inputType="textCapWords"
+                android:paddingHorizontal="16dp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#55FFFFFF"
+                android:textSize="14sp" />
 
             <!-- Popular Skills -->
             <TextView
+                android:id="@+id/tv_popular_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/nunito_bold"
+                android:letterSpacing="0.1"
                 android:text="POPULAR SKILLS"
                 android:textColor="#8E8E93"
-                android:textSize="12sp"
-                android:fontFamily="@font/nunito_bold"
-                android:layout_marginTop="24dp"
-                android:letterSpacing="0.1"/>
+                android:textSize="12sp" />
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/cg_popular_skills"
@@ -100,352 +105,429 @@
                 app:chipSpacingHorizontal="8dp"
                 app:chipSpacingVertical="4dp"
                 app:singleSelection="true">
-
-                <com.google.android.material.chip.Chip
-                    style="@style/Widget.MaterialComponents.Chip.Action"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Python 🐍"
-                    android:textColor="@color/skill_chip_text_selector"
-                    android:checkable="true"
-                    app:chipBackgroundColor="#1C1C35"
-                    app:chipStrokeColor="@color/chip_stroke_selector"
-                    app:chipStrokeWidth="1dp"
-                    app:chipCornerRadius="16dp"
-                    android:fontFamily="@font/nunito_semibold"
-                    android:textSize="13sp"/>
-
-                <com.google.android.material.chip.Chip
-                    style="@style/Widget.MaterialComponents.Chip.Action"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Spanish 🇪🇸"
-                    android:textColor="@color/skill_chip_text_selector"
-                    android:checkable="true"
-                    app:chipBackgroundColor="#1C1C35"
-                    app:chipStrokeColor="@color/chip_stroke_selector"
-                    app:chipStrokeWidth="1dp"
-                    app:chipCornerRadius="16dp"
-                    android:fontFamily="@font/nunito_semibold"
-                    android:textSize="13sp"/>
-
-                <com.google.android.material.chip.Chip
-                    style="@style/Widget.MaterialComponents.Chip.Action"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Piano 🎹"
-                    android:textColor="@color/skill_chip_text_selector"
-                    android:checkable="true"
-                    app:chipBackgroundColor="#1C1C35"
-                    app:chipStrokeColor="@color/chip_stroke_selector"
-                    app:chipStrokeWidth="1dp"
-                    app:chipCornerRadius="16dp"
-                    android:fontFamily="@font/nunito_semibold"
-                    android:textSize="13sp"/>
-
-                <com.google.android.material.chip.Chip
-                    style="@style/Widget.MaterialComponents.Chip.Action"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Drawing 🎨"
-                    android:textColor="@color/skill_chip_text_selector"
-                    android:checkable="true"
-                    app:chipBackgroundColor="#1C1C35"
-                    app:chipStrokeColor="@color/chip_stroke_selector"
-                    app:chipStrokeWidth="1dp"
-                    app:chipCornerRadius="16dp"
-                    android:fontFamily="@font/nunito_semibold"
-                    android:textSize="13sp"/>
-
-                <com.google.android.material.chip.Chip
-                    style="@style/Widget.MaterialComponents.Chip.Action"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Cooking 🍳"
-                    android:textColor="@color/skill_chip_text_selector"
-                    android:checkable="true"
-                    app:chipBackgroundColor="#1C1C35"
-                    app:chipStrokeColor="@color/chip_stroke_selector"
-                    app:chipStrokeWidth="1dp"
-                    app:chipCornerRadius="16dp"
-                    android:fontFamily="@font/nunito_semibold"
-                    android:textSize="13sp"/>
-
-                <com.google.android.material.chip.Chip
-                    style="@style/Widget.MaterialComponents.Chip.Action"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Math 📐"
-                    android:textColor="@color/skill_chip_text_selector"
-                    android:checkable="true"
-                    app:chipBackgroundColor="#1C1C35"
-                    app:chipStrokeColor="@color/chip_stroke_selector"
-                    app:chipStrokeWidth="1dp"
-                    app:chipCornerRadius="16dp"
-                    android:fontFamily="@font/nunito_semibold"
-                    android:textSize="13sp"/>
-
-                <com.google.android.material.chip.Chip
-                    style="@style/Widget.MaterialComponents.Chip.Action"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Design 🎨"
-                    android:textColor="@color/skill_chip_text_selector"
-                    android:checkable="true"
-                    app:chipBackgroundColor="#1C1C35"
-                    app:chipStrokeColor="@color/chip_stroke_selector"
-                    app:chipStrokeWidth="1dp"
-                    app:chipCornerRadius="16dp"
-                    android:fontFamily="@font/nunito_semibold"
-                    android:textSize="13sp"/>
-
-                <com.google.android.material.chip.Chip
-                    style="@style/Widget.MaterialComponents.Chip.Action"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Chess ♟️"
-                    android:textColor="@color/skill_chip_text_selector"
-                    android:checkable="true"
-                    app:chipBackgroundColor="#1C1C35"
-                    app:chipStrokeColor="@color/chip_stroke_selector"
-                    app:chipStrokeWidth="1dp"
-                    app:chipCornerRadius="16dp"
-                    android:fontFamily="@font/nunito_semibold"
-                    android:textSize="13sp"/>
-
-                <com.google.android.material.chip.Chip
-                    style="@style/Widget.MaterialComponents.Chip.Action"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Photography 📷"
-                    android:textColor="@color/skill_chip_text_selector"
-                    android:checkable="true"
-                    app:chipBackgroundColor="#1C1C35"
-                    app:chipStrokeColor="@color/chip_stroke_selector"
-                    app:chipStrokeWidth="1dp"
-                    app:chipCornerRadius="16dp"
-                    android:fontFamily="@font/nunito_semibold"
-                    android:textSize="13sp"/>
-
-                <com.google.android.material.chip.Chip
-                    style="@style/Widget.MaterialComponents.Chip.Action"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="French 🇫🇷"
-                    android:textColor="@color/skill_chip_text_selector"
-                    android:checkable="true"
-                    app:chipBackgroundColor="#1C1C35"
-                    app:chipStrokeColor="@color/chip_stroke_selector"
-                    app:chipStrokeWidth="1dp"
-                    app:chipCornerRadius="16dp"
-                    android:fontFamily="@font/nunito_semibold"
-                    android:textSize="13sp"/>
+                <!-- Chips are added dynamically -->
             </com.google.android.material.chip.ChipGroup>
 
-            <!-- Starting Level -->
+            <!-- Daily Practice Time Section -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/nunito_bold"
+                android:letterSpacing="0.1"
+                android:text="DAILY PRACTICE TIME 🎯"
+                android:textColor="#8E8E93"
+                android:textSize="12sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/shape_input_field"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="3"
+                    android:rowCount="2">
+
+                    <TextView
+                        android:id="@+id/tv_preset_5"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/shape_input_field"
+                        android:fontFamily="@font/nunito_bold"
+                        android:gravity="center"
+                        android:text="5 min"
+                        android:textColor="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/tv_preset_10"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/shape_input_field"
+                        android:fontFamily="@font/nunito_bold"
+                        android:gravity="center"
+                        android:text="10 min"
+                        android:textColor="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/tv_preset_15"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/shape_input_field"
+                        android:fontFamily="@font/nunito_bold"
+                        android:gravity="center"
+                        android:text="15 min"
+                        android:textColor="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/tv_preset_20"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/shape_input_field"
+                        android:fontFamily="@font/nunito_bold"
+                        android:gravity="center"
+                        android:text="20 min"
+                        android:textColor="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/tv_preset_30"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/shape_input_field"
+                        android:fontFamily="@font/nunito_bold"
+                        android:gravity="center"
+                        android:text="30 min"
+                        android:textColor="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/tv_preset_45"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/shape_input_field"
+                        android:fontFamily="@font/nunito_bold"
+                        android:gravity="center"
+                        android:text="45 min"
+                        android:textColor="#FFFFFF" />
+                </GridLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:gravity="center"
+                    android:text="Or type any amount:"
+                    android:textColor="#8E8E93"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <FrameLayout
+                        android:id="@+id/btn_minus_goal"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/shape_input_field"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="−"
+                            android:textColor="#FFFFFF"
+                            android:textSize="24sp" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="12dp"
+                        android:background="@drawable/shape_input_field"
+                        android:gravity="center"
+                        android:minWidth="100dp"
+                        android:paddingVertical="8dp">
+
+                        <TextView
+                            android:id="@+id/tv_goal_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="10"
+                            android:textColor="#FFFFFF"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:fontFamily="@font/nunito_semibold"
+                            android:text="min"
+                            android:textColor="#8E8E93"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:id="@+id/btn_plus_goal"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/shape_input_field"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="+"
+                            android:textColor="#FFFFFF"
+                            android:textSize="24sp" />
+                    </FrameLayout>
+                </LinearLayout>
+
+                <!-- Weekly Total Box -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/shape_input_field"
+                    android:backgroundTint="#1A58CC02"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🗓️"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/nunito_bold"
+                        android:text="Weekly total"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/tv_weekly_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_bold"
+                        android:text="70 min"
+                        android:textColor="#58CC02"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Skill Level Selection -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/nunito_bold"
+                android:letterSpacing="0.1"
                 android:text="STARTING LEVEL"
                 android:textColor="#8E8E93"
-                android:textSize="12sp"
-                android:fontFamily="@font/nunito_bold"
-                android:layout_marginTop="24dp"
-                android:letterSpacing="0.1"/>
+                android:textSize="12sp" />
 
-            <!-- Beginner -->
             <LinearLayout
-                android:id="@+id/ll_beginner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:background="@drawable/shape_input_field"
-                android:padding="16dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:clickable="true"
-                android:focusable="true">
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🌱"
-                    android:textSize="24sp"/>
-
+                <!-- Beginner -->
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:id="@+id/ll_beginner"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="16dp"
-                    android:orientation="vertical">
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/shape_input_field"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Beginner"
-                        android:textColor="#FFFFFF"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/nunito_bold"/>
+                        android:text="🌱"
+                        android:textSize="24sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Just getting started"
-                        android:textColor="#8E8E93"
-                        android:textSize="12sp"
-                        android:fontFamily="@font/nunito_semibold"/>
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="Beginner"
+                            android:textColor="#FFFFFF"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_semibold"
+                            android:text="Just getting started"
+                            android:textColor="#8E8E93"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/iv_beginner_check"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_check_circle"
+                        app:tint="#58CC02" />
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/iv_beginner_check"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="✓"
-                    android:textColor="#58CC02"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:visibility="gone"/>
-            </LinearLayout>
-
-            <!-- Intermediate -->
-            <LinearLayout
-                android:id="@+id/ll_intermediate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/shape_input_field"
-                android:padding="16dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:clickable="true"
-                android:focusable="true">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🔥"
-                    android:textSize="24sp"/>
-
+                <!-- Intermediate -->
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:id="@+id/ll_intermediate"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="16dp"
-                    android:orientation="vertical">
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/shape_input_field"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Intermediate"
-                        android:textColor="#FFFFFF"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/nunito_bold"/>
+                        android:text="🔥"
+                        android:textSize="24sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Building momentum"
-                        android:textColor="#8E8E93"
-                        android:textSize="12sp"
-                        android:fontFamily="@font/nunito_semibold"/>
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="Intermediate"
+                            android:textColor="#FFFFFF"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_semibold"
+                            android:text="Building momentum"
+                            android:textColor="#8E8E93"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/iv_intermediate_check"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_check_circle"
+                        android:visibility="gone"
+                        app:tint="#58CC02" />
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/iv_intermediate_check"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="✓"
-                    android:textColor="#58CC02"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:visibility="gone"/>
-            </LinearLayout>
-
-            <!-- Advanced -->
-            <LinearLayout
-                android:id="@+id/ll_advanced"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/shape_input_field"
-                android:padding="16dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:clickable="true"
-                android:focusable="true">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="⚡"
-                    android:textSize="24sp"/>
-
+                <!-- Advanced -->
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:id="@+id/ll_advanced"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="16dp"
-                    android:orientation="vertical">
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/shape_input_field"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Advanced"
-                        android:textColor="#FFFFFF"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/nunito_bold"/>
+                        android:text="⚡"
+                        android:textSize="24sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Refining mastery"
-                        android:textColor="#8E8E93"
-                        android:textSize="12sp"
-                        android:fontFamily="@font/nunito_semibold"/>
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="Advanced"
+                            android:textColor="#FFFFFF"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_semibold"
+                            android:text="Refining mastery"
+                            android:textColor="#8E8E93"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/iv_advanced_check"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_check_circle"
+                        android:visibility="gone"
+                        app:tint="#58CC02" />
                 </LinearLayout>
-
-                <TextView
-                    android:id="@+id/iv_advanced_check"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="✓"
-                    android:textColor="#58CC02"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:visibility="gone"/>
             </LinearLayout>
 
-            <!-- Decay Timer -->
+            <!-- Decay Timer Section -->
             <TextView
                 android:id="@+id/tv_decay_timer_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DECAY TIMER — 1 DAYS"
-                android:textColor="#8E8E93"
-                android:textSize="12sp"
-                android:fontFamily="@font/nunito_bold"
                 android:layout_marginTop="24dp"
-                android:letterSpacing="0.1"/>
+                android:fontFamily="@font/nunito_bold"
+                android:letterSpacing="0.1"
+                android:text="DECAY TIMER — 1 DAY"
+                android:textColor="#8E8E93"
+                android:textSize="12sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/shape_input_field"
-                android:padding="16dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="16dp">
 
                 <com.google.android.material.slider.Slider
                     android:id="@+id/slider_decay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:value="1.0"
                     android:valueFrom="1.0"
                     android:valueTo="14.0"
                     android:stepSize="1.0"
-                    android:value="1.0"
-                    app:labelBehavior="gone"
-                    app:trackHeight="8dp"
-                    app:thumbRadius="10dp" />
+                    app:thumbColor="#FF4B4B"
+                    app:trackColorActive="#FF4B4B"
+                    app:trackColorInactive="#3C3C4E" />
 
                 <LinearLayout
                     android:id="@+id/ll_decay_status"
@@ -453,55 +535,62 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/shape_input_field"
-                    android:padding="12dp"
+                    android:backgroundTint="#26FF4B4B"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingVertical="12dp">
 
                     <TextView
                         android:id="@+id/tv_decay_status_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="🛑"
-                        android:textSize="18sp"/>
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/tv_decay_status_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
+                        android:fontFamily="@font/nunito_bold"
                         android:text="At Risk"
                         android:textColor="#FF4B4B"
-                        android:textSize="14sp"
-                        android:fontFamily="@font/nunito_bold"/>
+                        android:textSize="13sp" />
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Buttons -->
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_add_skill"
+            <!-- Bottom Actions - Stacked Vertically -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:background="@drawable/shape_btn_login_selector"
-                android:text="✓  ADD SKILL"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                android:fontFamily="@font/nunito_bold"
-                android:textAllCaps="true"
-                android:enabled="false"
-                android:alpha="0.5"/>
+                android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_cancel"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/shape_input_field"
-                android:text="CANCEL"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                android:fontFamily="@font/nunito_bold"
-                android:textAllCaps="true"/>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_add_skill"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:alpha="0.5"
+                    android:background="@drawable/shape_button_primary"
+                    android:enabled="false"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="✓  ADD SKILL"
+                    android:textAllCaps="true"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/shape_button_secondary"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="CANCEL"
+                    android:textAllCaps="true"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

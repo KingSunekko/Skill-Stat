@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/nunito_extrabold"
-            android:text="2"
+            android:text="--"
             android:textColor="@color/splash_green"
             android:textSize="18sp" />
         <TextView
@@ -31,7 +31,7 @@
             android:visibility="gone" />
     </FrameLayout>
 
-    <!-- Avatar -->
+    <!-- Avatar Container -->
     <FrameLayout
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -42,24 +42,17 @@
             android:layout_height="match_parent"
             android:background="@drawable/shape_avatar_bg"
             android:backgroundTint="#2D2D44" />
-        <TextView
-            android:id="@+id/tv_avatar_emoji"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:text="👦"
-            android:textSize="24sp" />
-        <View
-            android:id="@+id/v_status_dot"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:layout_gravity="bottom|end"
-            android:background="@drawable/shape_star_dot"
-            android:backgroundTint="@color/splash_green"
-            android:visibility="gone" />
+            android:padding="2dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/prof1" />
     </FrameLayout>
 
-    <!-- Info -->
+    <!-- Info Section -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -76,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_bold"
-                android:text="You"
+                android:text="User"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
             <TextView
@@ -91,7 +84,8 @@
                 android:paddingVertical="1dp"
                 android:text="YOU"
                 android:textColor="@color/white"
-                android:textSize="9sp" />
+                android:textSize="9sp"
+                android:visibility="gone" />
         </LinearLayout>
 
         <TextView
@@ -100,19 +94,33 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:fontFamily="@font/nunito_semibold"
-            android:text="🔥 6d • ⭐ 340 XP this week"
+            android:text="🔥 0d • ⭐ 0 XP"
             android:textColor="@color/splash_text_secondary"
             android:textSize="11sp" />
     </LinearLayout>
 
-    <!-- Score -->
-    <TextView
-        android:id="@+id/tv_score"
+    <!-- Score Section -->
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/nunito_extrabold"
-        android:text="340"
-        android:textColor="@color/splash_green"
-        android:textSize="18sp" />
-
+        android:gravity="end"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_extrabold"
+            android:text="0"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/tv_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_bold"
+            android:text="Level"
+            android:textColor="@color/splash_green"
+            android:textSize="10sp"
+            android:visibility="gone" />
+    </LinearLayout>
 </LinearLayout>

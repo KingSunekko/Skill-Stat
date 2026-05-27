@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/splash_bg_dark">
@@ -47,31 +48,29 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/nunito_semibold"
-                android:text="Skill growth tracking"
+                android:text="7-day skill growth tracking"
                 android:textColor="@color/splash_text_secondary"
                 android:textSize="14sp" />
 
-            <!-- Skill Tabs (Custom 3D Designs) -->
+            <!-- Skill Tabs -->
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:scrollbars="none"
-                android:clipToPadding="false"
-                android:paddingBottom="10dp">
+                android:scrollbars="none">
 
                 <LinearLayout
                     android:id="@+id/ll_stats_tabs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="2dp">
-                    <!-- Dynamically populated -->
+                    android:orientation="horizontal">
+                    <!-- Tabs will be added dynamically -->
                 </LinearLayout>
             </HorizontalScrollView>
 
             <!-- Main Chart Card -->
             <LinearLayout
+                android:id="@+id/card_stats_main"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -87,16 +86,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
-
                         <TextView
                             android:id="@+id/tv_stats_skill_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nunito_bold"
-                            android:text="No skill selected"
+                            android:text="Design 🎨"
                             android:textColor="@color/white"
-                            android:textSize="20sp" />
-
+                            android:textSize="22sp" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -106,53 +103,54 @@
                             android:textSize="12sp" />
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tv_stats_percentage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:fontFamily="@font/nunito_bold"
-                        android:text="0%"
-                        android:textColor="@color/splash_green"
-                        android:textSize="32sp" />
-                </RelativeLayout>
-
-                <!-- Chart Visualization -->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp">
-
-                    <TextView
-                        android:id="@+id/tv_stats_growth_badge"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/shape_reward_skill_pill"
-                        android:fontFamily="@font/nunito_bold"
-                        android:paddingHorizontal="10dp"
-                        android:paddingVertical="4dp"
-                        android:text="0% this week"
-                        android:textColor="@color/white"
-                        android:textSize="9sp" />
-
                     <LinearLayout
-                        android:id="@+id/ll_bar_chart"
-                        android:layout_width="match_parent"
-                        android:layout_height="140dp"
-                        android:layout_marginTop="20dp"
-                        android:gravity="bottom"
-                        android:orientation="horizontal">
-                        <!-- Dynamically populated -->
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:gravity="end"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_stats_percentage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="22%"
+                            android:textColor="@color/splash_green"
+                            android:textSize="36sp" />
+
+                        <TextView
+                            android:id="@+id/tv_stats_growth_badge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/shape_growth_badge_bg"
+                            android:fontFamily="@font/nunito_bold"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="4dp"
+                            android:text="+22.0% growth this week"
+                            android:textColor="@color/splash_green"
+                            android:textSize="10sp" />
                     </LinearLayout>
                 </RelativeLayout>
+
+                <!-- Chart Container -->
+                <LinearLayout
+                    android:id="@+id/ll_bar_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_marginTop="24dp"
+                    android:gravity="bottom"
+                    android:orientation="horizontal"
+                    android:weightSum="7">
+                    <!-- Bars will be added dynamically -->
+                </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="16dp"
-                    android:background="#33FFFFFF" />
+                    android:layout_marginTop="24dp"
+                    android:background="#1AFFFFFF" />
 
                 <!-- Summary Row -->
                 <LinearLayout
@@ -172,12 +170,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nunito_bold"
-                            android:text="0%"
+                            android:text="22%"
                             android:textColor="@color/splash_green"
-                            android:textSize="18sp" />
+                            android:textSize="20sp" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_semibold"
                             android:text="Peak"
                             android:textColor="@color/splash_text_secondary"
                             android:textSize="11sp" />
@@ -194,12 +193,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nunito_bold"
-                            android:text="0%"
+                            android:text="22%"
                             android:textColor="#FF9800"
-                            android:textSize="18sp" />
+                            android:textSize="20sp" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_semibold"
                             android:text="Low"
                             android:textColor="@color/splash_text_secondary"
                             android:textSize="11sp" />
@@ -216,12 +216,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nunito_bold"
-                            android:text="0%"
+                            android:text="22%"
                             android:textColor="#21B1FF"
-                            android:textSize="18sp" />
+                            android:textSize="20sp" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_semibold"
                             android:text="Avg"
                             android:textColor="@color/splash_text_secondary"
                             android:textSize="11sp" />
@@ -229,7 +230,46 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Decay Status Section -->
+            <!-- Mastery Heatmap Header -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/nunito_bold"
+                android:letterSpacing="0.05"
+                android:text="MASTERY HEATMAP"
+                android:textColor="@color/splash_text_secondary"
+                android:textSize="13sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/shape_skill_card"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:gravity="center">
+
+                <GridLayout
+                    android:id="@+id/gl_heatmap"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:columnCount="7"
+                    android:rowCount="4">
+                    <!-- Heatmap cells will be added here -->
+                </GridLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:text="Last 28 days of consistency"
+                    android:textColor="@color/splash_text_secondary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Decay Status -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -240,42 +280,13 @@
                 android:textColor="@color/splash_text_secondary"
                 android:textSize="13sp" />
 
-            <!-- Decay List Container -->
             <LinearLayout
                 android:id="@+id/ll_decay_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:orientation="vertical">
-                <!-- Dynamically populated -->
-            </LinearLayout>
-
-            <!-- Ebbinghaus Box -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:background="@drawable/shape_info_banner_gold"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_bold"
-                    android:text="📖 Science of Forgetting"
-                    android:textColor="#FFD700"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/nunito_semibold"
-                    android:lineSpacingExtra="4dp"
-                    android:text="Skills decay over time without practice. SkillStat tracks this so you can practice right before you start to forget! 🧠"
-                    android:textColor="#BFBFBF"
-                    android:textSize="13sp" />
+                <!-- Items added dynamically -->
             </LinearLayout>
 
         </LinearLayout>

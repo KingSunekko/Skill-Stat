@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Bottom Shadow/Edge -->
-    <item>
+    <!-- Background of the progress bar -->
+    <item android:id="@android:id/background">
         <shape>
-            <solid android:color="#3A8B01" />
             <corners android:radius="10dp" />
+            <solid android:color="#1F2430" />
         </shape>
     </item>
-    <!-- Main Fill with light top highlight -->
-    <item android:bottom="3dp">
-        <shape>
-            <gradient
-                android:angle="270"
-                android:endColor="#58CC02"
-                android:startColor="#82E603" />
-            <corners android:radius="10dp" />
-        </shape>
+
+    <!-- The actual progress fill -->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape>
+                <corners android:radius="10dp" />
+                <gradient
+                    android:angle="270"
+                    android:endColor="#58CC02"
+                    android:startColor="#82E603" />
+            </shape>
+        </clip>
     </item>
 </layer-list>

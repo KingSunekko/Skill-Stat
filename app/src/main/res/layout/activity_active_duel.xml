@@ -7,12 +7,13 @@
     android:background="@color/splash_bg_dark">
 
     <!-- Top Bar -->
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/rl_active_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="20dp"
         android:paddingTop="50dp"
+        android:paddingBottom="12dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <FrameLayout
@@ -22,7 +23,10 @@
             android:background="@drawable/shape_skill_card"
             android:backgroundTint="#2D2D44"
             android:clickable="true"
-            android:focusable="true">
+            android:focusable="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -34,16 +38,55 @@
         </FrameLayout>
 
         <TextView
+            android:id="@+id/tv_header_title_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/nunito_extrabold"
+            android:text="Active Duel"
+            android:textColor="@color/white"
+            android:textSize="19sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintStart_toEndOf="@id/btn_back_active"
+            app:layout_constraintEnd_toStartOf="@id/btn_duel_info"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <ImageView
+            android:id="@+id/btn_duel_info"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/shape_avatar_bg"
+            android:backgroundTint="#2D2D44"
+            android:padding="8dp"
+            android:src="@drawable/ic_info"
+            app:tint="@color/white"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintEnd_toStartOf="@id/tv_prize_pool"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_prize_pool"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="16dp"
-            android:layout_toEndOf="@id/btn_back_active"
+            android:background="@drawable/shape_reward_skill_pill"
+            android:backgroundTint="#FFD700"
             android:fontFamily="@font/nunito_extrabold"
-            android:text="⚔️ Active Duel"
-            android:textColor="@color/white"
-            android:textSize="22sp" />
-    </RelativeLayout>
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="6dp"
+            android:text="Prize: 500"
+            android:textColor="#8B6914"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -69,15 +112,15 @@
                 android:orientation="horizontal">
 
                 <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center" android:orientation="vertical">
-                    <TextView android:id="@+id/tv_my_avatar" android:layout_width="60dp" android:layout_height="60dp" android:text="👦" android:textSize="40sp" android:gravity="center"/>
-                    <TextView android:id="@+id/tv_my_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="You" android:textColor="@color/white" android:fontFamily="@font/nunito_bold" android:textSize="14sp"/>
+                    <ImageView android:id="@+id/iv_my_avatar" android:layout_width="80dp" android:layout_height="80dp" android:src="@drawable/prof1" android:scaleType="centerInside" android:contentDescription="My Avatar"/>
+                    <TextView android:id="@+id/tv_my_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="You" android:textColor="@color/white" android:fontFamily="@font/nunito_bold" android:textSize="14sp"/>
                 </LinearLayout>
 
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginHorizontal="32dp" android:text="VS" android:textColor="#FF4B4B" android:fontFamily="@font/nunito_extrabold" android:textSize="28sp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginHorizontal="24dp" android:text="VS" android:textColor="#FF4B4B" android:fontFamily="@font/nunito_extrabold" android:textSize="32sp"/>
 
                 <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center" android:orientation="vertical">
-                    <TextView android:id="@+id/tv_opponent_avatar" android:layout_width="60dp" android:layout_height="60dp" android:text="🦊" android:textSize="40sp" android:gravity="center"/>
-                    <TextView android:id="@+id/tv_opponent_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alex" android:textColor="@color/white" android:fontFamily="@font/nunito_bold" android:textSize="14sp"/>
+                    <ImageView android:id="@+id/iv_opponent_avatar" android:layout_width="80dp" android:layout_height="80dp" android:src="@drawable/prof2" android:scaleType="centerInside" android:contentDescription="Opponent Avatar"/>
+                    <TextView android:id="@+id/tv_opponent_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="Opponent" android:textColor="@color/white" android:fontFamily="@font/nunito_bold" android:textSize="14sp"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -91,13 +134,13 @@
                 android:backgroundTint="#2D2D44"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="4dp"
-                android:text="Skill - time remaining"
+                android:text="Skill Duel"
                 android:textColor="@color/white"
-                android:fontFamily="@font/nunito_bold"
-                android:textSize="13sp" />
+                android:fontFamily="@font/nunito_bold" android:textSize="13sp" />
 
-            <!-- Progress Gained Card -->
+            <!-- Effort Points Card -->
             <LinearLayout
+                android:id="@+id/v_progress_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
@@ -107,7 +150,17 @@
                 android:padding="20dp"
                 android:gravity="center">
 
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Progress Gained" android:textColor="@color/white" android:fontFamily="@font/nunito_bold" android:textSize="15sp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Battle Effort Points" android:textColor="@color/white" android:fontFamily="@font/nunito_bold" android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/tv_duel_countdown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Time Left: --:--:--"
+                    android:textColor="@color/splash_text_secondary"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/nunito_bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -117,27 +170,100 @@
                     android:orientation="horizontal">
 
                     <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
-                        <TextView android:id="@+id/tv_my_gain" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="+0%" android:textColor="@color/splash_green" android:fontFamily="@font/nunito_extrabold" android:textSize="32sp"/>
+                        <TextView android:id="@+id/tv_my_gain" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.0" android:textColor="@color/splash_green" android:fontFamily="@font/nunito_extrabold" android:textSize="32sp"/>
+                        <TextView android:id="@+id/tv_my_multiplier" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1.0x" android:textColor="@color/splash_green" android:textSize="10sp" android:alpha="0.7" android:fontFamily="@font/nunito_bold"/>
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="You" android:textColor="@color/splash_text_secondary" android:textSize="11sp"/>
                     </LinearLayout>
 
-                    <TextView android:id="@+id/tv_duel_status_icon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⚔️" android:textSize="32sp" android:layout_marginHorizontal="16dp"/>
+                    <ImageView android:id="@+id/iv_duel_status_icon" android:layout_width="50dp" android:layout_height="50dp" android:src="@drawable/ic_nav_stats" android:layout_marginHorizontal="16dp" android:padding="8dp" android:background="@drawable/shape_skill_card" android:backgroundTint="#2D2D44" android:contentDescription="Status Icon"/>
 
                     <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
-                        <TextView android:id="@+id/tv_opponent_gain" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="+0%" android:textColor="#FF4B4B" android:fontFamily="@font/nunito_extrabold" android:textSize="32sp"/>
-                        <TextView android:id="@+id/tv_opponent_label_small" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alex" android:textColor="@color/splash_text_secondary" android:textSize="11sp"/>
+                        <TextView android:id="@+id/tv_opponent_gain" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.0" android:textColor="#FF4B4B" android:fontFamily="@font/nunito_extrabold" android:textSize="32sp"/>
+                        <TextView android:id="@+id/tv_opponent_multiplier" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1.0x" android:textColor="#FF4B4B" android:textSize="10sp" android:alpha="0.7" android:fontFamily="@font/nunito_bold"/>
+                        <TextView android:id="@+id/tv_opponent_label_small" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Opponent" android:textColor="@color/splash_text_secondary" android:textSize="11sp"/>
                     </LinearLayout>
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_duel_status_text"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:fontFamily="@font/nunito_bold"
-                    android:text="The duel has just begun!"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:gravity="center"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_duel_status_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_extrabold"
+                        android:text="NECK AND NECK"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+                    <ImageView
+                        android:id="@+id/iv_status_small_icon"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginStart="6dp"
+                        android:src="@drawable/ic_nav_stats"
+                        app:tint="@color/white"
+                        android:contentDescription="Small Icon"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Activity Feed -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/shape_skill_card"
+                android:orientation="vertical"
+                android:padding="20dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Recent Battle Activity" android:textColor="@color/white" android:fontFamily="@font/nunito_bold" android:textSize="15sp"/>
+                <LinearLayout
+                    android:id="@+id/ll_activity_feed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical">
+                    <!-- Feed items added in code -->
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Quick Taunts -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/shape_skill_card"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Quick Taunts" android:textColor="@color/white" android:fontFamily="@font/nunito_bold" android:textSize="15sp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView android:id="@+id/btn_taunt_1" android:layout_width="60dp" android:layout_height="60dp" android:background="@drawable/shape_avatar_bg" android:backgroundTint="#2D2D44" android:text="🏃💨" android:gravity="center" android:textSize="24sp" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true"/>
+                    <TextView android:id="@+id/btn_taunt_2" android:layout_width="60dp" android:layout_height="60dp" android:background="@drawable/shape_avatar_bg" android:backgroundTint="#2D2D44" android:text="🐢" android:gravity="center" android:textSize="24sp" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true"/>
+                    <TextView android:id="@+id/btn_taunt_3" android:layout_width="60dp" android:layout_height="60dp" android:background="@drawable/shape_avatar_bg" android:backgroundTint="#2D2D44" android:text="🔥" android:gravity="center" android:textSize="24sp" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true"/>
+                    <TextView android:id="@+id/btn_taunt_4" android:layout_width="60dp" android:layout_height="60dp" android:background="@drawable/shape_avatar_bg" android:backgroundTint="#2D2D44" android:text="🙌" android:gravity="center" android:textSize="24sp" android:clickable="true" android:focusable="true"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Rivalry History -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/shape_skill_card"
+                android:orientation="vertical"
+                android:padding="20dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="All-Time Rivalry" android:textColor="@color/white" android:fontFamily="@font/nunito_bold" android:textSize="15sp"/>
+                <TextView android:id="@+id/tv_rivalry_stats" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="You 0 - 0 Opponent" android:textColor="@color/splash_text_secondary" android:fontFamily="@font/nunito_semibold" android:textSize="14sp"/>
             </LinearLayout>
 
             <!-- Mastery Comparison -->
@@ -149,21 +275,79 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Mastery Comparison" android:textColor="@color/white" android:fontFamily="@font/nunito_bold" android:textSize="15sp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Total Mastery Comparison" android:textColor="@color/white" android:fontFamily="@font/nunito_bold" android:textSize="15sp"/>
 
-                <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="20dp">
-                    <TextView android:id="@+id/tv_mastery_my_label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="You 👦" android:textColor="@color/white" android:fontFamily="@font/nunito_bold" android:textSize="13sp"/>
-                    <TextView android:id="@+id/tv_my_mastery_percent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:text="0%" android:textColor="@color/splash_green" android:fontFamily="@font/nunito_extrabold" android:textSize="14sp"/>
-                </RelativeLayout>
-                <View android:id="@+id/v_my_mastery_bg" android:layout_width="match_parent" android:layout_height="10dp" android:layout_marginTop="8dp" android:background="@drawable/shape_progress_bg"/>
-                <View android:id="@+id/v_my_mastery_fill" android:layout_width="0dp" android:layout_height="10dp" android:layout_marginTop="-10dp" android:background="@drawable/shape_progress_fill"/>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
 
-                <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp">
-                    <TextView android:id="@+id/tv_mastery_opponent_label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alex 🦊" android:textColor="@color/white" android:fontFamily="@font/nunito_bold" android:textSize="13sp"/>
-                    <TextView android:id="@+id/tv_opponent_mastery_percent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:text="0%" android:textColor="#FF4B4B" android:fontFamily="@font/nunito_extrabold" android:textSize="14sp"/>
-                </RelativeLayout>
-                <View android:id="@+id/v_opponent_mastery_bg" android:layout_width="match_parent" android:layout_height="10dp" android:layout_marginTop="8dp" android:background="@drawable/shape_progress_bg"/>
-                <View android:id="@+id/v_opponent_mastery_fill" android:layout_width="0dp" android:layout_height="10dp" android:layout_marginTop="-10dp" android:background="@drawable/shape_progress_fill" android:backgroundTint="#FF4B4B"/>
+                    <TextView
+                        android:id="@+id/tv_mastery_my_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="You"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/nunito_bold"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_my_mastery_percent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0%"
+                        android:textColor="@color/splash_green"
+                        android:fontFamily="@font/nunito_extrabold"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <FrameLayout
+                        android:id="@+id/fl_my_mastery"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toBottomOf="@id/tv_mastery_my_label">
+                        <View android:id="@+id/v_my_mastery_bg" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@drawable/shape_progress_bg"/>
+                        <View android:id="@+id/v_my_mastery_fill" android:layout_width="0dp" android:layout_height="match_parent" android:background="@drawable/shape_progress_fill_green"/>
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/tv_mastery_opponent_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Opponent"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/nunito_bold"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/fl_my_mastery" />
+
+                    <TextView
+                        android:id="@+id/tv_opponent_mastery_percent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0%"
+                        android:textColor="#FF4B4B"
+                        android:fontFamily="@font/nunito_extrabold"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_mastery_opponent_label" />
+
+                    <FrameLayout
+                        android:id="@+id/fl_opponent_mastery"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toBottomOf="@id/tv_mastery_opponent_label">
+                        <View android:id="@+id/v_opponent_mastery_bg" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@drawable/shape_progress_bg"/>
+                        <View android:id="@+id/v_opponent_mastery_fill" android:layout_width="0dp" android:layout_height="match_parent" android:background="@drawable/shape_progress_fill_green" android:backgroundTint="#FF4B4B"/>
+                    </FrameLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
 
@@ -185,7 +369,7 @@
             android:background="@drawable/shape_btn_green_3d"
             android:fontFamily="@font/nunito_extrabold"
             android:gravity="center"
-            android:text="💪 PRACTICE NOW"
+            android:text="PRACTICE NOW"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:clickable="true"

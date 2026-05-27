@@ -13,6 +13,7 @@
         android:scrollbars="none">
 
         <LinearLayout
+            android:id="@+id/card_rewards_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
@@ -21,22 +22,65 @@
             android:paddingTop="40dp"
             android:paddingBottom="40dp">
 
-            <!-- Celebration Icon -->
+            <!-- Lottie Celebration Animation -->
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottie_celebration"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                app:lottie_autoPlay="false"
+                app:lottie_loop="false"
+                android:visibility="gone" />
+
             <TextView
                 android:id="@+id/tv_celebration_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="🎉"
-                android:textSize="80sp" />
+                android:textSize="80sp"
+                android:visibility="visible" />
 
             <TextView
+                android:id="@+id/tv_rewards_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:fontFamily="@font/nunito_bold"
                 android:text="Amazing work!"
                 android:textColor="@color/white"
                 android:textSize="32sp" />
+
+            <!-- Zen Mode Badge -->
+            <TextView
+                android:id="@+id/tv_zen_bonus_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/shape_status_badge"
+                android:backgroundTint="#264CAF50"
+                android:fontFamily="@font/nunito_bold"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="6dp"
+                android:text="🧘 Zen Mode Bonus Active"
+                android:textColor="@color/splash_green"
+                android:textSize="12sp"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <!-- New Personal Best Badge -->
+            <TextView
+                android:id="@+id/tv_new_pb_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/shape_btn_ai_gradient_3d"
+                android:fontFamily="@font/nunito_extrabold"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="8dp"
+                android:text="👻 NEW PERSONAL BEST!"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:visibility="gone"
+                tools:visibility="visible" />
 
             <!-- Skill Tag (Pill) -->
             <TextView
@@ -62,6 +106,7 @@
 
                 <!-- Time Practiced -->
                 <LinearLayout
+                    android:id="@+id/ll_reward_time"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -97,6 +142,7 @@
 
                 <!-- XP Earned -->
                 <LinearLayout
+                    android:id="@+id/ll_reward_xp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -132,6 +178,7 @@
 
                 <!-- Skill Growth -->
                 <LinearLayout
+                    android:id="@+id/ll_reward_growth"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -166,6 +213,7 @@
 
                 <!-- Day Streak -->
                 <LinearLayout
+                    android:id="@+id/ll_reward_streak"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -199,7 +247,7 @@
                 </LinearLayout>
             </GridLayout>
 
-            <!-- Reset Banner (Redesigned) -->
+            <!-- Reset Banner -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -240,7 +288,7 @@
                     android:textSize="13sp" />
             </LinearLayout>
 
-            <!-- Total XP Container (Redesigned) -->
+            <!-- Total XP Container -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -248,29 +296,51 @@
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
-                <!-- Total XP Pill -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_total_xp_pill"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:paddingHorizontal="44dp"
+                    android:paddingHorizontal="32dp"
                     android:paddingVertical="12dp">
-                    <TextView
+
+                    <FrameLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="⭐"
-                        android:textSize="22sp" />
+                        android:layout_marginEnd="10dp">
+
+                        <!-- Small star background -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="⭐"
+                            android:textSize="16sp"
+                            android:layout_gravity="top|start"
+                            android:alpha="0.7" />
+
+                        <!-- Main big star -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="⭐"
+                            android:textSize="26sp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginStart="10dp"
+                            android:shadowColor="#40000000"
+                            android:shadowDx="2"
+                            android:shadowDy="2"
+                            android:shadowRadius="2" />
+                    </FrameLayout>
+
                     <TextView
                         android:id="@+id/tv_total_xp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
                         android:fontFamily="@font/nunito_extrabold"
                         android:text="3,150 XP"
                         android:textColor="#5C4D00"
-                        android:textSize="24sp" />
+                        android:textSize="26sp" />
                 </LinearLayout>
 
                 <TextView
@@ -298,6 +368,52 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <!-- Rank Up Overlay -->
+    <LinearLayout
+        android:id="@+id/ll_rank_up_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#E6000000"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:elevation="20dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <TextView
+            android:id="@+id/tv_rank_up_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_extrabold"
+            android:text="LEVEL UP! 🛡️"
+            android:textColor="#FFD700"
+            android:textSize="40sp"
+            android:shadowColor="#000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="4" />
+
+        <TextView
+            android:id="@+id/tv_rank_up_sub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="You are now an Apprentice!"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/nunito_semibold"
+            android:text="Tap to continue"
+            android:textColor="#88FFFFFF"
+            android:textSize="14sp" />
+    </LinearLayout>
 
     <!-- Confetti Container -->
     <FrameLayout

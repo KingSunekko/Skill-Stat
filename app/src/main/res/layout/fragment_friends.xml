@@ -5,73 +5,72 @@
     android:layout_height="match_parent"
     android:background="@color/splash_bg_dark">
 
-    <!-- Header -->
-    <RelativeLayout
-        android:id="@+id/rl_friends_header"
-        android:layout_width="match_parent"
+    <!-- Header Section -->
+    <TextView
+        android:id="@+id/tv_friends_title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="20dp"
-        android:paddingTop="40dp"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/nunito_bold"
+        android:text="Friends 👥"
+        android:textColor="@color/splash_text_primary"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/nunito_extrabold"
-                android:text="Friends"
-                android:textColor="@color/white"
-                android:textSize="28sp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="👥"
-                android:textSize="24sp" />
-        </LinearLayout>
+    <TextView
+        android:id="@+id/tv_friends_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/nunito_semibold"
+        android:text="Connect and compete"
+        android:textColor="@color/splash_text_secondary"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_friends_title" />
 
-        <TextView
-            android:id="@+id/btn_add_friend_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/shape_btn_green_3d"
-            android:fontFamily="@font/nunito_extrabold"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="8dp"
-            android:text="+ ADD"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:clickable="true"
-            android:focusable="true" />
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/btn_add_friend_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/shape_btn_green_3d"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/nunito_extrabold"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="10dp"
+        android:text="+ ADD"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_friends_subtitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_friends_title" />
 
     <!-- Tabs Container -->
     <LinearLayout
         android:id="@+id/ll_friends_tabs"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="48dp"
         android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/shape_bottom_nav_bg"
         android:backgroundTint="#2D2D44"
         android:orientation="horizontal"
         android:padding="4dp"
-        app:layout_constraintTop_toBottomOf="@id/rl_friends_header">
+        app:layout_constraintTop_toBottomOf="@id/tv_friends_subtitle">
 
         <LinearLayout
             android:id="@+id/ll_tab_friends"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
             android:background="@drawable/shape_skill_card"
             android:clickable="true"
-            android:focusable="true">
+            android:focusable="true"
+            android:gravity="center">
             <TextView
                 android:id="@+id/tv_tab_friends"
                 android:layout_width="wrap_content"
@@ -79,7 +78,7 @@
                 android:fontFamily="@font/nunito_bold"
                 android:text="Friends"
                 android:textColor="@color/splash_green"
-                android:textSize="13sp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -87,9 +86,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.2"
-            android:gravity="center"
             android:clickable="true"
-            android:focusable="true">
+            android:focusable="true"
+            android:gravity="center">
             <TextView
                 android:id="@+id/tv_tab_leaderboard"
                 android:layout_width="wrap_content"
@@ -97,7 +96,7 @@
                 android:fontFamily="@font/nunito_bold"
                 android:text="Leaderboard"
                 android:textColor="@color/splash_text_secondary"
-                android:textSize="13sp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -105,9 +104,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
             android:clickable="true"
-            android:focusable="true">
+            android:focusable="true"
+            android:gravity="center">
             <TextView
                 android:id="@+id/tv_tab_search"
                 android:layout_width="wrap_content"
@@ -115,7 +114,7 @@
                 android:fontFamily="@font/nunito_bold"
                 android:text="Search"
                 android:textColor="@color/splash_text_secondary"
-                android:textSize="13sp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -123,9 +122,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
             android:clickable="true"
-            android:focusable="true">
+            android:focusable="true"
+            android:gravity="center">
             <TextView
                 android:id="@+id/tv_tab_duels"
                 android:layout_width="wrap_content"
@@ -133,11 +132,130 @@
                 android:fontFamily="@font/nunito_bold"
                 android:text="Duels"
                 android:textColor="@color/splash_text_secondary"
-                android:textSize="13sp" />
+                android:textSize="12sp" />
         </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/ll_tab_chat"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6"
+            android:clickable="true"
+            android:focusable="true">
+            <TextView
+                android:id="@+id/tv_tab_chat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="💬"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_chat_tab_badge"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_alignTop="@id/tv_tab_chat"
+                android:layout_alignEnd="@id/tv_tab_chat"
+                android:layout_marginTop="-4dp"
+                android:layout_marginEnd="-6dp"
+                android:background="@drawable/shape_status_badge"
+                android:backgroundTint="@color/critical_red"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="8sp"
+                android:visibility="gone" />
+        </RelativeLayout>
     </LinearLayout>
 
-    <!-- CONTENT: FRIENDS -->
+    <!-- Nudge Alert Banner -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/card_nudge_alert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/shape_nudge_banner"
+        android:padding="16dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/ll_friends_tabs">
+
+        <TextView
+            android:id="@+id/tv_nudge_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="👋"
+            android:textSize="32sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toEndOf="@id/tv_nudge_icon"
+            app:layout_constraintEnd_toStartOf="@id/ll_nudge_actions"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/tv_nudge_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:text="Someone nudged you!"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_nudge_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/nunito_semibold"
+                android:text="Go practice to keep your skills sharp!"
+                android:textColor="#D1D1D6"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_nudge_actions"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/btn_nudge_practice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_btn_nudge_practice"
+                android:fontFamily="@font/nunito_bold"
+                android:gravity="center"
+                android:paddingVertical="10dp"
+                android:text="Practice Now!"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/btn_nudge_dismiss"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/shape_btn_nudge_dismiss"
+                android:fontFamily="@font/nunito_bold"
+                android:gravity="center"
+                android:paddingVertical="10dp"
+                android:text="Dismiss"
+                android:textColor="#8E8E93"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- CONTENT Sections -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nsv_friends_content"
         android:layout_width="match_parent"
@@ -145,54 +263,74 @@
         android:fillViewport="true"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_friends_tabs">
+        app:layout_constraintTop_toBottomOf="@id/card_nudge_alert">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="20dp"
-            android:paddingTop="24dp"
+            android:paddingTop="16dp"
             android:paddingBottom="100dp">
 
-            <!-- Search Bar Inner -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/shape_input_selector"
-                android:gravity="center_vertical"
-                android:paddingHorizontal="16dp"
-                android:clickable="true"
-                android:focusable="true">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🔍"
-                    android:textSize="16sp" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:fontFamily="@font/nunito_semibold"
-                    android:text="Search friends..."
-                    android:textColor="@color/splash_text_secondary"
-                    android:textSize="14sp" />
-            </LinearLayout>
+            <!-- PENDING REQUESTS SECTION -->
+            <TextView
+                android:id="@+id/tv_requests_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="PENDING REQUESTS"
+                android:textColor="@color/xp_yellow"
+                android:textSize="11sp"
+                android:visibility="gone" />
 
-            <!-- Friends List Container -->
+            <LinearLayout
+                android:id="@+id/ll_requests_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp" />
+
+            <!-- ACTIVE DUELS SUMMARY SECTION -->
+            <TextView
+                android:id="@+id/tv_active_duels_summary_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="CURRENT BATTLES ⚔️"
+                android:textColor="@color/splash_green"
+                android:textSize="11sp"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/ll_active_duels_summary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp" />
+
+            <!-- MAIN FRIENDS LIST -->
+            <TextView
+                android:id="@+id/tv_my_friends_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="MY FRIENDS"
+                android:textColor="@color/splash_text_secondary"
+                android:textSize="11sp" />
+
             <LinearLayout
                 android:id="@+id/ll_friends_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
-                <!-- Dynamically populated -->
-            </LinearLayout>
-
+                android:orientation="vertical" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- CONTENT: LEADERBOARD -->
+    <!-- Leaderboard Content -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nsv_leaderboard_content"
         android:layout_width="match_parent"
@@ -201,35 +339,23 @@
         android:scrollbars="none"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_friends_tabs">
+        app:layout_constraintTop_toBottomOf="@id/card_nudge_alert">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="20dp"
-            android:paddingTop="20dp"
+            android:paddingTop="16dp"
             android:paddingBottom="100dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/nunito_bold"
-                android:text="Top rankers this week"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                android:layout_marginBottom="16dp"/>
-
             <LinearLayout
                 android:id="@+id/ll_leaderboard_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <!-- Dynamically populated -->
-            </LinearLayout>
+                android:orientation="vertical" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- CONTENT: SEARCH -->
+    <!-- Search Content -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nsv_search_content"
         android:layout_width="match_parent"
@@ -238,52 +364,36 @@
         android:scrollbars="none"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_friends_tabs">
+        app:layout_constraintTop_toBottomOf="@id/card_nudge_alert">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="20dp"
-            android:paddingTop="20dp"
+            android:paddingTop="16dp"
             android:paddingBottom="100dp">
-
             <EditText
                 android:id="@+id/et_search_friends"
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
                 android:background="@drawable/shape_input_selector"
-                android:drawableStart="@drawable/ic_info"
-                android:drawablePadding="12dp"
-                android:drawableTint="@color/splash_green"
                 android:fontFamily="@font/nunito_semibold"
                 android:hint="Search by username..."
+                android:inputType="text"
                 android:paddingHorizontal="16dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/splash_text_secondary"
-                android:textSize="14sp"
-                android:inputType="text" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/nunito_extrabold"
-                android:text="💡 SEARCH RESULTS"
-                android:textColor="@color/splash_text_secondary"
-                android:textSize="13sp" />
-
+                android:textSize="14sp" />
             <LinearLayout
                 android:id="@+id/ll_suggested_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:orientation="vertical">
-                <!-- Dynamically populated -->
-            </LinearLayout>
+                android:orientation="vertical" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- CONTENT: DUELS -->
+    <!-- Duels Content -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nsv_duels_content"
         android:layout_width="match_parent"
@@ -292,45 +402,66 @@
         android:scrollbars="none"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_friends_tabs">
+        app:layout_constraintTop_toBottomOf="@id/card_nudge_alert">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="20dp"
-            android:paddingTop="24dp"
+            android:paddingTop="16dp"
             android:paddingBottom="100dp">
-
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/btn_start_new_duel"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/shape_btn_green_3d"
+                android:clickable="true"
+                android:focusable="true"
                 android:fontFamily="@font/nunito_extrabold"
-                android:text="📜 ACTIVE DUELS"
-                android:textColor="@color/splash_text_secondary"
-                android:textSize="13sp" />
-
+                android:gravity="center"
+                android:paddingVertical="16dp"
+                android:text="START NEW DUEL ⚔️"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
             <LinearLayout
                 android:id="@+id/ll_duel_history_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:orientation="vertical">
-                <!-- Dynamically populated -->
-            </LinearLayout>
+                android:orientation="vertical" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
+    <!-- Chat Content -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsv_chat_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_nudge_alert">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="100dp">
             <TextView
-                android:id="@+id/btn_start_new_duel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:text="Recent Chats"
+                android:textColor="@color/splash_text_secondary"
+                android:textSize="11sp"
+                android:layout_marginBottom="12dp"/>
+            <LinearLayout
+                android:id="@+id/ll_chat_list"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginTop="24dp"
-                android:background="@drawable/shape_btn_green_3d"
-                android:fontFamily="@font/nunito_extrabold"
-                android:gravity="center"
-                android:text="⚔️ START NEW DUEL"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:clickable="true"
-                android:focusable="true" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

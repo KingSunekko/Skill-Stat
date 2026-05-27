@@ -5,14 +5,14 @@ import android.animation.AnimatorSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class AvatarAdapter extends RecyclerView.Adapter<AvatarAdapter.AvatarViewHolder> {
 
-    private final List<String> avatars;
+    private final List<Integer> avatars;
     private int selectedPosition = 0;
     private final OnAvatarClickListener listener;
 
@@ -20,7 +20,7 @@ public class AvatarAdapter extends RecyclerView.Adapter<AvatarAdapter.AvatarView
         void onAvatarClick(int position);
     }
 
-    public AvatarAdapter(List<String> avatars, OnAvatarClickListener listener) {
+    public AvatarAdapter(List<Integer> avatars, OnAvatarClickListener listener) {
         this.avatars = avatars;
         this.listener = listener;
     }
@@ -34,7 +34,7 @@ public class AvatarAdapter extends RecyclerView.Adapter<AvatarAdapter.AvatarView
 
     @Override
     public void onBindViewHolder(@NonNull AvatarViewHolder holder, int position) {
-        holder.tvEmoji.setText(avatars.get(position));
+        holder.ivAvatar.setImageResource(avatars.get(position));
         
         // Reset translation before applying new state to avoid cumulative issues during recycling
         holder.container.setTranslationY(0f);
@@ -75,12 +75,12 @@ public class AvatarAdapter extends RecyclerView.Adapter<AvatarAdapter.AvatarView
     }
 
     static class AvatarViewHolder extends RecyclerView.ViewHolder {
-        TextView tvEmoji;
+        ImageView ivAvatar;
         View container;
 
         AvatarViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvEmoji = itemView.findViewById(R.id.tv_avatar_emoji);
+            ivAvatar = itemView.findViewById(R.id.iv_avatar_image);
             container = itemView.findViewById(R.id.avatar_container);
         }
     }

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- The "3D" bottom edge (Dark Green Extrusion) -->
-    <item android:top="6dp">
+    <item
+        android:top="9dp"
+        android:bottom="3dp"
+        android:left="3dp"
+        android:right="3dp">
         <shape android:shape="rectangle">
             <solid android:color="#2D6601" />
             <corners android:radius="16dp" />
@@ -9,7 +13,11 @@
     </item>
 
     <!-- The main body with extra thick Green border -->
-    <item android:bottom="6dp">
+    <item
+        android:bottom="9dp"
+        android:top="3dp"
+        android:left="3dp"
+        android:right="3dp">
         <shape android:shape="rectangle">
             <solid android:color="#1A1A2E" />
             <stroke

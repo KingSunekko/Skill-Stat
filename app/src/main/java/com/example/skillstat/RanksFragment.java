@@ -1,18 +1,27 @@
 package com.example.skillstat;
 
+import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnticipateOvershootInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
+import com.example.skillstat.models.Duel;
 import com.example.skillstat.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -24,25 +33,44 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 public class RanksFragment extends Fragment {
 
     private static final String TAG = "RanksFragment";
     private LinearLayout llLeaderboardList;
     private View podiumSection;
-    private TextView tabGlobal, tabWeekly, tabSkills;
+    private TextView tabGlobal, tabWeekly, tabSkills, tabDuels;
 
-    private TextView tvUserPoints, tvUserName, tvUserStreak, tvUserRank, tvUserRankLabel, tvHeaderEmoji, tvTopRankBadge;
+    private TextView tvUserPoints, tvUserName, tvUserStreak, tvUserRank, tvUserRankLabel, tvTopRankBadge;
+    private ImageView ivHeaderUserAvatar;
 
-    private TextView tvPodium1Emoji, tvPodium1Name, tvPodium1Score;
-    private TextView tvPodium2Emoji, tvPodium2Name, tvPodium2Score;
-    private TextView tvPodium3Emoji, tvPodium3Name, tvPodium3Score;
+    private ImageView ivPodium1Avatar, ivPodium2Avatar, ivPodium3Avatar;
+    private TextView tvPodium1Name, tvPodium1Score;
+    private TextView tvPodium2Name, tvPodium2Score;
+    private TextView tvPodium3Name, tvPodium3Score;
 
     private List<TextView> tabs = new ArrayList<>();
     private DatabaseReference mDatabase;
     private String currentUid;
     private boolean isFirebaseAvailable = false;
+    private String currentTabMode = "global"; 
+    private boolean hasAnimatedEntrance = false;
+
+    private static class SkillRankEntry {
+        User user;
+        String skillName;
+        double mastery;
+
+        SkillRankEntry(User user, String skillName, double mastery) {
+            this.user = user;
+            this.skillName = skillName;
+            this.mastery = mastery;
+        }
+    }
 
     @Nullable
     @Override
@@ -71,66 +99,87 @@ public class RanksFragment extends Fragment {
         tvUserStreak = view.findViewById(R.id.tv_user_streak);
         tvUserRank = view.findViewById(R.id.tv_user_rank);
         tvUserRankLabel = view.findViewById(R.id.tv_user_rank_label);
-        tvHeaderEmoji = view.findViewById(R.id.tv_header_user_emoji);
+        ivHeaderUserAvatar = view.findViewById(R.id.iv_header_user_avatar);
         tvTopRankBadge = view.findViewById(R.id.tv_top_rank_badge);
 
         tabGlobal = view.findViewById(R.id.tab_global);
+        tabDuels = view.findViewById(R.id.tab_duels);
         tabWeekly = view.findViewById(R.id.tab_weekly);
         tabSkills = view.findViewById(R.id.tab_skills_rank);
 
-        tvPodium1Emoji = view.findViewById(R.id.tv_podium_1_emoji);
+        ivPodium1Avatar = view.findViewById(R.id.iv_podium_1_avatar);
         tvPodium1Name = view.findViewById(R.id.tv_podium_1_name);
         tvPodium1Score = view.findViewById(R.id.tv_podium_1_score);
 
-        tvPodium2Emoji = view.findViewById(R.id.tv_podium_2_emoji);
+        ivPodium2Avatar = view.findViewById(R.id.iv_podium_2_avatar);
         tvPodium2Name = view.findViewById(R.id.tv_podium_2_name);
         tvPodium2Score = view.findViewById(R.id.tv_podium_2_score);
 
-        tvPodium3Emoji = view.findViewById(R.id.tv_podium_3_emoji);
+        ivPodium3Avatar = view.findViewById(R.id.iv_podium_3_avatar);
         tvPodium3Name = view.findViewById(R.id.tv_podium_3_name);
         tvPodium3Score = view.findViewById(R.id.tv_podium_3_score);
 
         tabs.add(tabGlobal);
+        tabs.add(tabDuels);
         tabs.add(tabWeekly);
         tabs.add(tabSkills);
 
         setupTabs();
         selectTab(tabGlobal);
         
+        // Initial setup for entrance animations
+        View userCard = view.findViewById(R.id.card_user_rank);
+        if (userCard != null) {
+            userCard.setAlpha(0);
+            userCard.setTranslationY(-30);
+        }
+        if (podiumSection != null) {
+            podiumSection.setAlpha(0);
+            podiumSection.setScaleY(0.8f);
+        }
+
         if (isFirebaseAvailable) {
-            loadGlobalLeaderboard();
-        } else {
-            podiumSection.setVisibility(View.GONE);
-            if (tvUserName != null) tvUserName.setText("Offline Mode");
+            loadLeaderboard("totalPoints");
+        }
+    }
+
+    private void runEntranceAnimations() {
+        if (hasAnimatedEntrance) return;
+        hasAnimatedEntrance = true;
+
+        View userCard = getView() != null ? getView().findViewById(R.id.card_user_rank) : null;
+        if (userCard != null) {
+            userCard.animate().alpha(1).translationY(0).setDuration(600).setInterpolator(new DecelerateInterpolator()).start();
+        }
+
+        if (podiumSection != null) {
+            podiumSection.animate().alpha(1).scaleY(1.0f).setDuration(700).setStartDelay(200).setInterpolator(new AnticipateOvershootInterpolator()).start();
         }
     }
 
     private void setupTabs() {
-        tabGlobal.setOnClickListener(v -> { selectTab(tabGlobal); if (isFirebaseAvailable) loadGlobalLeaderboard(); });
-        tabWeekly.setOnClickListener(v -> { selectTab(tabWeekly); if (isFirebaseAvailable) loadGlobalLeaderboard(); });
-        tabSkills.setOnClickListener(v -> { selectTab(tabSkills); loadSkillsPlaceholder(); });
+        tabGlobal.setOnClickListener(v -> { selectTab(tabGlobal); currentTabMode = "global"; if (isFirebaseAvailable) loadLeaderboard("totalPoints"); });
+        tabDuels.setOnClickListener(v -> { selectTab(tabDuels); currentTabMode = "duels"; if (isFirebaseAvailable) loadDuelsLeaderboard(); });
+        tabWeekly.setOnClickListener(v -> { selectTab(tabWeekly); currentTabMode = "weekly"; if (isFirebaseAvailable) loadLeaderboard("weeklyPoints"); });
+        tabSkills.setOnClickListener(v -> { selectTab(tabSkills); currentTabMode = "skills"; if (isFirebaseAvailable) loadSkillsLeaderboard(); });
     }
 
     private void selectTab(TextView selectedTab) {
         if (getContext() == null) return;
         for (TextView tab : tabs) {
-            if (tab == selectedTab) {
-                tab.setSelected(true);
-                tab.setBackgroundResource(R.drawable.shape_skill_chip_selector);
-                tab.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
-            } else {
-                tab.setSelected(false);
-                tab.setBackground(null);
-                tab.setTextColor(ContextCompat.getColor(requireContext(), R.color.splash_text_secondary));
-            }
+            boolean isActive = (tab == selectedTab);
+            tab.setSelected(isActive);
+            tab.setBackgroundResource(isActive ? R.drawable.shape_skill_chip_selector : 0);
+            tab.setTextColor(ContextCompat.getColor(requireContext(), isActive ? R.color.white : R.color.splash_text_secondary));
+            tab.animate().scaleX(isActive ? 1.05f : 1.0f).scaleY(isActive ? 1.05f : 1.0f).setDuration(200).start();
         }
     }
 
-    private void loadGlobalLeaderboard() {
-        if (tvUserRankLabel != null) tvUserRankLabel.setText("Global Rank");
-        if (mDatabase == null) return;
-        
-        Query query = mDatabase.child("users").orderByChild("totalPoints").limitToLast(50);
+    private void loadLeaderboard(String orderByField) {
+        if (tvUserRankLabel != null) {
+            tvUserRankLabel.setText("weeklyPoints".equals(orderByField) ? "Weekly Rank" : "Global Rank");
+        }
+        Query query = mDatabase.child("users").orderByChild(orderByField).limitToLast(50);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -145,122 +194,205 @@ public class RanksFragment extends Fragment {
                 }
                 Collections.reverse(userList);
                 updateUI(userList);
+                runEntranceAnimations();
             }
-            @Override public void onCancelled(@NonNull DatabaseError error) { Log.e(TAG, "Load failed", error.toException()); }
+            @Override public void onCancelled(@NonNull DatabaseError error) {}
         });
     }
 
-    private void updateUI(List<User> users) {
-        if (llLeaderboardList == null) return;
-        llLeaderboardList.removeAllViews();
-        if (users.isEmpty()) {
-            podiumSection.setVisibility(View.GONE);
-            return;
-        }
-
-        int myRank = -1;
-        User me = null;
-
-        for (int i = 0; i < users.size(); i++) {
-            if (currentUid != null && users.get(i).getUid() != null && users.get(i).getUid().equals(currentUid)) {
-                myRank = i + 1;
-                me = users.get(i);
-                break;
+    private void loadDuelsLeaderboard() {
+        if (tvUserRankLabel != null) tvUserRankLabel.setText("Duels Rank");
+        mDatabase.child("users").orderByChild("wins").limitToLast(50).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!isAdded() || !"duels".equals(currentTabMode)) return;
+                List<User> userList = new ArrayList<>();
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    User user = ds.getValue(User.class);
+                    if (user != null) {
+                        user.setUid(ds.getKey());
+                        userList.add(user);
+                    }
+                }
+                Collections.reverse(userList);
+                updateUI(userList);
+                loadLiveDuels();
             }
-        }
+            @Override public void onCancelled(@NonNull DatabaseError error) {}
+        });
+    }
 
-        if (me != null) {
-            if (tvUserName != null) tvUserName.setText(me.getUsername());
-            if (tvUserPoints != null) tvUserPoints.setText(me.getTotalPoints() + " pts");
-            if (tvUserStreak != null) tvUserStreak.setText(me.getStreak() + " streak");
-            if (tvHeaderEmoji != null) tvHeaderEmoji.setText(me.getAvatarUrl());
-            if (tvUserRank != null) tvUserRank.setText(myRank != -1 ? "#" + myRank : "--");
-            if (tvTopRankBadge != null) tvTopRankBadge.setText(myRank != -1 ? "#" + myRank + " Global" : "Unranked");
-        }
+    private void loadLiveDuels() {
+        mDatabase.child("duels").orderByChild("status").equalTo("active").limitToLast(5).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!isAdded() || !"duels".equals(currentTabMode)) return;
+                if (snapshot.exists()) {
+                    addSectionHeader("LIVE DUELS ⚔️");
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        Duel d = ds.getValue(Duel.class);
+                        if (d != null) { d.setDuelId(ds.getKey()); addLiveDuelItem(d); }
+                    }
+                }
+            }
+            @Override public void onCancelled(@NonNull DatabaseError error) {}
+        });
+    }
 
+    private void addSectionHeader(String title) {
+        TextView tv = new TextView(getContext());
+        tv.setText(title); tv.setTextColor(0xFF8E8E93); tv.setTextSize(11);
+        tv.setPadding(0, 32, 0, 16); tv.setTypeface(Typeface.DEFAULT_BOLD);
+        llLeaderboardList.addView(tv);
+    }
+
+    private void addLiveDuelItem(Duel duel) {
+        View v = getLayoutInflater().inflate(R.layout.item_duel_history, llLeaderboardList, false);
+        ((TextView) v.findViewById(R.id.tv_title)).setText(duel.getSkillName() + " Battle");
+        ((TextView) v.findViewById(R.id.tv_subtitle)).setText("Ongoing Live Match");
+        ((TextView) v.findViewById(R.id.tv_your_score)).setText("Pts: " + String.format("%.1f", duel.getInitiatorEffort()));
+        ((TextView) v.findViewById(R.id.tv_their_score)).setText("Pts: " + String.format("%.1f", duel.getOpponentEffort()));
+        v.setOnClickListener(view -> {
+            Intent i = new Intent(getActivity(), ActiveDuelActivity.class);
+            i.putExtra("duel_id", duel.getDuelId()); startActivity(i);
+        });
+        llLeaderboardList.addView(v);
+    }
+
+    private void loadSkillsLeaderboard() {
+        if (tvUserRankLabel != null) tvUserRankLabel.setText("Skills Rank");
+        mDatabase.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!isAdded() || !"skills".equals(currentTabMode)) return;
+                List<SkillRankEntry> skillEntries = new ArrayList<>();
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    User user = ds.getValue(User.class);
+                    if (user != null) {
+                        user.setUid(ds.getKey());
+                        if (user.getSkillMastery() != null) {
+                            for (Map.Entry<String, Double> entry : user.getSkillMastery().entrySet()) {
+                                skillEntries.add(new SkillRankEntry(user, entry.getKey(), entry.getValue()));
+                            }
+                        }
+                    }
+                }
+                Collections.sort(skillEntries, (e1, e2) -> Double.compare(e2.mastery, e1.mastery));
+                updateSkillsUI(skillEntries);
+            }
+            @Override public void onCancelled(@NonNull DatabaseError error) {}
+        });
+    }
+
+    private void updateSkillsUI(List<SkillRankEntry> entries) {
+        llLeaderboardList.removeAllViews();
+        podiumSection.setVisibility(View.GONE);
+        for (int i = 0; i < entries.size(); i++) {
+            SkillRankEntry entry = entries.get(i);
+            boolean isMe = currentUid != null && entry.user.getUid().equals(currentUid);
+            addListItem(i + 1, (i < 3 ? (i == 0 ? "🥇" : (i == 1 ? "🥈" : "🥉")) : ""), entry.user, entry.skillName, (int) entry.mastery + "%", isMe, i);
+        }
+    }
+
+    private void updateUI(List<User> users) {
+        llLeaderboardList.removeAllViews();
         podiumSection.setVisibility(View.VISIBLE);
+        int myRank = -1; User me = null;
+        for (int i = 0; i < users.size(); i++) {
+            if (currentUid != null && users.get(i).getUid().equals(currentUid)) { myRank = i + 1; me = users.get(i); break; }
+        }
+        if (me != null) {
+            tvUserName.setText(me.getUsername());
+            ivHeaderUserAvatar.setImageResource(getAvatarResourceId(me.getAvatarUrl()));
+            tvUserStreak.setText("🔥 " + me.getStreak() + " streak");
+            String pts;
+            if ("duels".equals(currentTabMode)) pts = me.getWins() + " wins";
+            else if ("weekly".equals(currentTabMode)) pts = me.getWeeklyPoints() + " XP";
+            else pts = me.getTotalPoints() + " pts";
+            
+            animateNumber(tvUserPoints, Integer.parseInt(pts.replaceAll("[^0-9]", "")), pts.replaceAll("[0-9,]", ""), "");
+            tvUserRank.setText("#" + myRank);
+            tvTopRankBadge.setText("#" + myRank + " " + currentTabMode.toUpperCase());
+            if (myRank <= 3) checkAndAwardPodiumBadge(me);
+        }
+
         if (users.size() >= 1) setPodium(1, users.get(0));
         if (users.size() >= 2) setPodium(2, users.get(1));
-        else if (tvPodium2Name != null) tvPodium2Name.setText("---");
         if (users.size() >= 3) setPodium(3, users.get(2));
-        else if (tvPodium3Name != null) tvPodium3Name.setText("---");
 
         for (int i = 0; i < users.size(); i++) {
-            User user = users.get(i);
-            int rank = i + 1;
-            String medal = "";
-            if (rank == 1) medal = "🥇";
-            else if (rank == 2) medal = "🥈";
-            else if (rank == 3) medal = "🥉";
-
-            String sub = "🔥 " + user.getStreak() + "d • Lv." + ((user.getTotalPoints() / 1000) + 1);
-            boolean isMe = currentUid != null && user.getUid() != null && user.getUid().equals(currentUid);
-            addListItem(rank, medal, user, sub, String.valueOf(user.getTotalPoints()), isMe);
+            User u = users.get(i);
+            String score;
+            if ("duels".equals(currentTabMode)) score = String.valueOf(u.getWins());
+            else if ("weekly".equals(currentTabMode)) score = String.valueOf(u.getWeeklyPoints());
+            else score = String.valueOf(u.getTotalPoints());
+            
+            addListItem(i + 1, (i < 3 ? (i == 0 ? "🥇" : (i == 1 ? "🥈" : "🥉")) : ""), u, "🔥 " + u.getStreak() + "d streak", score, currentUid != null && u.getUid().equals(currentUid), i);
         }
+    }
+
+    private void checkAndAwardPodiumBadge(User user) {
+        if (user.getBadges() != null && !user.getBadges().contains("Podium")) {
+            List<String> newBadges = new ArrayList<>(user.getBadges());
+            newBadges.add("Podium");
+            mDatabase.child("users").child(currentUid).child("badges").setValue(newBadges);
+            mDatabase.child("users").child(currentUid).child("totalPoints").setValue(user.getTotalPoints() + 500);
+            Toast.makeText(getContext(), "🏆 UNLOCKED: Podium Badge! (+500 XP)", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void animateNumber(TextView tv, int target, String prefix, String suffix) {
+        if (tv == null) return;
+        ValueAnimator animator = ValueAnimator.ofInt(0, target);
+        animator.setDuration(1000);
+        animator.addUpdateListener(animation -> tv.setText(prefix + animation.getAnimatedValue() + suffix));
+        animator.start();
     }
 
     private void setPodium(int place, User user) {
-        boolean isMe = currentUid != null && user.getUid() != null && user.getUid().equals(currentUid);
-        String name = isMe ? "You" : user.getUsername();
+        ImageView av = place == 1 ? ivPodium1Avatar : (place == 2 ? ivPodium2Avatar : ivPodium3Avatar);
+        TextView name = place == 1 ? tvPodium1Name : (place == 2 ? tvPodium2Name : tvPodium3Name);
+        TextView score = place == 1 ? tvPodium1Score : (place == 2 ? tvPodium2Score : tvPodium3Score);
+        av.setImageResource(getAvatarResourceId(user.getAvatarUrl()));
+        name.setText(user.getUsername());
         
-        TextView emojiView = null, nameView = null, scoreView = null;
-        if (place == 1) { emojiView = tvPodium1Emoji; nameView = tvPodium1Name; scoreView = tvPodium1Score; }
-        else if (place == 2) { emojiView = tvPodium2Emoji; nameView = tvPodium2Name; scoreView = tvPodium2Score; }
-        else if (place == 3) { emojiView = tvPodium3Emoji; nameView = tvPodium3Name; scoreView = tvPodium3Score; }
-
-        if (emojiView != null) emojiView.setText(user.getAvatarUrl());
-        if (nameView != null) nameView.setText(name);
-        if (scoreView != null) scoreView.setText(String.valueOf(user.getTotalPoints()));
-
-        if (nameView != null && nameView.getParent() instanceof View) {
-            View podiumContainer = (View) nameView.getParent();
-            podiumContainer.setOnClickListener(v -> openFriendProfile(user.getUid()));
-        }
+        String scoreVal;
+        if ("duels".equals(currentTabMode)) scoreVal = String.valueOf(user.getWins());
+        else if ("weekly".equals(currentTabMode)) scoreVal = String.valueOf(user.getWeeklyPoints());
+        else scoreVal = String.valueOf(user.getTotalPoints());
+        
+        score.setText(scoreVal);
+        av.setScaleX(0); av.setScaleY(0);
+        av.animate().scaleX(1).scaleY(1).setDuration(500).setStartDelay(300 + place * 100L).setInterpolator(new AnticipateOvershootInterpolator()).start();
     }
 
-    private void addListItem(int rank, String medal, User user, String sub, String score, boolean isYou) {
+    private void addListItem(int rank, String medal, User user, String sub, String score, boolean isYou, int index) {
         View item = getLayoutInflater().inflate(R.layout.item_leaderboard, llLeaderboardList, false);
-        ((TextView) item.findViewById(R.id.tv_avatar_emoji)).setText(user.getAvatarUrl());
+        ((ImageView) item.findViewById(R.id.iv_avatar)).setImageResource(getAvatarResourceId(user.getAvatarUrl()));
         ((TextView) item.findViewById(R.id.tv_name)).setText(isYou ? "You" : user.getUsername());
         ((TextView) item.findViewById(R.id.tv_sub_info)).setText(sub);
         ((TextView) item.findViewById(R.id.tv_score)).setText(score);
         
         TextView tvRank = item.findViewById(R.id.tv_rank_number);
         TextView tvMedal = item.findViewById(R.id.tv_rank_medal);
-        if (!medal.isEmpty()) {
-            if (tvMedal != null) { tvMedal.setText(medal); tvMedal.setVisibility(View.VISIBLE); }
-            if (tvRank != null) tvRank.setVisibility(View.GONE);
-        } else if (tvRank != null) {
+        if (!medal.isEmpty()) { 
+            tvMedal.setText(medal); 
+            tvMedal.setVisibility(View.VISIBLE); 
+            tvRank.setVisibility(View.GONE); 
+        } else {
             tvRank.setText(String.valueOf(rank));
         }
+        
+        if (isYou) item.setBackgroundResource(R.drawable.shape_leaderboard_you);
 
-        if (isYou) {
-            item.setBackgroundResource(R.drawable.shape_leaderboard_you);
-            View badge = item.findViewById(R.id.tv_you_badge);
-            if (badge != null) badge.setVisibility(View.VISIBLE);
-        }
-
-        item.setOnClickListener(v -> openFriendProfile(user.getUid()));
+        item.setAlpha(0); item.setTranslationX(50);
+        item.animate().alpha(1).translationX(0).setDuration(400).setStartDelay(500 + index * 50L).start();
         llLeaderboardList.addView(item);
     }
 
-    private void openFriendProfile(String uid) {
-        if (uid == null) return;
-        Intent intent = new Intent(getActivity(), FriendProfileActivity.class);
-        intent.putExtra("friend_uid", uid);
-        startActivity(intent);
-    }
-
-    private void loadSkillsPlaceholder() {
-        llLeaderboardList.removeAllViews();
-        podiumSection.setVisibility(View.GONE);
-        if (getContext() != null) {
-            TextView tv = new TextView(getContext());
-            tv.setText("Skills leaderboard coming soon!");
-            tv.setTextColor(0x88FFFFFF);
-            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            tv.setPadding(0, 100, 0, 0);
-            llLeaderboardList.addView(tv);
-        }
+    private int getAvatarResourceId(String avatarName) {
+        if (avatarName == null) return R.drawable.prof1;
+        int resId = getResources().getIdentifier(avatarName, "drawable", requireContext().getPackageName());
+        return resId != 0 ? resId : R.drawable.prof1;
     }
 }

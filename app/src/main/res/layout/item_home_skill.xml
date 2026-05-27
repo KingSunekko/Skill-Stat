@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_bold"
-            android:text="Java 💻"
+            android:text="Skill Name"
             android:textColor="@color/white"
             android:textSize="16sp" />
 
@@ -36,7 +36,7 @@
                 android:layout_width="8dp"
                 android:layout_height="8dp"
                 android:background="@drawable/shape_star_dot"
-                android:backgroundTint="#FF4B4B" />
+                android:backgroundTint="#58CC02" />
 
             <TextView
                 android:id="@+id/tv_status_text"
@@ -44,25 +44,62 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
                 android:fontFamily="@font/nunito_bold"
-                android:text="At Risk"
-                android:textColor="#FF4B4B"
+                android:text="Learning"
+                android:textColor="#58CC02"
                 android:textSize="11sp" />
         </LinearLayout>
     </RelativeLayout>
 
-    <View
-        android:id="@+id/v_progress_bg"
+    <!-- Mastery Bar -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Mastery"
+        android:textColor="@color/splash_text_secondary"
+        android:textSize="10sp"
+        android:fontFamily="@font/nunito_semibold"/>
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/shape_progress_bg" />
+        android:layout_height="8dp"
+        android:layout_marginTop="4dp">
+        <View
+            android:id="@+id/v_progress_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_progress_bg" />
+        <View
+            android:id="@+id/v_progress_fill"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_progress_fill_green" />
+    </FrameLayout>
 
-    <View
-        android:id="@+id/v_progress_fill"
-        android:layout_width="200dp"
-        android:layout_height="10dp"
-        android:layout_marginTop="-10dp"
-        android:background="@drawable/shape_progress_fill" />
+    <!-- Sharpness Bar (Decay UI) -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Sharpness"
+        android:textColor="@color/splash_text_secondary"
+        android:textSize="10sp"
+        android:fontFamily="@font/nunito_semibold"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_marginTop="2dp">
+        <View
+            android:id="@+id/v_sharpness_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_progress_bg"
+            android:alpha="0.3"/>
+        <View
+            android:id="@+id/v_sharpness_fill"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_progress_fill_green" />
+    </FrameLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -74,11 +111,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_semibold"
-            android:text="82% • Advanced"
+            android:text="0% • Beginner"
             android:textColor="@color/splash_text_secondary"
             android:textSize="12sp" />
 
         <LinearLayout
+            android:id="@+id/ll_time_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -96,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:fontFamily="@font/nunito_bold"
-                android:text="1d left"
+                android:text="7d left"
                 android:textColor="@color/splash_text_secondary"
                 android:textSize="12sp" />
         </LinearLayout>

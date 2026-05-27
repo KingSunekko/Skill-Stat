@@ -44,11 +44,12 @@
     </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsv_practice"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
         android:scrollbars="none"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/ll_heatmap_preview"
         app:layout_constraintTop_toBottomOf="@id/ll_header">
 
         <LinearLayout
@@ -56,7 +57,231 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="20dp"
-            android:paddingBottom="40dp">
+            android:paddingBottom="20dp">
+
+            <!-- Challenge Card -->
+            <LinearLayout
+                android:id="@+id/card_practice_challenge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/shape_btn_ai_gradient_3d"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="12dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🎯"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_bold"
+                        android:text="CHALLENGE ACTIVE"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        android:letterSpacing="0.05" />
+                    <TextView
+                        android:id="@+id/tv_practice_challenge_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_extrabold"
+                        android:text="Speed Round"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Zen Mode Toggle -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/shape_skill_card"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="12dp">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_bold"
+                        android:text="🧘 Strict Zen Mode"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_semibold"
+                        android:text="Stay focused for +50% XP!"
+                        android:textColor="@color/splash_green"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/iv_zen_info"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="8dp"
+                    android:padding="4dp"
+                    android:src="@android:drawable/ic_dialog_info"
+                    app:tint="@color/splash_text_secondary"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"/>
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switch_strict_mode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    app:thumbTint="@color/splash_green"
+                    app:trackTint="@color/splash_text_secondary" />
+            </LinearLayout>
+
+            <!-- Soundscapes (Zen Mode Upgrade) -->
+            <LinearLayout
+                android:id="@+id/ll_soundscapes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/shape_skill_card"
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="🎧 Focus Soundscape"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <LinearLayout
+                        android:id="@+id/btn_sound_none"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:alpha="1.0"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackgroundBorderless">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🚫"
+                            android:textSize="20sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_semibold"
+                            android:text="None"
+                            android:textColor="@color/white"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_sound_lofi"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:alpha="0.5"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackgroundBorderless">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="☕"
+                            android:textSize="20sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_semibold"
+                            android:text="Lofi"
+                            android:textColor="@color/white"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_sound_white"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:alpha="0.5"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackgroundBorderless">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🌧️"
+                            android:textSize="20sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_semibold"
+                            android:text="Rain"
+                            android:textColor="@color/white"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_sound_binaural"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:alpha="0.5"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackgroundBorderless">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🧠"
+                            android:textSize="20sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_semibold"
+                            android:text="Focus"
+                            android:textColor="@color/white"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
 
             <!-- Skill Info -->
             <TextView
@@ -64,11 +289,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
                 android:fontFamily="@font/nunito_bold"
                 android:text="Java 💻"
                 android:textColor="@color/white"
                 android:textSize="28sp" />
+
+            <!-- Sub-skill Selection -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_sub_skill"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:hint="Focus on a sub-skill?"
+                app:boxBackgroundColor="#1A1F35"
+                app:boxStrokeColor="@color/splash_green"
+                app:hintTextColor="@color/splash_green"
+                android:textColorHint="#606080"
+                android:visibility="gone">
+
+                <AutoCompleteTextView
+                    android:id="@+id/actv_sub_skill"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:inputType="none"
+                    android:textColor="@color/white" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/tv_goal_info"
@@ -87,7 +335,22 @@
                 android:layout_width="220dp"
                 android:layout_height="220dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="40dp">
+                android:layout_marginTop="32dp">
+
+                <!-- Rival Ghost Progress -->
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/cp_rival_ghost"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    app:indicatorSize="200dp"
+                    app:trackThickness="4dp"
+                    app:trackColor="@android:color/transparent"
+                    app:indicatorColor="#4DFF4B4B"
+                    app:trackCornerRadius="10dp"
+                    android:progress="0"
+                    android:visibility="invisible"
+                    app:indicatorDirectionCircular="clockwise"/>
 
                 <com.google.android.material.progressindicator.CircularProgressIndicator
                     android:id="@+id/cp_timer"
@@ -101,6 +364,25 @@
                     app:trackCornerRadius="10dp"
                     android:progress="0"
                     app:indicatorDirectionCircular="clockwise"/>
+
+                <!-- Rival Ghost Indicator -->
+                <FrameLayout
+                    android:id="@+id/fl_ghost_indicator"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:visibility="gone">
+                    <TextView
+                        android:id="@+id/tv_ghost_avatar"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="top|center_horizontal"
+                        android:text="👤"
+                        android:textSize="12sp"
+                        android:gravity="center"
+                        android:background="@drawable/shape_ghost_bg"
+                        android:elevation="2dp"/>
+                </FrameLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -135,15 +417,114 @@
                         android:text="0%"
                         android:textColor="@color/splash_green"
                         android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tv_zen_streak"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/nunito_bold"
+                        android:text="🧘 0m Streak"
+                        android:textColor="#FFD700"
+                        android:textSize="10sp"
+                        android:visibility="gone" />
+
+                    <!-- Live Duel Info Container -->
+                    <LinearLayout
+                        android:id="@+id/ll_duel_status_container"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="4dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/tv_duel_status_live"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="Duel Active ⚔️"
+                            android:textColor="#FF4B4B"
+                            android:textSize="10sp" />
+
+                        <ImageView
+                            android:id="@+id/iv_duel_info"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:layout_marginStart="4dp"
+                            android:src="@android:drawable/ic_dialog_info"
+                            app:tint="#FF4B4B" />
+                    </LinearLayout>
                 </LinearLayout>
             </FrameLayout>
+
+            <!-- Battle Shout Section (Only visible during duel) -->
+            <LinearLayout
+                android:id="@+id/ll_battle_shout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/shape_edit_btn_selector"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:visibility="gone"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="📢 BATTLE SHOUT"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Reflection Note -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="Session Reflection (Optional)"
+                    android:textColor="@color/splash_text_secondary"
+                    android:textSize="12sp"
+                    android:letterSpacing="0.05" />
+
+                <EditText
+                    android:id="@+id/et_practice_note"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/shape_input_selector"
+                    android:gravity="top"
+                    android:hint="What did you focus on today? Any breakthroughs?"
+                    android:padding="16dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="#4E4E6A"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/nunito_semibold" />
+            </LinearLayout>
 
             <!-- Controls -->
             <LinearLayout
                 android:id="@+id/ll_controls"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="32dp"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -314,5 +695,63 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <!-- Heatmap Preview -->
+    <LinearLayout
+        android:id="@+id/ll_heatmap_preview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1A1F35"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="12dp"
+        app:layout_constraintBottom_toTopOf="@id/ll_global_status">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_bold"
+            android:text="Productivity Heatmap (Last 14 Days)"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            android:alpha="0.7"/>
+
+        <GridLayout
+            android:id="@+id/gl_heatmap_preview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center_horizontal"
+            android:columnCount="14"
+            android:rowCount="1" />
+    </LinearLayout>
+
+    <!-- Global Status Counter -->
+    <LinearLayout
+        android:id="@+id/ll_global_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#121524"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingVertical="12dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <View
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/shape_online_indicator"
+            android:backgroundTint="@color/splash_green" />
+
+        <TextView
+            android:id="@+id/tv_global_trainers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_semibold"
+            android:text="1 trainer currently grinding"
+            android:textColor="@color/splash_text_secondary"
+            android:textSize="12sp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

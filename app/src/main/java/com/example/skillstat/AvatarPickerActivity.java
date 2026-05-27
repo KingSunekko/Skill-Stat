@@ -50,13 +50,13 @@ public class AvatarPickerActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView() {
-        List<String> emojiAvatars = Arrays.asList(
-                "🧙‍♂️", "🦊", "🐉", "🦁", "🐺",
-                "🦅", "🐸", "🤖", "👾", "🧜‍♀️",
-                "🐨", "🦋", "🐬", "🦄", "🐯"
+        List<Integer> imageAvatars = Arrays.asList(
+                R.drawable.prof1, R.drawable.prof2, R.drawable.prof3, R.drawable.prof4, R.drawable.prof5,
+                R.drawable.prof6, R.drawable.prof7, R.drawable.prof8, R.drawable.prof9, R.drawable.prof10,
+                R.drawable.prof11, R.drawable.prof12, R.drawable.prof13, R.drawable.prof14, R.drawable.prof15
         );
 
-        adapter = new AvatarAdapter(emojiAvatars, position -> {
+        adapter = new AvatarAdapter(imageAvatars, position -> {
             // Optional: handle selection changes
         });
 

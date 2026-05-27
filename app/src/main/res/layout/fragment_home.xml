@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/splash_bg_dark">
@@ -22,7 +23,8 @@
             <!-- Header Section -->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:clipChildren="false">
 
                 <FrameLayout
                     android:id="@+id/fl_home_avatar"
@@ -33,13 +35,13 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/shape_avatar_bg"
                         android:backgroundTint="@color/splash_green" />
-                    <TextView
-                        android:id="@+id/tv_home_avatar_emoji"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <ImageView
+                        android:id="@+id/iv_home_avatar"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
                         android:layout_gravity="center"
-                        android:text="🧙‍♂️"
-                        android:textSize="28sp" />
+                        android:scaleType="centerInside"
+                        tools:src="@drawable/prof1" />
                 </FrameLayout>
 
                 <LinearLayout
@@ -68,17 +70,22 @@
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:clipChildren="false"
+                    android:clipToPadding="false">
+
                     <FrameLayout
                         android:id="@+id/btn_notifications"
                         android:layout_width="44dp"
                         android:layout_height="44dp"
                         android:background="@drawable/shape_skill_card"
-                        android:backgroundTint="#2D2D44">
+                        android:backgroundTint="#2D2D44"
+                        android:clipChildren="false"
+                        android:clipToPadding="false">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -87,17 +94,19 @@
                             android:textSize="20sp" />
                         <TextView
                             android:id="@+id/tv_notif_badge"
-                            android:layout_width="22dp"
-                            android:layout_height="18dp"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
                             android:layout_gravity="top|end"
-                            android:layout_marginTop="-4dp"
-                            android:layout_marginEnd="-4dp"
-                            android:background="@drawable/shape_status_at_risk"
+                            android:layout_marginTop="-6dp"
+                            android:layout_marginEnd="-6dp"
+                            android:background="@drawable/shape_notification_red"
                             android:gravity="center"
                             android:text="0"
                             android:textColor="@color/white"
                             android:textSize="10sp"
-                            android:fontFamily="@font/nunito_bold" />
+                            android:fontFamily="@font/nunito_bold"
+                            android:elevation="4dp"
+                            android:visibility="gone" />
                     </FrameLayout>
 
                     <LinearLayout
@@ -127,6 +136,7 @@
 
             <!-- XP Card -->
             <LinearLayout
+                android:id="@+id/card_xp_progress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
@@ -156,18 +166,21 @@
                         android:textSize="13sp" />
                 </RelativeLayout>
 
-                <View
-                    android:id="@+id/v_xp_progress_bg"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
-                    android:layout_marginTop="12dp"
-                    android:background="@drawable/shape_progress_bg" />
-                <View
-                    android:id="@+id/v_xp_progress_fill"
-                    android:layout_width="0dp"
-                    android:layout_height="10dp"
-                    android:layout_marginTop="-10dp"
-                    android:background="@drawable/shape_progress_fill" />
+                    android:layout_marginTop="12dp">
+                    <View
+                        android:id="@+id/v_xp_progress_bg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/shape_progress_bg" />
+                    <View
+                        android:id="@+id/v_xp_progress_fill"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/shape_progress_fill_green" />
+                </FrameLayout>
 
                 <TextView
                     android:id="@+id/tv_home_xp_needed"
@@ -180,7 +193,155 @@
                     android:textSize="12sp" />
             </LinearLayout>
 
-            <!-- Skill at Risk Alert (Hidden for new users) -->
+            <!-- Skill Decay Heatmap Section -->
+            <LinearLayout
+                android:id="@+id/ll_heatmap_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/shape_skill_card"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_bold"
+                        android:text="Retention Heatmap"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/nunito_semibold"
+                        android:text="Skill health status"
+                        android:textColor="@color/splash_text_secondary"
+                        android:textSize="11sp" />
+                </RelativeLayout>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:scrollbars="none">
+                    <LinearLayout
+                        android:id="@+id/ll_heatmap_grid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="4dp">
+                        <!-- Squares will be added here -->
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <View android:layout_width="8dp" android:layout_height="8dp" android:background="@drawable/shape_heatmap_square" android:backgroundTint="@color/critical_red"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="4dp" android:text="Decaying" android:textColor="@color/splash_text_secondary" android:textSize="10sp" android:fontFamily="@font/nunito_semibold"/>
+                    <View android:layout_width="8dp" android:layout_height="8dp" android:layout_marginStart="12dp" android:background="@drawable/shape_heatmap_square" android:backgroundTint="@color/xp_yellow"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="4dp" android:text="Warning" android:textColor="@color/splash_text_secondary" android:textSize="10sp" android:fontFamily="@font/nunito_semibold"/>
+                    <View android:layout_width="8dp" android:layout_height="8dp" android:layout_marginStart="12dp" android:background="@drawable/shape_heatmap_square" android:backgroundTint="@color/splash_green"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="4dp" android:text="Sharp" android:textColor="@color/splash_text_secondary" android:textSize="10sp" android:fontFamily="@font/nunito_semibold"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Nudge Alert -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/card_nudge_alert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/shape_nudge_banner"
+                android:padding="16dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tv_nudge_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="👋"
+                    android:textSize="32sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toEndOf="@id/tv_nudge_icon"
+                    app:layout_constraintEnd_toStartOf="@id/ll_nudge_actions"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <TextView
+                        android:id="@+id/tv_nudge_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_bold"
+                        android:text="Someone nudged you!"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_nudge_message"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/nunito_semibold"
+                        android:text="Go practice to keep your skills sharp!"
+                        android:textColor="#D1D1D6"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_nudge_actions"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <TextView
+                        android:id="@+id/btn_nudge_practice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/shape_btn_nudge_practice"
+                        android:fontFamily="@font/nunito_bold"
+                        android:gravity="center"
+                        android:paddingVertical="10dp"
+                        android:text="Practice Now!"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/btn_nudge_dismiss"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/shape_btn_nudge_dismiss"
+                        android:fontFamily="@font/nunito_bold"
+                        android:gravity="center"
+                        android:paddingVertical="10dp"
+                        android:text="Dismiss"
+                        android:textColor="#8E8E93"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Skill at Risk Alert -->
             <LinearLayout
                 android:id="@+id/card_risk_alert"
                 android:layout_width="match_parent"
@@ -238,6 +399,7 @@
 
             <!-- Quick Stats -->
             <LinearLayout
+                android:id="@+id/ll_stats_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -341,76 +503,36 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <!-- Badges Section -->
             <TextView
-                android:id="@+id/tv_home_goal_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
                 android:fontFamily="@font/nunito_bold"
                 android:letterSpacing="0.05"
-                android:text="TODAY'S GOAL — 10 MIN"
+                android:text="ACHIEVEMENTS"
                 android:textColor="@color/splash_text_secondary"
                 android:textSize="13sp" />
 
-            <!-- Daily Practice Card -->
-            <LinearLayout
+            <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/shape_skill_card"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/nunito_bold"
-                        android:text="Daily Practice"
-                        android:textColor="@color/white"
-                        android:textSize="16sp" />
-                    <TextView
-                        android:id="@+id/tv_home_goal_progress"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:fontFamily="@font/nunito_bold"
-                        android:text="0 / 10 min"
-                        android:textColor="@color/splash_green"
-                        android:textSize="16sp" />
-                </RelativeLayout>
-
-                <View
-                    android:id="@+id/v_goal_progress_bg"
-                    android:layout_width="match_parent"
-                    android:layout_height="12dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/shape_progress_bg" />
-
-                <View
-                    android:id="@+id/v_goal_progress_fill"
-                    android:layout_width="0dp"
-                    android:layout_height="12dp"
-                    android:layout_marginTop="-12dp"
-                    android:background="@drawable/shape_progress_fill" />
-
-                <TextView
-                    android:id="@+id/tv_home_goal_footer"
+                android:layout_marginTop="12dp"
+                android:scrollbars="none">
+                <LinearLayout
+                    android:id="@+id/ll_home_badges"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/nunito_semibold"
-                    android:text="10 more min to unlock your reward 🎁"
-                    android:textColor="@color/splash_text_secondary"
-                    android:textSize="12sp" />
-            </LinearLayout>
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp">
+                    <!-- Badges will be added here -->
+                </LinearLayout>
+            </HorizontalScrollView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
                 android:fontFamily="@font/nunito_bold"
                 android:letterSpacing="0.05"
                 android:text="YOUR SKILLS"
@@ -513,14 +635,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="⚡"
+                        android:text="⚔️"
                         android:textSize="18sp" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:fontFamily="@font/nunito_bold"
-                        android:text="CHALLENGE"
+                        android:text="DUEL"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -546,6 +668,56 @@
                         android:layout_marginStart="8dp"
                         android:fontFamily="@font/nunito_bold"
                         android:text="FRIENDS"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_home_daily_challenges"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_columnWeight="1"
+                    android:background="@drawable/shape_skill_card"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🎯"
+                        android:textSize="18sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/nunito_bold"
+                        android:text="DAILY"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_home_history"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_columnWeight="1"
+                    android:background="@drawable/shape_skill_card"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📜"
+                        android:textSize="18sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/nunito_bold"
+                        android:text="HISTORY"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
                 </LinearLayout>

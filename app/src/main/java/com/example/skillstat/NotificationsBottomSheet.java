@@ -8,8 +8,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,14 +16,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.skillstat.models.Duel;
+import com.example.skillstat.models.User;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class NotificationsBottomSheet extends BottomSheetDialogFragment {
@@ -34,6 +35,7 @@ public class NotificationsBottomSheet extends BottomSheetDialogFragment {
     private LinearLayout llNotificationsContainer;
     private DatabaseReference mDatabase;
     private String currentUid;
+    private User currentUser;
 
     @Nullable
     @Override
@@ -54,7 +56,19 @@ public class NotificationsBottomSheet extends BottomSheetDialogFragment {
         btnMarkAllRead.setOnClickListener(v -> markAllAsRead());
         applyHoverEffect(btnMarkAllRead);
 
+        loadCurrentUser();
         loadNotifications();
+    }
+
+    private void loadCurrentUser() {
+        if (currentUid == null) return;
+        mDatabase.child("users").child(currentUid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                currentUser = snapshot.getValue(User.class);
+            }
+            @Override public void onCancelled(@NonNull DatabaseError error) {}
+        });
     }
 
     private void loadNotifications() {
@@ -120,9 +134,22 @@ public class NotificationsBottomSheet extends BottomSheetDialogFragment {
             btnAction.setOnClickListener(v -> {
                 dismissNotification(key);
                 dismiss();
-                // Navigate to home practice
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
+            });
+            btnDismiss.setOnClickListener(v -> dismissNotification(key));
+        } else if ("duel_accepted".equals(type)) {
+            tvIcon.setText("🔥");
+            tvTitle.setText("Duel Started!");
+            tvDesc.setText(message);
+            btnAction.setText("View Duel");
+            String duelId = (String) notif.get("duelId");
+            btnAction.setOnClickListener(v -> {
+                dismissNotification(key);
+                Intent intent = new Intent(getActivity(), ActiveDuelActivity.class);
+                intent.putExtra("duel_id", duelId);
+                startActivity(intent);
+                dismiss();
             });
             btnDismiss.setOnClickListener(v -> dismissNotification(key));
         } else {
@@ -152,21 +179,77 @@ public class NotificationsBottomSheet extends BottomSheetDialogFragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Duel duel = snapshot.getValue(Duel.class);
-                if (duel != null) {
-                    mDatabase.child("duels").child(duelId).child("status").setValue("active");
-                    mDatabase.child("users").child(duel.getInitiatorUid()).child("activeDuels").child(duelId).setValue(true);
-                    mDatabase.child("users").child(duel.getOpponentUid()).child("activeDuels").child(duelId).setValue(true);
-                    
-                    dismissNotification(notifKey);
-                    Toast.makeText(getContext(), "Duel Started! ⚔️", Toast.LENGTH_SHORT).show();
-                    
-                    Intent intent = new Intent(getActivity(), ActiveDuelActivity.class);
-                    intent.putExtra("duel_id", duelId);
-                    startActivity(intent);
-                    dismiss();
+                if (duel != null && "pending".equals(duel.getStatus())) {
+                    mDatabase.child("users").child(duel.getInitiatorUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot initSnap) {
+                            User initiator = initSnap.getValue(User.class);
+                            mDatabase.child("users").child(duel.getOpponentUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot oppSnap) {
+                                    User opponent = oppSnap.getValue(User.class);
+                                    if (initiator != null && opponent != null) {
+                                        if (initiator.getTotalPoints() >= duel.getWagerAmount() && opponent.getTotalPoints() >= duel.getWagerAmount()) {
+                                            // Capture fresh start mastery as Double
+                                            double initStart = initiator.getSkillMastery().getOrDefault(duel.getSkillName(), 0.0);
+                                            double oppStart = opponent.getSkillMastery().getOrDefault(duel.getSkillName(), 0.0);
+                                            duel.setInitiatorStartMastery(initStart);
+                                            duel.setOpponentStartMastery(oppStart);
+                                            duel.setInitiatorCurrentMastery(initStart);
+                                            duel.setOpponentCurrentMastery(oppStart);
+                                            
+                                            startDuel(notifKey, duelId, duel, opponent.getUsername());
+                                        } else {
+                                            Toast.makeText(getContext(), "One player no longer has enough XP!", Toast.LENGTH_SHORT).show();
+                                            declineDuel(notifKey, duelId);
+                                        }
+                                    }
+                                }
+                                @Override public void onCancelled(@NonNull DatabaseError error) {}
+                            });
+                        }
+                        @Override public void onCancelled(@NonNull DatabaseError error) {}
+                    });
                 }
             }
             @Override public void onCancelled(@NonNull DatabaseError error) {}
+        });
+    }
+
+    private void startDuel(String notifKey, String duelId, Duel duel, String opponentName) {
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("duels/" + duelId + "/status", "active");
+        updates.put("duels/" + duelId + "/startTime", ServerValue.TIMESTAMP);
+        updates.put("duels/" + duelId + "/initiatorStartMastery", duel.getInitiatorStartMastery());
+        updates.put("duels/" + duelId + "/opponentStartMastery", duel.getOpponentStartMastery());
+        updates.put("duels/" + duelId + "/initiatorCurrentMastery", duel.getInitiatorCurrentMastery());
+        updates.put("duels/" + duelId + "/opponentCurrentMastery", duel.getOpponentCurrentMastery());
+        
+        int wager = duel.getWagerAmount();
+        updates.put("users/" + duel.getInitiatorUid() + "/totalPoints", ServerValue.increment(-wager));
+        updates.put("users/" + duel.getOpponentUid() + "/totalPoints", ServerValue.increment(-wager));
+        
+        updates.put("users/" + duel.getInitiatorUid() + "/activeDuels/" + duelId, true);
+        updates.put("users/" + duel.getOpponentUid() + "/activeDuels/" + duelId, true);
+        
+        // Notify initiator
+        Map<String, Object> acceptNotif = new HashMap<>();
+        acceptNotif.put("type", "duel_accepted");
+        acceptNotif.put("duelId", duelId);
+        acceptNotif.put("message", opponentName + " accepted your " + duel.getSkillName() + " challenge! ⚔️");
+        acceptNotif.put("timestamp", ServerValue.TIMESTAMP);
+        String notifPath = "users/" + duel.getInitiatorUid() + "/notifications/" + mDatabase.push().getKey();
+        updates.put(notifPath, acceptNotif);
+
+        mDatabase.updateChildren(updates).addOnSuccessListener(aVoid -> {
+            dismissNotification(notifKey);
+            if (getContext() != null) {
+                Toast.makeText(getContext(), "Duel Started! ⚔️", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), ActiveDuelActivity.class);
+                intent.putExtra("duel_id", duelId);
+                startActivity(intent);
+                dismiss();
+            }
         });
     }
 
@@ -184,6 +267,7 @@ public class NotificationsBottomSheet extends BottomSheetDialogFragment {
     }
 
     private void showEmptyState() {
+        if (!isAdded() || getContext() == null) return;
         TextView tv = new TextView(getContext());
         tv.setText("No new notifications");
         tv.setTextColor(0x88FFFFFF);

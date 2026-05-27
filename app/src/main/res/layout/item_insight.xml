@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_skill_card"
+    android:backgroundTint="#2D2D44"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tv_insight_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/shape_avatar_bg"
+        android:backgroundTint="#3D3D5C"
+        android:gravity="center"
+        android:text="💡"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_insight_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/nunito_semibold"
+        android:text="Insight message goes here"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+</LinearLayout>

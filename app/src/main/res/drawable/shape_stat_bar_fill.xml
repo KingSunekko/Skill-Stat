@@ -1,28 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Bottom Shadow/Edge -->
-    <item>
-        <shape>
-            <solid android:color="#3A8B01" />
-            <corners
-                android:topLeftRadius="12dp"
-                android:topRightRadius="12dp"
-                android:bottomLeftRadius="0dp"
-                android:bottomRightRadius="0dp" />
-        </shape>
-    </item>
-    <!-- Main Fill -->
-    <item android:bottom="3dp">
-        <shape>
-            <gradient
-                android:angle="270"
-                android:endColor="#58CC02"
-                android:startColor="#82E603" />
-            <corners
-                android:topLeftRadius="12dp"
-                android:topRightRadius="12dp"
-                android:bottomLeftRadius="0dp"
-                android:bottomRightRadius="0dp" />
-        </shape>
-    </item>
-</layer-list>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#58CC02" />
+    <corners android:radius="20dp" />
+</shape>

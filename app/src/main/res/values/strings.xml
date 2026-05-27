@@ -1,5 +1,96 @@
 <resources>
     <string name="app_name">Skill Stat</string>
-    <!-- TODO: Replace with your actual Web Client ID from Firebase Console / google-services.json -->
-    <string name="default_web_client_id">YOUR_WEB_CLIENT_ID_HERE</string>
+    <string name="default_web_client_id">947420194712-mvmc612fu239ttvr2ad7a9dlmm6a7ru6.apps.googleusercontent.com</string>
+
+    <!-- Friends & Social -->
+    <string name="nudge_title_format">%1$s nudged you!</string>
+    <string name="nudge_message_format">\"%1$s\"</string>
+    <string name="nudge_keyword">nudged you!</string>
+    <string name="says_keyword">says:</string>
+    <string name="no_recent_chats">No recent chats. Message a friend to start!</string>
+    <string name="start_conversation">Start a conversation!</string>
+    <string name="btn_friends">Friends</string>
+    <string name="btn_requested">Requested</string>
+    <string name="btn_add_friend">+ Add</string>
+    <string name="request_sent_toast">Request sent to %1$s</string>
+    <string name="friend_request_notif_format">%1$s sent you a friend request! 👋</string>
+    <string name="wants_to_be_friends">Wants to be friends!</string>
+    <string name="btn_accept">Accept</string>
+    <string name="friends_with_format">You are now friends with %1$s</string>
+    <string name="unfriended_format">Unfriended %1$s</string>
+    <string name="nudge_sent">✅ Sent!</string>
+    <string name="nudge_notif_format">%1$s nudged you! Go practice! 👋</string>
+    <string name="label_you">You</string>
+    <string name="header_active_duels">ACTIVE DUELS</string>
+    <string name="header_past_results">PAST RESULTS</string>
+    <string name="vs_format">vs %1$s</string>
+    <string name="duel_active_suffix"> • Active</string>
+    <string name="duel_completed_suffix"> • Completed</string>
+    <string name="score_you_format">You +%1$d%%</string>
+    <string name="score_them_format">Them +%1$d%%</string>
+    <string name="handle_level_format">@%1$s • Lv.%2$d</string>
+    <string name="streak_format_plain">🔥 %1$dd</string>
+    <string name="xp_format_plain">⭐ %1$d</string>
+    <string name="primary_skill_format_plain">⬢ %1$s</string>
+    <string name="leaderboard_sub_info_format">🔥 %1$dd • ⭐ %2$s Stars</string>
+
+    <string name="duel_victory">🏆 VICTORY</string>
+    <string name="duel_defeat">💀 DEFEAT</string>
+    <string name="duel_draw">🤝 DRAW</string>
+
+    <string name="share_duel_victory">I just beat @%1$s in a %2$s duel on Skill Stat! 🏆</string>
+    <string name="share_duel_defeat">Close duel against @%1$s in %2$s! I\'ll get them next time on Skill Stat. ⚔️</string>
+    <string name="share_duel_draw">It was a tie! @%1$s and I are perfectly matched in %2$s. 🤝 #SkillStat</string>
+
+    <string name="practice_offline_error">%1$s is offline. Duel online friends!</string>
+    <string name="general_practice">General Practice</string>
+
+    <!-- Duel Activity -->
+    <string name="duel_rules_title">Duel Rules ⚔️</string>
+    <string name="duel_rules_message">• Effort Points = Mastery Gained × Multiplier\n• Multiplier = 1.0 + (Start Mastery / 100)\n• Why? To make duels fair for beginners and experts alike!\n• Winner gets the Prize Pool + 🏆 Trophy</string>
+    <string name="got_it">Got it!</string>
+    <string name="taunt_sent">%1$s Sent!</string>
+    <string name="prize_pool_format">💰 %1$d Stars</string>
+    <string name="rivalry_format">You %1$d - %2$d %3$s</string>
+    <string name="no_activity">No activity yet this duel.</string>
+    <string name="activity_feed_format">• %1$s earned ⭐ %2$d Stars (%3$s)</string>
+    <string name="time_just_now">just now</string>
+    <string name="time_m_ago">%1$dm ago</string>
+    <string name="time_h_ago">%1$dh ago</string>
+    <string name="time_d_ago">%1$dd ago</string>
+    <string name="duel_finished_suffix"> — FINISHED</string>
+    <string name="duel_time_left_format">%1$s — %2$dd %3$dh left</string>
+    <string name="effort_format">%.1f</string>
+    <string name="multiplier_format">x%.1f Multiplier</string>
+    <string name="victory_msg">VICTORY! You won!</string>
+    <string name="defeat_msg">DEFEAT!</string>
+    <string name="draw_msg">DRAW! 🤝</string>
+    <string name="leading_format">🏆 Leading by %.1f pts!</string>
+    <string name="overtake_format">Opponent leading! Gain %.1f to overtake!</string>
+    <string name="dead_heat">Dead heat! Keep practicing.</string>
+    <string name="victory_dialog_title">VICTORY!</string>
+    <string name="defeat_dialog_title">DEFEAT</string>
+    <string name="victory_dialog_msg">You out-practiced your opponent!\nYou dominated the %1$s arena.</string>
+    <string name="defeat_dialog_msg">Your opponent was more dedicated this time.\nDon\'t give up!</string>
+    <string name="draw_dialog_msg">It was a perfectly balanced match!\nYou both gain 250 Stars.</string>
+    <string name="reward_format">+%1$d Stars</string>
+    <string name="no_reward">0 Stars</string>
+    <string name="error_duel_id_missing">Error: Duel ID missing</string>
+    <string name="no_activity_yet">No activity yet!</string>
+    <string name="practiced_skill">Practiced %1$s</string>
+    <string name="plus_points">+%1$.1f pts</string>
+    <string name="duel_ended">Duel Ended</string>
+    <string name="you_won_duel">You won the duel! 🎉</string>
+    <string name="opponent_won_duel">%1$s won the duel! 💀</string>
+    <string name="leading_status">You are leading! 📈</string>
+    <string name="trailing_status">Opponent is leading! 📉</string>
+    <string name="neck_and_neck">Neck and neck! ⚔️</string>
+    <string name="you">You</string>
+
+    <!-- Rewards -->
+    <string name="time_min">%1$d min</string>
+    <string name="time_sec">%1$d sec</string>
+    <string name="total_stars">%1$d Stars</string>
+    <string name="next_check_info">%1$s — next check in %2$d days 📅</string>
+
 </resources>

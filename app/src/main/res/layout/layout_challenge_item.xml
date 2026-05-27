@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_skill_card"
+    android:backgroundTint="#2D2D44"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tv_challenge_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/shape_skill_card"
+        android:backgroundTint="#3D3D5C"
+        android:gravity="center"
+        android:text="⚡"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/layout_action"
+        app:layout_constraintStart_toEndOf="@id/tv_challenge_icon"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_challenge_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_bold"
+            android:text="Challenge Title"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_challenge_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/nunito_semibold"
+            android:text="Challenge description goes here"
+            android:textColor="#8E8E93"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_challenge_xp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="+50 XP"
+            android:textColor="@color/splash_green"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/layout_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btn_challenge_go"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/shape_skill_card"
+            android:backgroundTint="@color/splash_green"
+            android:src="@android:drawable/ic_media_play"
+            app:tint="@color/white" />
+
+        <ImageView
+            android:id="@+id/iv_challenge_check"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@android:drawable/checkbox_on_background"
+            android:visibility="gone"
+            app:tint="@color/splash_green" />
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -32,7 +33,7 @@ public class AvatarPickerFragment extends Fragment {
     private AvatarAdapter adapter;
     private EditText etDisplayName;
     private Button btnContinue;
-    private String selectedEmoji = "🧙‍♂️"; // Default
+    private int selectedAvatarResId = R.drawable.prof1; // Default
     private DatabaseReference mDatabase;
 
     @Nullable
@@ -49,9 +50,46 @@ public class AvatarPickerFragment extends Fragment {
         setupRecyclerView();
         setupValidation();
 
-        btnContinue.setOnClickListener(v -> saveAndContinue());
+        btnContinue.setOnClickListener(v -> {
+            applyClickEffect(v);
+            saveAndContinue();
+        });
+
+        animateEntrance(view);
 
         return view;
+    }
+
+    private void animateEntrance(View view) {
+        View header = view.findViewById(R.id.tv_picker_title);
+        View sub = view.findViewById(R.id.tv_picker_subtitle);
+        
+        if (header != null) {
+            header.setAlpha(0);
+            header.setTranslationY(20);
+            header.animate().alpha(1).translationY(0).setDuration(500).setInterpolator(new DecelerateInterpolator()).start();
+        }
+        if (sub != null) {
+            sub.setAlpha(0);
+            sub.setTranslationY(20);
+            sub.animate().alpha(1).translationY(0).setDuration(500).setStartDelay(100).setInterpolator(new DecelerateInterpolator()).start();
+        }
+        
+        etDisplayName.setAlpha(0);
+        etDisplayName.setTranslationY(20);
+        etDisplayName.animate().alpha(1).translationY(0).setDuration(500).setStartDelay(200).start();
+        
+        rvAvatars.setAlpha(0);
+        rvAvatars.setTranslationY(30);
+        rvAvatars.animate().alpha(1).translationY(0).setDuration(600).setStartDelay(300).start();
+        
+        btnContinue.setAlpha(0);
+        btnContinue.setTranslationY(20);
+        btnContinue.animate().alpha(1).translationY(0).setDuration(500).setStartDelay(400).start();
+    }
+
+    private void applyClickEffect(View v) {
+        v.animate().scaleX(0.95f).scaleY(0.95f).setDuration(100).withEndAction(() -> v.animate().scaleX(1f).scaleY(1f).setDuration(100).start()).start();
     }
 
     private void saveAndContinue() {
@@ -65,9 +103,12 @@ public class AvatarPickerFragment extends Fragment {
         String uid = FirebaseAuth.getInstance().getUid();
         if (uid == null) return;
 
+        // Map the resource ID back to a string name for storage
+        String avatarName = getResources().getResourceEntryName(selectedAvatarResId);
+
         Map<String, Object> updates = new HashMap<>();
         updates.put("username", name);
-        updates.put("avatarUrl", selectedEmoji);
+        updates.put("avatarUrl", avatarName); // Now storing "prof1", "prof2", etc.
 
         mDatabase.child("users").child(uid).updateChildren(updates)
                 .addOnSuccessListener(aVoid -> {
@@ -106,18 +147,18 @@ public class AvatarPickerFragment extends Fragment {
     private void updateButtonState() {
         boolean isEnabled = !TextUtils.isEmpty(etDisplayName.getText().toString().trim());
         btnContinue.setEnabled(isEnabled);
-        btnContinue.setAlpha(isEnabled ? 1.0f : 0.5f);
+        btnContinue.animate().alpha(isEnabled ? 1.0f : 0.5f).setDuration(200).start();
     }
 
     private void setupRecyclerView() {
-        List<String> emojiAvatars = Arrays.asList(
-                "🧙‍♂️", "🦊", "🐉", "🦁", "🐺",
-                "🦅", "🐸", "🤖", "👾", "🧜‍♀️",
-                "🐨", "🦋", "🐬", "🦄", "🐯"
+        List<Integer> imageAvatars = Arrays.asList(
+                R.drawable.prof1, R.drawable.prof2, R.drawable.prof3, R.drawable.prof4, R.drawable.prof5,
+                R.drawable.prof6, R.drawable.prof7, R.drawable.prof8, R.drawable.prof9, R.drawable.prof10,
+                R.drawable.prof11, R.drawable.prof12, R.drawable.prof13, R.drawable.prof14, R.drawable.prof15
         );
 
-        adapter = new AvatarAdapter(emojiAvatars, position -> {
-            selectedEmoji = emojiAvatars.get(position);
+        adapter = new AvatarAdapter(imageAvatars, position -> {
+            selectedAvatarResId = imageAvatars.get(position);
         });
 
         rvAvatars.setLayoutManager(new GridLayoutManager(getContext(), 5));

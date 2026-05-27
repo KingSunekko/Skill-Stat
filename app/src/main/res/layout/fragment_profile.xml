@@ -2,6 +2,7 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nsv_profile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/splash_bg_dark"
@@ -14,63 +15,97 @@
         android:paddingBottom="120dp">
 
         <!-- Header Section -->
-        <FrameLayout
-            android:id="@+id/fl_avatar_container"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:layout_marginTop="60dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+        <LinearLayout
+            android:id="@+id/ll_profile_header_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
             app:layout_constraintTop_toTopOf="parent">
 
-            <!-- Glowing Ring -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/shape_avatar_bg"
-                android:backgroundTint="@color/splash_green" />
+            <FrameLayout
+                android:id="@+id/cv_profile_avatar"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_marginTop="60dp">
 
-            <View
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:background="@drawable/shape_avatar_bg"
-                android:backgroundTint="@color/splash_bg_dark" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shape_avatar_bg"
+                    android:backgroundTint="@color/splash_green" />
+
+                <View
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/shape_avatar_bg"
+                    android:backgroundTint="@color/splash_bg_dark" />
+
+                <ImageView
+                    android:id="@+id/iv_profile_avatar"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerInside"
+                    tools:src="@drawable/prof1" />
+            </FrameLayout>
 
             <TextView
-                android:id="@+id/tv_profile_avatar_emoji"
+                android:id="@+id/tv_profile_rank_badge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="🧙‍♂️"
-                android:textSize="55sp" />
-        </FrameLayout>
+                android:layout_marginTop="12dp"
+                android:background="@drawable/shape_achievement_badge"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="4dp"
+                android:text="🥇 Gold Rank"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:fontFamily="@font/nunito_extrabold" />
 
-        <TextView
-            android:id="@+id/tv_profile_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/nunito_extrabold"
-            android:text="SkillStatUser"
-            android:textColor="@color/white"
-            android:textSize="28sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fl_avatar_container" />
+            <TextView
+                android:id="@+id/tv_profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/nunito_extrabold"
+                android:text="KingSunekko"
+                android:textColor="@color/white"
+                android:textSize="28sp" />
 
-        <TextView
-            android:id="@+id/tv_profile_handle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:fontFamily="@font/nunito_bold"
-            android:text="ID: user_000127 - Level 8 ⚡"
-            android:textColor="@color/splash_text_secondary"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_profile_name" />
+            <!-- KEEP: THE FORGE RPG PROGRESS -->
+            <TextView
+                android:id="@+id/tv_forge_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="Novice 🛠️"
+                android:textColor="#FFD700"
+                android:textSize="16sp" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/pb_forge_xp"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                app:indicatorColor="@color/splash_green"
+                app:trackColor="#1AFFFFFF"
+                app:trackCornerRadius="4dp"
+                app:trackThickness="6dp"
+                android:progress="10" />
+
+            <TextView
+                android:id="@+id/tv_profile_handle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="user@gmail.com"
+                android:textColor="@color/splash_text_secondary"
+                android:textSize="14sp" />
+        </LinearLayout>
 
         <!-- Stat Pills Row -->
         <LinearLayout
@@ -81,7 +116,7 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:paddingHorizontal="16dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_profile_handle">
+            app:layout_constraintTop_toBottomOf="@id/ll_profile_header_container">
 
             <TextView
                 android:id="@+id/tv_streak_days"
@@ -90,26 +125,57 @@
                 android:layout_weight="1"
                 android:layout_marginEnd="6dp"
                 android:background="@drawable/shape_pill_streak"
+                android:backgroundTint="#FF9F00"
                 android:fontFamily="@font/nunito_extrabold"
                 android:gravity="center"
                 android:paddingVertical="10dp"
-                android:text="🔥 6 streak"
+                android:text="🔥 1 streak"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/tv_total_points"
+            <!-- Improved XP Pill -->
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.2"
                 android:layout_marginHorizontal="6dp"
                 android:background="@drawable/shape_pill_xp"
-                android:fontFamily="@font/nunito_extrabold"
                 android:gravity="center"
-                android:paddingVertical="10dp"
-                android:text="⭐ 3,135 XP"
-                android:textColor="#5E4300"
-                android:textSize="14sp" />
+                android:orientation="horizontal"
+                android:paddingVertical="10dp">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="⭐"
+                        android:textSize="10sp"
+                        android:alpha="0.7" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="⭐"
+                        android:textSize="18sp"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginStart="4dp"
+                        android:shadowColor="#40000000"
+                        android:shadowDx="1"
+                        android:shadowDy="1"
+                        android:shadowRadius="1" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/tv_total_points"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_extrabold"
+                    android:text="3683 XP"
+                    android:textColor="#5E4300"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tv_skills_count"
@@ -118,12 +184,115 @@
                 android:layout_weight="1"
                 android:layout_marginStart="6dp"
                 android:background="@drawable/shape_pill_skills"
+                android:backgroundTint="#A061FF"
                 android:fontFamily="@font/nunito_extrabold"
                 android:gravity="center"
                 android:paddingVertical="10dp"
-                android:text="🧠 3 skills"
+                android:text="🧠 5 skills"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- Overall Statistics -->
+        <TextView
+            android:id="@+id/tv_label_stats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/nunito_extrabold"
+            android:letterSpacing="0.1"
+            android:text="OVERALL STATISTICS 📊"
+            android:textColor="@color/splash_text_secondary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_stat_pills" />
+
+        <LinearLayout
+            android:id="@+id/ll_stats_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/shape_skill_card"
+            android:orientation="vertical"
+            android:padding="20dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_label_stats">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="Best Streak"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/tv_stat_best_streak"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/nunito_extrabold"
+                    android:text="0 days"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="12dp"
+                android:background="#35355A" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="Total Sessions"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/tv_stat_total_sessions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/nunito_extrabold"
+                    android:text="141"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="12dp"
+                android:background="#35355A" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="Win Rate"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/tv_stat_win_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/nunito_extrabold"
+                    android:text="60.0%"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+            </RelativeLayout>
         </LinearLayout>
 
         <!-- Info Card -->
@@ -136,7 +305,7 @@
             android:background="@drawable/shape_skill_card"
             android:orientation="vertical"
             android:padding="20dp"
-            app:layout_constraintTop_toBottomOf="@id/ll_stat_pills">
+            app:layout_constraintTop_toBottomOf="@id/ll_stats_card">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -154,7 +323,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:fontFamily="@font/nunito_extrabold"
-                    android:text="⏱️ 20 min"
+                    android:text="⏱️ 1 min"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
             </RelativeLayout>
@@ -181,7 +350,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:fontFamily="@font/nunito_extrabold"
-                    android:text="3 📚"
+                    android:text="5 📚"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
             </RelativeLayout>
@@ -208,7 +377,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:fontFamily="@font/nunito_extrabold"
-                    android:text="Lifelong learner."
+                    android:text="tae"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
             </RelativeLayout>
@@ -237,84 +406,6 @@
             android:layout_marginTop="12dp"
             android:columnCount="3"
             app:layout_constraintTop_toBottomOf="@id/tv_label_achievements">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="4dp"
-                android:background="@drawable/shape_achievement_badge"
-                android:fontFamily="@font/nunito_bold"
-                android:gravity="center"
-                android:paddingVertical="10dp"
-                android:text="🔥 7-Day Streak"
-                android:textColor="@color/white"
-                android:textSize="10sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="4dp"
-                android:background="@drawable/shape_achievement_badge"
-                android:fontFamily="@font/nunito_bold"
-                android:gravity="center"
-                android:paddingVertical="10dp"
-                android:text="⭐ 1000 XP"
-                android:textColor="@color/white"
-                android:textSize="10sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="4dp"
-                android:background="@drawable/shape_achievement_badge"
-                android:fontFamily="@font/nunito_bold"
-                android:gravity="center"
-                android:paddingVertical="10dp"
-                android:text="🧠 3 Skills"
-                android:textColor="@color/white"
-                android:textSize="10sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="4dp"
-                android:background="@drawable/shape_achievement_badge"
-                android:fontFamily="@font/nunito_bold"
-                android:gravity="center"
-                android:paddingVertical="10dp"
-                android:text="📊 First Practice"
-                android:textColor="@color/white"
-                android:textSize="10sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="4dp"
-                android:background="@drawable/shape_skill_card"
-                android:fontFamily="@font/nunito_bold"
-                android:gravity="center"
-                android:paddingVertical="10dp"
-                android:text="🔒 Top 10"
-                android:textColor="@color/splash_text_secondary"
-                android:textSize="10sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_margin="4dp"
-                android:background="@drawable/shape_skill_card"
-                android:fontFamily="@font/nunito_bold"
-                android:gravity="center"
-                android:paddingVertical="10dp"
-                android:text="🔒 Mastered"
-                android:textColor="@color/splash_text_secondary"
-                android:textSize="10sp" />
         </GridLayout>
 
         <!-- Settings Section -->
@@ -338,7 +429,7 @@
             android:layout_height="60dp"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="12dp"
-            android:background="@drawable/shape_skill_card"
+            android:background="@drawable/shape_pill_dark_3d"
             android:fontFamily="@font/nunito_extrabold"
             android:gravity="center"
             android:text="✏️ EDIT PROFILE"
@@ -354,7 +445,7 @@
             android:layout_height="60dp"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="12dp"
-            android:background="@drawable/shape_skill_card"
+            android:background="@drawable/shape_pill_dark_3d"
             android:fontFamily="@font/nunito_extrabold"
             android:gravity="center"
             android:text="⏱️ DAILY PRACTICE GOAL"
@@ -393,11 +484,26 @@
                 android:layout_width="0dp"
                 android:layout_height="55dp"
                 android:layout_columnWeight="1"
-                android:layout_margin="4dp"
-                android:background="@drawable/shape_skill_card"
+                android:layout_margin="6dp"
+                android:background="@drawable/shape_pill_dark_3d"
                 android:fontFamily="@font/nunito_extrabold"
                 android:gravity="center"
                 android:text="📄 HISTORY"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/btn_ghost_library"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                android:background="@drawable/shape_btn_ai_gradient_3d"
+                android:fontFamily="@font/nunito_extrabold"
+                android:gravity="center"
+                android:text="👻 GHOST RECORDS"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:clickable="true"
@@ -408,8 +514,8 @@
                 android:layout_width="0dp"
                 android:layout_height="55dp"
                 android:layout_columnWeight="1"
-                android:layout_margin="4dp"
-                android:background="@drawable/shape_skill_card"
+                android:layout_margin="6dp"
+                android:background="@drawable/shape_pill_dark_3d"
                 android:fontFamily="@font/nunito_extrabold"
                 android:gravity="center"
                 android:text="🏆 BADGES"
@@ -423,8 +529,8 @@
                 android:layout_width="0dp"
                 android:layout_height="55dp"
                 android:layout_columnWeight="1"
-                android:layout_margin="4dp"
-                android:background="@drawable/shape_skill_card"
+                android:layout_margin="6dp"
+                android:background="@drawable/shape_pill_dark_3d"
                 android:fontFamily="@font/nunito_extrabold"
                 android:gravity="center"
                 android:text="🗓️ HEATMAP"
@@ -438,8 +544,8 @@
                 android:layout_width="0dp"
                 android:layout_height="55dp"
                 android:layout_columnWeight="1"
-                android:layout_margin="4dp"
-                android:background="@drawable/shape_skill_card"
+                android:layout_margin="6dp"
+                android:background="@drawable/shape_pill_dark_3d"
                 android:fontFamily="@font/nunito_extrabold"
                 android:gravity="center"
                 android:text="📊 WEEKLY"
@@ -453,11 +559,11 @@
                 android:layout_width="0dp"
                 android:layout_height="55dp"
                 android:layout_columnWeight="1"
-                android:layout_margin="4dp"
-                android:background="@drawable/shape_skill_card"
+                android:layout_margin="6dp"
+                android:background="@drawable/shape_pill_dark_3d"
                 android:fontFamily="@font/nunito_extrabold"
                 android:gravity="center"
-                android:text="🔬 SUB-SKILLS"
+                android:text="⚒️ THE FORGE"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:clickable="true"
@@ -468,11 +574,11 @@
                 android:layout_width="0dp"
                 android:layout_height="55dp"
                 android:layout_columnWeight="1"
-                android:layout_margin="4dp"
-                android:background="@drawable/shape_skill_card"
+                android:layout_margin="6dp"
+                android:background="@drawable/shape_pill_dark_3d"
                 android:fontFamily="@font/nunito_extrabold"
                 android:gravity="center"
-                android:text="📁 CATEGORIES"
+                android:text="📂 CATEGORIES"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:clickable="true"
@@ -500,12 +606,13 @@
                 android:textSize="16sp" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switch_daily_reminder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
                 app:useMaterialThemeColors="false"
                 app:thumbTint="@color/white"
-                app:trackTint="@color/splash_green" />
+                app:trackTint="@color/switch_track_selector" />
         </LinearLayout>
 
         <View
@@ -535,12 +642,13 @@
                 android:textSize="16sp" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switch_decay_alerts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
                 app:useMaterialThemeColors="false"
                 app:thumbTint="@color/white"
-                app:trackTint="@color/splash_green" />
+                app:trackTint="@color/switch_track_selector" />
         </LinearLayout>
 
         <View

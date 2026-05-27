@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Name your sub-skill"
+        android:textColor="#B0B0C0"
+        android:fontFamily="@font/nunito_bold"
+        android:textSize="14sp"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/et_sub_skill_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_pill_dark_3d"
+        android:padding="12dp"
+        android:hint="e.g. Hooks, Footwork, UI Design"
+        android:textColorHint="#606080"
+        android:textColor="@color/white"
+        android:fontFamily="@font/nunito_semibold"
+        android:inputType="textCapWords"
+        android:maxLines="1" />
+
+</LinearLayout>

@@ -19,7 +19,13 @@
         android:text="Java 💻"
         android:textColor="@color/splash_text_primary"
         android:textSize="20sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ll_status"
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Status Badge (3D) -->
@@ -27,32 +33,46 @@
         android:id="@+id/ll_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="8dp"
         android:background="@drawable/shape_status_badge"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingHorizontal="10dp"
         android:paddingVertical="4dp"
-        app:layout_constraintBottom_toBottomOf="@id/tv_skill_name"
+        app:layout_constrainedWidth="true"
         app:layout_constraintStart_toEndOf="@id/tv_skill_name"
-        app:layout_constraintTop_toTopOf="@id/tv_skill_name">
+        app:layout_constraintEnd_toStartOf="@id/header_spacer"
+        app:layout_constraintTop_toTopOf="@id/tv_skill_name"
+        app:layout_constraintBottom_toBottomOf="@id/tv_skill_name">
 
         <View
             android:id="@+id/status_dot"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:layout_marginEnd="6dp"
-            android:background="@drawable/shape_dot_active" />
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:background="@drawable/shape_star_dot"
+            android:backgroundTint="#58CC02" />
 
         <TextView
             android:id="@+id/tv_status_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
             android:fontFamily="@font/nunito_bold"
-            android:text="Sharp"
-            android:textColor="@color/splash_green"
-            android:textSize="12sp" />
+            android:text="Learning"
+            android:textColor="#58CC02"
+            android:textSize="11sp" />
     </LinearLayout>
+
+    <!-- Spacer to push buttons to the right -->
+    <View
+        android:id="@+id/header_spacer"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toEndOf="@id/ll_status"
+        app:layout_constraintEnd_toStartOf="@id/btn_edit"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@id/tv_skill_name"
+        app:layout_constraintBottom_toBottomOf="@id/tv_skill_name" />
 
     <!-- Edit Button (3D) -->
     <TextView
@@ -68,10 +88,9 @@
         android:textSize="12sp"
         android:clickable="true"
         android:focusable="true"
-        app:layout_constraintBottom_toBottomOf="@id/tv_skill_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_skill_name"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintBottom_toBottomOf="@id/tv_skill_name" />
 
     <!-- Progress Bar Section (3D) -->
     <View
@@ -89,8 +108,7 @@
         android:background="@drawable/shape_progress_fill"
         app:layout_constraintBottom_toBottomOf="@id/progress_bg"
         app:layout_constraintStart_toStartOf="@id/progress_bg"
-        app:layout_constraintTop_toTopOf="@id/progress_bg"
-        app:layout_constraintWidth_percent="0.82" />
+        app:layout_constraintTop_toTopOf="@id/progress_bg" />
 
     <!-- Progress Info Text -->
     <TextView
@@ -114,8 +132,7 @@
         android:textColor="@color/splash_text_secondary"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@id/tv_progress_percent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_progress_percent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Practice Button (3D) -->
     <LinearLayout
@@ -135,8 +152,7 @@
             android:layout_height="16dp"
             android:layout_marginEnd="8dp"
             android:src="@android:drawable/ic_media_play"
-            app:tint="@color/white"
-            tools:ignore="ContentDescription" />
+            app:tint="@color/white" />
 
         <TextView
             android:layout_width="wrap_content"

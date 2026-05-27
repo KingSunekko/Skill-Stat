@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="🦋"
+            android:text="👤"
             android:textSize="24sp" />
     </FrameLayout>
 
@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_bold"
-            android:text="Priya"
+            android:text="Name"
             android:textColor="@color/white"
             android:textSize="15sp" />
 
@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_semibold"
-            android:text="@priya_draws · 2 mutual friends"
+            android:text="@username"
             android:textColor="@color/splash_text_secondary"
             android:textSize="11sp" />
 
@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_semibold"
-            android:text="Drawing 🖍️ · Lv.10"
+            android:text="Rank • Lv.1"
             android:textColor="@color/splash_text_secondary"
             android:textSize="11sp" />
     </LinearLayout>

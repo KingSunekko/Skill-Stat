@@ -46,6 +46,21 @@
         app:layout_constraintTop_toTopOf="@id/tv_my_skills_title"
         app:tint="@color/splash_text_primary" />
 
+    <ImageButton
+        android:id="@+id/btn_tree_overview"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/shape_dot_active"
+        android:backgroundTint="#2D2D44"
+        android:contentDescription="Master Tree"
+        android:padding="6dp"
+        android:src="@android:drawable/ic_menu_share"
+        app:layout_constraintBottom_toBottomOf="@id/btn_add_small"
+        app:layout_constraintEnd_toStartOf="@id/btn_add_small"
+        app:layout_constraintTop_toTopOf="@id/btn_add_small"
+        app:tint="@color/splash_text_primary" />
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"

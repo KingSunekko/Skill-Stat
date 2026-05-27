@@ -7,48 +7,51 @@
     android:background="@color/splash_bg_dark">
 
     <!-- Top Header -->
-    <FrameLayout
-        android:id="@+id/btn_back"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/shape_edit_btn_selector"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintStart_toStartOf="parent"
+    <LinearLayout
+        android:id="@+id/ll_edit_profile_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="20dp"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="center"
-            android:src="@android:drawable/ic_menu_revert"
-            app:tint="@color/white"
-            android:rotation="0" />
-    </FrameLayout>
+        <FrameLayout
+            android:id="@+id/btn_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/shape_edit_btn_selector"
+            android:clickable="true"
+            android:focusable="true">
 
-    <TextView
-        android:id="@+id/tv_edit_profile_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:fontFamily="@font/nunito_bold"
-        android:text="Edit Profile ✏️"
-        android:textColor="@color/white"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/btn_back"
-        app:layout_constraintStart_toEndOf="@id/btn_back"
-        app:layout_constraintTop_toTopOf="@id/btn_back" />
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@android:drawable/ic_menu_revert"
+                app:tint="@color/white"
+                android:rotation="0" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tv_edit_profile_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="Edit Profile ✏️"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsv_edit_profile"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@id/ll_bottom_actions"
-        app:layout_constraintTop_toBottomOf="@id/btn_back">
+        app:layout_constraintTop_toBottomOf="@id/ll_edit_profile_header">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -76,13 +79,13 @@
                     android:layout_gravity="center"
                     android:background="@drawable/shape_logo_circle" />
 
-                <TextView
-                    android:id="@+id/tv_edit_avatar_emoji"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:id="@+id/iv_edit_avatar_preview"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_gravity="center"
-                    android:text="🧙‍♂️"
-                    android:textSize="50sp" />
+                    android:scaleType="centerInside"
+                    tools:src="@drawable/prof1" />
             </FrameLayout>
 
             <TextView
@@ -104,8 +107,8 @@
                 android:clipToPadding="false"
                 android:overScrollMode="never"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="6"
-                tools:itemCount="8"
+                app:spanCount="5"
+                tools:itemCount="15"
                 tools:listitem="@layout/item_avatar" />
 
             <!-- Display Name Input -->
@@ -186,8 +189,7 @@
             android:text="💾 SAVE CHANGES"
             android:textColor="@color/white"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:stateListAnimator="@animator/button_hover" />
+            android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_cancel_edit"
@@ -200,8 +202,17 @@
             android:text="CANCEL"
             android:textColor="@color/white"
             android:textSize="14sp"
-            android:textStyle="bold"
-            android:stateListAnimator="@animator/button_hover" />
+            android:textStyle="bold" />
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/pb_edit_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
